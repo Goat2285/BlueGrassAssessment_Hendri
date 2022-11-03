@@ -18,6 +18,7 @@ export default function LoginLayout({ children, illustration, title }: Props) {
   return (
     <StyledRoot>
       <Logo
+        disabledLink={true}
         sx={{
           zIndex: 9,
           position: 'absolute',
@@ -34,8 +35,8 @@ export default function LoginLayout({ children, illustration, title }: Props) {
         <Image
           disabledEffect
           visibleByDefault
-          alt="auth"
-          src={illustration || '/assets/illustrations/illustration_dashboard.png'}
+          alt="My fertility journey - Happy family with a child"
+          src={illustration || '/assets/images/illustrations/dashboard.svg'}
           sx={{ maxWidth: 720 }}
         />
 

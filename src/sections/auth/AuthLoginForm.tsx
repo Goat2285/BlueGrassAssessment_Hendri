@@ -10,7 +10,7 @@ import { LoadingButton } from '@mui/lab';
 import { useAuthContext } from '../../auth/useAuthContext';
 // components
 import Iconify from '../../components/iconify';
-import FormProvider, { RHFTextField } from '../../components/hook-form';
+import FormProvider, { RHFTextField, RHFCheckbox } from '../../components/hook-form';
 
 // ----------------------------------------------------------------------
 
@@ -80,7 +80,8 @@ export default function AuthLoginForm() {
       </Stack>
 
       <Stack alignItems="flex-end" sx={{ my: 2 }}>
-        <Link variant="body2" color="inherit" underline="always">
+        <RHFCheckbox name={'rememberMe'} label={'Remember me'} />
+        <Link variant="body2" color="inherit" underline='hover'  sx={{ cursor: "pointer" }}>
           Forgot password?
         </Link>
       </Stack>

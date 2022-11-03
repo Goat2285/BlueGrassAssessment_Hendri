@@ -6,7 +6,6 @@ import { Button, Typography } from '@mui/material';
 // components
 import { MotionContainer, varBounce } from '../components/animate';
 // assets
-import { PageNotFoundIllustration } from '../assets/illustrations';
 
 // ----------------------------------------------------------------------
 
@@ -31,14 +30,9 @@ export default function Page404() {
           </Typography>
         </m.div>
 
-        <m.div variants={varBounce().in}>
-          <PageNotFoundIllustration
-            sx={{
-              height: 260,
-              my: { xs: 5, sm: 10 },
-            }}
-          />
-        </m.div>
+        {/* <m.div variants={varBounce().in}>
+          
+        </m.div> */}
 
         <Button to="/" component={RouterLink} size="large" variant="contained">
           Go to Home

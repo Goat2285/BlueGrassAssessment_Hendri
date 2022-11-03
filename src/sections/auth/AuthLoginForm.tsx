@@ -17,6 +17,8 @@ import FormProvider, { RHFTextField, RHFCheckbox } from '../../components/hook-f
 type FormValuesProps = {
   email: string;
   password: string;
+  rememberMe?: boolean;
+  redirectUrl?: string;
   afterSubmit?: string;
 };
 
@@ -43,7 +45,7 @@ export default function AuthLoginForm() {
 
   const onSubmit = async (data: FormValuesProps) => {
     try {
-      await login(data.email, data.password);
+      await login(data.email, data.password, data.rememberMe = false, data.redirectUrl = './');
     } catch (error) {
       console.error(error);
 
@@ -71,7 +73,7 @@ export default function AuthLoginForm() {
             endAdornment: (
               <InputAdornment position="end">
                 <IconButton onClick={() => setShowPassword(!showPassword)} edge="end">
-                  <Iconify icon={showPassword ? 'eva:eye-fill' : 'eva:eye-off-fill'} />
+                  <Iconify icon={showPassword ? 'eva:eye-fill' : 'eva:eye-off-fill'} color={'text.disabled'} width={25} />
                 </IconButton>
               </InputAdornment>
             ),
@@ -79,9 +81,9 @@ export default function AuthLoginForm() {
         />
       </Stack>
 
-      <Stack alignItems="flex-end" sx={{ my: 2 }}>
-        <RHFCheckbox name={'rememberMe'} label={'Remember me'} />
-        <Link variant="body2" color="inherit" underline='hover'  sx={{ cursor: "pointer" }}>
+      <Stack justifyContent="space-between" sx={{ my: 2 }} direction='row' alignItems='center'>
+        <RHFCheckbox name={'rememberMe'} label={'Remember me'} sx={{paddingLeft: '10px'}} />
+        <Link variant="body2" color="inherit" underline='hover'  sx={{ cursor: "pointer", color: 'primary.dark', fontWeight: 'bold' }}>
           Forgot password?
         </Link>
       </Stack>
@@ -94,10 +96,10 @@ export default function AuthLoginForm() {
         variant="contained"
         loading={isSubmitSuccessful || isSubmitting}
         sx={{
-          bgcolor: 'text.primary',
+          bgcolor: 'primary.main',
           color: (theme) => (theme.palette.mode === 'light' ? 'common.white' : 'grey.800'),
           '&:hover': {
-            bgcolor: 'text.primary',
+            bgcolor: 'primary.light',
             color: (theme) => (theme.palette.mode === 'light' ? 'common.white' : 'grey.800'),
           },
         }}

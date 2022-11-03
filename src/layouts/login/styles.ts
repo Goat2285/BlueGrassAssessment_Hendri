@@ -14,7 +14,7 @@ export const StyledRoot = styled('main')(() => ({
 export const StyledSection = styled('div')(({ theme }) => ({
   display: 'none',
   position: 'relative',
-  [theme.breakpoints.up('md')]: {
+  [theme.breakpoints.up('lg')]: {
     flexGrow: 1,
     display: 'flex',
     alignItems: 'center',
@@ -38,7 +38,7 @@ export const StyledSectionBg = styled('div')(({ theme }) => ({
 }));
 
 export const StyledContent = styled('div')(({ theme }) => ({
-  width: 480,
+  width: 608,
   margin: 'auto',
   display: 'flex',
   minHeight: '100vh',
@@ -48,4 +48,10 @@ export const StyledContent = styled('div')(({ theme }) => ({
     flexShrink: 0,
     padding: theme.spacing(30, 8, 0, 8),
   },
+}));
+
+export const StylesGettingStarted = styled('div')(({ theme }) => ({
+  position: 'absolute',
+  right: 40,
+  top: 40,
 }));

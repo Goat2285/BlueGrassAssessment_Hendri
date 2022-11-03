@@ -133,10 +133,11 @@ export function AuthProvider({ children }: AuthProviderProps) {
   }, [initialize]);
 
   // LOGIN
-  const login = async (email: string, password: string) => {
-    const response = await axios.post('/api/account/login', {
+  const login = async (email: string, password: string, rememberMe: boolean, redirectUrl: string) => {
+    const response = await axios.post('/SignIn', {
       email,
       password,
+      rememberMe
     });
     const { accessToken, user } = response.data;
 
@@ -152,7 +153,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   // REGISTER
   const register = async (email: string, password: string, firstName: string, lastName: string) => {
-    const response = await axios.post('/api/account/register', {
+    const response = await axios.post('/SignUp', {
       email,
       password,
       firstName,

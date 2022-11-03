@@ -30,14 +30,8 @@ export default function AuthLoginForm() {
     password: Yup.string().required('Password is required'),
   });
 
-  const defaultValues = {
-    email: 'demo@minimals.cc',
-    password: 'demo1234',
-  };
-
   const methods = useForm<FormValuesProps>({
-    resolver: yupResolver(LoginSchema),
-    defaultValues,
+    resolver: yupResolver(LoginSchema)
   });
 
   const {
@@ -107,7 +101,7 @@ export default function AuthLoginForm() {
           },
         }}
       >
-        Login
+        Sign in
       </LoadingButton>
     </FormProvider>
   );

@@ -16,9 +16,10 @@ type Props = {
 
 export default function LoginLayout({ children, illustration, title }: Props) {
   return (
-    <StyledRoot>
+    <StyledRoot sx={{ p:'16px' }}>
       <Logo
         disabledLink={true}
+        logoStyle={2}
         sx={{
           zIndex: 9,
           position: 'absolute',
@@ -27,8 +28,8 @@ export default function LoginLayout({ children, illustration, title }: Props) {
         }}
       />
 
-      <StyledSection>
-        <Typography variant="h3" sx={{ mb: 10, maxWidth: 480, textAlign: 'center' }}>
+      <StyledSection sx={{ maxWidth: 444, borderRadius: '16px', boxShadow: 20 }}>
+        <Typography variant="h3" sx={{ textAlign: 'center', mb: 5 }}>
           {title || 'Hi, Welcome back'}
         </Typography>
 

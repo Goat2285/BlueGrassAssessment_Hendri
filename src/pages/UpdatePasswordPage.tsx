@@ -3,12 +3,13 @@ import { Helmet } from 'react-helmet-async';
 
 // ----------------------------------------------------------------------
 
-export default function ResetPasswordPage() {
+export default function UpdatePasswordPage() {
   return (
     <>
       <Helmet>
-        <title>Reset password</title>
+        <title>Update password</title>
       </Helmet>
+      <p>Update password</p>
     </>
   );
 }

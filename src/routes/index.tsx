@@ -1,23 +1,14 @@
-import { Navigate, useRoutes } from 'react-router-dom';
-// auth
-import AuthGuard from '../auth/AuthGuard';
-import GuestGuard from '../auth/GuestGuard';
+import { useRoutes } from 'react-router-dom';
 // layouts
-import CompactLayout from '../layouts/compact';
-import DashboardLayout from '../layouts/dashboard';
-// config
-import { PATH_AFTER_LOGIN } from '../config';
+import SingleColumnLayout from '../layouts/singleColumn';
+
 //
 import {
   Page404,
-  LandingPage,
-  ManageUsersPage,
-  ProfilePage,
-  PatientsPage,
-  LogsPage,
-  ManagePractisesPage,
   LoginPage,
-  ResetPasswordPage
+  AccountDisabledPage,
+  ForgotPasswordPage,
+  UpdatePasswordPage
 } from './elements';
 
 // ----------------------------------------------------------------------
@@ -25,35 +16,23 @@ import {
 export default function Router() {
   return useRoutes([
     {
-      path: '/',
-      children: [
-        { element: <Navigate to={PATH_AFTER_LOGIN} replace />, index: true },
+      children: [        
+        { path: '/login', element: <LoginPage /> },
         {
-          path: 'login',
-          element: (
-            <GuestGuard>
-              <LoginPage />
-            </GuestGuard>
-          ),
+          path: 'auth', element: <SingleColumnLayout />, 
+          children: [  
+            { path: 'disabled', element: <AccountDisabledPage /> },
+            { path: 'forgotpassword', element: <ForgotPasswordPage /> },
+            { path: 'updatepassword', element: <UpdatePasswordPage /> }
+          ]
         },
-      ],
+        {
+          path: '/*', element: <SingleColumnLayout />, 
+          children: [  
+            { path: '*', element: <Page404 /> },
+          ]
+        },
+      ]
     },
-    {
-      path: '/dashboard',
-      element: (
-        <AuthGuard>
-          <DashboardLayout />
-        </AuthGuard>
-      ),
-      children: [
-        { element: <Navigate to={PATH_AFTER_LOGIN} replace />, index: true },
-        { path: 'landing', element: <LandingPage /> },
-      ],
-    },
-    {
-      element: <CompactLayout />,
-      children: [{ path: '404', element: <Page404 /> }],
-    },
-    { path: '*', element: <Navigate to="/404" replace /> },
   ]);
 }

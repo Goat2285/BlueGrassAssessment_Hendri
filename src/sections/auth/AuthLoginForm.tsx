@@ -4,7 +4,7 @@ import * as Yup from 'yup';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 // @mui
-import { Link, Stack, Alert, IconButton, InputAdornment } from '@mui/material';
+import { Link, Stack, Alert, IconButton, InputAdornment, Button } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 // auth
 import { useAuthContext } from '../../auth/useAuthContext';
@@ -13,6 +13,8 @@ import Iconify from '../../components/iconify';
 import FormProvider, { RHFTextField, RHFCheckbox } from '../../components/hook-form';
 
 // ----------------------------------------------------------------------
+
+import { useNavigate } from 'react-router-dom';
 
 type FormValuesProps = {
   email: string;
@@ -24,6 +26,7 @@ type FormValuesProps = {
 
 export default function AuthLoginForm() {
   const { login } = useAuthContext();
+  const navigate = useNavigate();
 
   const [showPassword, setShowPassword] = useState(false);
 
@@ -58,8 +61,13 @@ export default function AuthLoginForm() {
     }
   };
 
+  const tempSubmitSim = () => {
+    navigate('/');
+  }
+
   return (
-    <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
+    // <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
+    <FormProvider methods={methods} onSubmit={handleSubmit(tempSubmitSim)}>
       <Stack spacing={3}>
         {!!errors.afterSubmit && <Alert severity="error">{errors.afterSubmit.message}</Alert>}
 
@@ -106,6 +114,17 @@ export default function AuthLoginForm() {
       >
         Sign in
       </LoadingButton>
+
+
+      <Button variant="text" onClick={()=>{
+        navigate('/auth/disabled');
+      }}>Go to Disabled screen</Button>
+      <Button variant="text" onClick={()=>{
+        navigate('/auth/forgotpassword');
+      }}>Go to forgotpassword screen</Button>
+      <Button variant="text" onClick={()=>{
+        navigate('/auth/updatepassword');
+      }}>Go to updatepassword screen</Button>
     </FormProvider>
   );
 }

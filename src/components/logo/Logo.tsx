@@ -6,7 +6,7 @@ import { Box, Link, BoxProps } from '@mui/material';
 // ----------------------------------------------------------------------
 
 export interface LogoProps extends BoxProps {
-  logoStyle?: 1 | 2,
+  logoStyle?: 1 | 2 | 3,
   cursorPointer?: Boolean,  
   disabledLink?: boolean;
 }

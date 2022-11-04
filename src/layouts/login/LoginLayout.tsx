@@ -42,8 +42,9 @@ export default function LoginLayout({ children, illustration, title }: Props) {
           disabledEffect
           visibleByDefault
           alt="My fertility journey - Happy family with a child"
-          src={illustration || '/assets/images/illustrations/dashboard.svg'}
-          sx={{ maxWidth: 720 }}
+          src={illustration || '/assets/images/logo-style3.svg'}
+          sx={{ width: 364 }}
+          objectFit={'contain'}
         />
 
         <StyledSectionBg />

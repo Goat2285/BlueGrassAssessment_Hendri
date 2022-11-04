@@ -9,14 +9,14 @@ import { ImageProps } from './types';
 // ----------------------------------------------------------------------
 
 const Image = forwardRef<HTMLSpanElement, ImageProps>(
-  ({ ratio, disabledEffect = false, effect = 'blur', sx, ...other }, ref) => {
+  ({ ratio, disabledEffect = false, effect = 'blur', sx, objectFit, ...other }, ref) => {
     const content = (
       <Box
         component={LazyLoadImage}
         wrapperClassName="wrapper"
         effect={disabledEffect ? undefined : effect}
         placeholderSrc={disabledEffect ? '/assets/transparent.png' : '/assets/placeholder.svg'}
-        sx={{ width: 1, height: 1, objectFit: 'cover' }}
+        sx={{ width: 1, height: 1, objectFit: objectFit ? objectFit :'cover' }}
         {...other}
       />
     );

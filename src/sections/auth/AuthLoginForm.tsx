@@ -48,12 +48,9 @@ export default function AuthLoginForm() {
 
   const onSubmit = async (data: FormValuesProps) => {
     try {
-      await login(data.email, data.password, data.rememberMe = false, data.redirectUrl = './');
+      // await login(data.email, data.password, data.rememberMe = false, data.redirectUrl = './');
     } catch (error) {
-      console.error('a', error);
-
       reset();
-
       setError('afterSubmit', {
         ...error,
         message: error.message,
@@ -61,12 +58,7 @@ export default function AuthLoginForm() {
     }
   };
 
-  const tempSubmitSim = () => {
-    navigate('/');
-  }
-
   return (
-    // <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
     <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
       <Stack spacing={3}>
         {!!errors.afterSubmit && <Alert severity="error">{errors.afterSubmit.message}</Alert>}

@@ -1,5 +1,5 @@
 import { Helmet } from 'react-helmet-async';
-
+import ForgotPassword from '../sections/forgotpassword';
 
 // ----------------------------------------------------------------------
 
@@ -9,7 +9,7 @@ export default function ForgotpasswordPage() {
       <Helmet>
         <title>Forgot password</title>
       </Helmet>
-      <p>Forgot password</p>
+      <ForgotPassword />
     </>
   );
 }

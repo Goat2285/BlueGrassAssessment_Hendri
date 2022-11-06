@@ -125,6 +125,7 @@ export default function palette(themeMode: 'light' | 'dark') {
     text: {
       primary: GREYS.grey1,
       secondary: GREYS.grey2,
+      tertiary: GREYS.grey3,
       disabled: GREYS.grey4,
     },
     background: { paper: '#fff', default: '#fff', neutral: GREY[200] },

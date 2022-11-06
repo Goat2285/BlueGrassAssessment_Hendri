@@ -24,12 +24,12 @@ export default function AccountDisabled() {
       <Box sx={{ m: 2 }}/>
       <Typography variant="h3">Account Disabled</Typography>
       <Box sx={{ m: 1 }}/>
-      <Typography variant="body1" color='text.secondary' sx={{textAlign: 'center'}}>Your account access has been disabled. Please get in touch with us to discuss how to go about reactivating your account</Typography>
+      <Typography variant="body1" color='text.secondary' sx={{ textAlign: 'center' }}>Your account access has been disabled. Please get in touch with us to discuss how to go about reactivating your account</Typography>
       <Box sx={{ mb: 5 }}/>
       <Button 
         variant="contained" 
         size="large" 
-        sx={{width: '100%'}}
+        sx={{ width: '100%' }}
         onClick={()=>{
           navigate('/login');
         }}

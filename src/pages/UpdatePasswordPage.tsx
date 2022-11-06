@@ -1,5 +1,5 @@
 import { Helmet } from 'react-helmet-async';
-
+import Updatepassword from '../sections/updatepassword';
 
 // ----------------------------------------------------------------------
 
@@ -9,7 +9,7 @@ export default function UpdatePasswordPage() {
       <Helmet>
         <title>Update password</title>
       </Helmet>
-      <p>Update password</p>
+      <Updatepassword />
     </>
   );
 }

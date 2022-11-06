@@ -7,21 +7,22 @@ import { useState } from "react";
 import Step1 from './step1';
 import Step2 from './step2';
 
-
-export default function ForgotPassword() {
-  const [emailIsSent, setEmailIsSent] = useState<boolean>(false)
+export default function UpdatePassword() {
+  const [passwordIsUpdated, setPasswordIsUpdated] = useState<boolean>(false)
 
   type FormValuesProps = {
     email: string;
+    confirmemail: string;
     afterSubmit?: string;
   };
 
-  const ForgotPasswordSchema = Yup.object().shape({
-    email: Yup.string().email('Email must be a valid email address').required('Email is required'),
+  const  UpdatePasswordSchema = Yup.object().shape({
+    password: Yup.string().required('Password is required').min(5, "Please use a password that is longer than 5 characters"),
+    confirmpassword: Yup.string().required('Password confirm is required').oneOf([Yup.ref('password'), null], 'Passwords must match').min(5, "Please use a password that is longer than 5 characters"),
   });
 
   const methods = useForm<FormValuesProps>({
-    resolver: yupResolver(ForgotPasswordSchema)
+    resolver: yupResolver(UpdatePasswordSchema)
   });
 
   const {
@@ -35,7 +36,7 @@ export default function ForgotPassword() {
     try {
       console.log(data)
       // Leaving this here for now until API is set up
-      setEmailIsSent(true)
+      setPasswordIsUpdated(true)
     } catch (error) {
       reset();
       setError('afterSubmit', {
@@ -53,15 +54,8 @@ export default function ForgotPassword() {
       justifyContent: 'center',
       maxWidth: 480 
     }}>
-      { emailIsSent ? 
-        <Step2 
-          onSubmit={onSubmit} 
-          handleSubmit={handleSubmit} 
-          errors={errors} 
-          isSubmitting={isSubmitting} 
-          isSubmitSuccessful={isSubmitSuccessful} 
-          methods={methods}
-        />
+      { passwordIsUpdated ? 
+        <Step2 />
       : 
         <Step1 
           onSubmit={onSubmit} 

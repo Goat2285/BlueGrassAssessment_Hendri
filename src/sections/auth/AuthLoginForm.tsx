@@ -50,7 +50,7 @@ export default function AuthLoginForm() {
     try {
       await login(data.email, data.password, data.rememberMe = false, data.redirectUrl = './');
     } catch (error) {
-      console.error(error);
+      console.error('a', error);
 
       reset();
 
@@ -67,7 +67,7 @@ export default function AuthLoginForm() {
 
   return (
     // <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
-    <FormProvider methods={methods} onSubmit={handleSubmit(tempSubmitSim)}>
+    <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
       <Stack spacing={3}>
         {!!errors.afterSubmit && <Alert severity="error">{errors.afterSubmit.message}</Alert>}
 
@@ -91,7 +91,7 @@ export default function AuthLoginForm() {
 
       <Stack justifyContent="space-between" sx={{ my: 2 }} direction='row' alignItems='center'>
         <RHFCheckbox name={'rememberMe'} label={'Remember me'} sx={{paddingLeft: '10px'}} />
-        <Link variant="body2" color="inherit" underline='hover'  sx={{ cursor: "pointer", color: 'primary.dark', fontWeight: 'bold' }}>
+        <Link variant="body2" color="inherit" underline='hover'  sx={{ cursor: "pointer", color: 'primary.dark', fontWeight: 'bold' }} href={'/auth/forgotpassword'}>
           Forgot password?
         </Link>
       </Stack>
@@ -119,9 +119,6 @@ export default function AuthLoginForm() {
       <Button variant="text" onClick={()=>{
         navigate('/auth/disabled');
       }}>Go to Disabled screen</Button>
-      <Button variant="text" onClick={()=>{
-        navigate('/auth/forgotpassword');
-      }}>Go to forgotpassword screen</Button>
       <Button variant="text" onClick={()=>{
         navigate('/auth/updatepassword');
       }}>Go to updatepassword screen</Button>

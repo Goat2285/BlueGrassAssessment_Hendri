@@ -3,7 +3,6 @@ import Image from '../../components/image';
 import { useNavigate } from 'react-router-dom';
 // Styles
 import { StylesGettingStarted } from './styles';
-import { width } from "@mui/system";
 
 export default function Welcome() {
   const navigate = useNavigate();
@@ -38,7 +37,7 @@ export default function Welcome() {
         variant="contained" 
         size="large" 
         onClick={()=>{
-          navigate('/register');
+          navigate('/auth/register');
         }}
       >
         Get Started      

@@ -17,7 +17,7 @@ export default function Login() {
     <LoginLayout>
       <StylesGettingStarted>
         <Typography variant="body2">Don’t have an account? &nbsp;
-          <Link variant="body2" color="inherit" underline='hover' sx={{ cursor: "pointer", color: 'primary.dark', fontWeight: 'bold' }}>Get started</Link>
+          <Link variant="body2" color="inherit" underline='hover' sx={{ cursor: "pointer", color: 'primary.dark', fontWeight: 'bold' }} href="auth/register">Get started</Link>
         </Typography>
       </StylesGettingStarted>
       <Stack spacing={2} sx={{ mb: 5, position: 'relative' }}>        

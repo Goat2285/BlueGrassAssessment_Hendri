@@ -5,11 +5,12 @@ import SingleColumnLayout from '../layouts/singleColumn';
 //
 import {
   Page404,
+  WelcomePage,
   LoginPage,
   AccountDisabledPage,
   ForgotPasswordPage,
-  UpdatePasswordPage,
-  WelcomePage
+  UpdatePasswordPage,  
+  RegisterPage
 } from './elements';
 
 // ----------------------------------------------------------------------
@@ -34,7 +35,8 @@ export default function Router() {
               children: [  
                 { path: 'disabled', element: <AccountDisabledPage /> },
                 { path: 'forgotpassword', element: <ForgotPasswordPage /> },
-                { path: 'updatepassword', element: <UpdatePasswordPage /> }
+                { path: 'updatepassword', element: <UpdatePasswordPage /> },
+                { path: 'register', element: <RegisterPage /> }
               ]
             },
             {

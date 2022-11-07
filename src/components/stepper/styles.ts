@@ -14,7 +14,7 @@ export const StyledStepLine = styled('div')(() => ({
   flex: 1,
 }));
 
-export const StyledStepper = styled('div')(() => ({
+export const StyledStepper = styled('div')(({ theme }) => ({
   display: 'flex',
   flexDirection: 'row',
   flexWrap: 'wrap',
@@ -22,9 +22,13 @@ export const StyledStepper = styled('div')(() => ({
   paddingBottom: '38px',
   paddingLeft: SIDEPADDING,
   paddingRight: SIDEPADDING,
+  [theme.breakpoints.down('sm')]: {
+    paddingLeft: 0,
+    paddingRight: 0,
+  },
 }));
 
-export const StyledStepperLabel = styled('p')(() => ({
+export const StyledStepperLabel = styled('p')(({ theme }) => ({
   position: 'absolute', 
   right: '15px', 
   transform: 'translateX(50%)',
@@ -35,4 +39,7 @@ export const StyledStepperLabel = styled('p')(() => ({
   letterSpacing: 0,
   textAlign: 'center',
   width: LABELWIDTH,
+  [theme.breakpoints.down('sm')]: {
+    display: 'none'
+  },
 }));

@@ -26,3 +26,5 @@ export const LandingPage = Loadable(lazy(() => import('../pages/LandingPage')));
 
 // Other
 export const Page404 = Loadable(lazy(() => import('../pages/Page404')));
+export const WelcomePage = Loadable(lazy(() => import('../pages/WelcomePage')));
+

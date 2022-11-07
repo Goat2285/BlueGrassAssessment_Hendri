@@ -8,7 +8,8 @@ import {
   LoginPage,
   AccountDisabledPage,
   ForgotPasswordPage,
-  UpdatePasswordPage
+  UpdatePasswordPage,
+  WelcomePage
 } from './elements';
 
 // ----------------------------------------------------------------------
@@ -16,20 +17,32 @@ import {
 export default function Router() {
   return useRoutes([
     {
-      children: [        
-        { path: '/login', element: <LoginPage /> },
-        {
-          path: 'auth', element: <SingleColumnLayout />, 
-          children: [  
-            { path: 'disabled', element: <AccountDisabledPage /> },
-            { path: 'forgotpassword', element: <ForgotPasswordPage /> },
-            { path: 'updatepassword', element: <UpdatePasswordPage /> }
-          ]
-        },
-        {
-          path: '/*', element: <SingleColumnLayout />, 
-          children: [  
-            { path: '*', element: <Page404 /> },
+      children: [
+        { 
+          path: '/', 
+          children: [
+            { 
+              path: 'welcome', 
+              element: <WelcomePage /> 
+            },
+            { 
+              path: 'login', 
+              element: <LoginPage /> 
+            },
+            {
+              path: 'auth', element: <SingleColumnLayout />, 
+              children: [  
+                { path: 'disabled', element: <AccountDisabledPage /> },
+                { path: 'forgotpassword', element: <ForgotPasswordPage /> },
+                { path: 'updatepassword', element: <UpdatePasswordPage /> }
+              ]
+            },
+            {
+              path: '*', element: <SingleColumnLayout />, 
+              children: [  
+                { path: '*', element: <Page404 /> },
+              ]
+            },
           ]
         },
       ]

@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 export default function ForgotPassWordStep1({ handleSubmit, onSubmit, methods, errors, isSubmitting, isSubmitSuccessful }: UpdatepasswordformProps){
   const navigate = useNavigate();
+
   return (
     <>
       <Typography variant="h3">Update Password</Typography>

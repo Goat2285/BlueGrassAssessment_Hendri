@@ -18,10 +18,10 @@ export default function Stepper({ currentStep, steps } : StepperProps){
               <StyledStepLine sx={{ backgroundColor: currentStep >= entry.step ? "primary.main" : "grey.300" }} />
               :
               null}
-            <StyledDot sx={{ backgroundColor: currentStep >= entry.step ? "primary.main" : "grey.300" }} />            
-            {currentStep > entry.step ? <Check color="primary" sx={{ marginRight: '8px' }} /> : null}
+            {currentStep <= entry.step ? <StyledDot sx={{ backgroundColor: currentStep >= entry.step ? "primary.main" : "grey.300" }} /> : null}           
+            {currentStep > entry.step ? <Check color="primary" sx={{ margin: '8px' }} /> : null}
           </Stack>
-          { entry.label ? <StyledStepperLabel>{entry.label}</StyledStepperLabel> : null }
+          { entry.tickLabel ? <StyledStepperLabel>{entry.tickLabel}</StyledStepperLabel> : null }
         </Box>
         ))}             
     </StyledStepper> 

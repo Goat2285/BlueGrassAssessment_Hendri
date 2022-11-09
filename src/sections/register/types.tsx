@@ -1,39 +1,26 @@
+import { Dispatch, SetStateAction } from "react";
+
 export type StepperProps = {
   currentStep: number;
   steps: { 
     step: number;
-    label: string; 
+    tickLabel?: string; 
+    header?: string;
+    headerDescription?: string;
     key: string;
   }[]  
 }
 
 export type Step1Props = {
-  firstname: string;
-  lastname: string;
-  email: string;
-  contactnumber: number;
-  nationality: string;
-  idnumber: number;
-  address: string;
-  dateofbirth: string;
+  setCurrentStep: Dispatch<SetStateAction<number>>;
 };
 
 export type Step2Props = {
-  haspartner: boolean,
-  firstname: string;
-  lastname: string;
-  email: string;
-  contactnumber: number;
-  nationality: string;
-  idnumber: number;
-  address: string;
-  dateofbirth: string;
+  setCurrentStep: Dispatch<SetStateAction<number>>;
 };
 
 export type Step3Props = {  
-  nameoncard: string;
-  cardnumber: number;
-  expirydate: string;
-  cvv: number;
-  afterSubmit?: string;
+  setCurrentStep: Dispatch<SetStateAction<number>>;
 };
+
+export type FormValuesProps = Step1Props & Step2Props & Step3Props

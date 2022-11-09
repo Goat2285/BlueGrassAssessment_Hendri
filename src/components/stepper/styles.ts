@@ -17,6 +17,7 @@ export const StyledStepLine = styled('div')(() => ({
 export const StyledStepper = styled('div')(({ theme }) => ({
   display: 'flex',
   flexDirection: 'row',
+  alignItems: 'center',
   flexWrap: 'wrap',
   width: '100%',
   paddingBottom: '38px',

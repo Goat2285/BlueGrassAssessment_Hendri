@@ -4067,6 +4067,11 @@
   "resolved" "https://registry.npmjs.org/colorette/-/colorette-2.0.16.tgz"
   "version" "2.0.16"
 
+"colors@1.4.0":
+  "integrity" "sha512-a+UqTh4kgZg/SlGvfbzDHpgRu7AAQOmmqRHJnxhRZICKFUT91brVhNNt58CMWU9PsBbv3PDCZUHbVxuDiH2mtA=="
+  "resolved" "https://registry.npmjs.org/colors/-/colors-1.4.0.tgz"
+  "version" "1.4.0"
+
 "combined-stream@^1.0.8":
   "integrity" "sha512-FQN4MRfuJeHf7cBbBMJFXhKSDq+2kAArBlmRBvcvFE5BB1HZKXtSFASDhdlz9zOYwxh8lDdnvmMOe/+5cdoEdg=="
   "resolved" "https://registry.npmjs.org/combined-stream/-/combined-stream-1.0.8.tgz"
@@ -7214,6 +7219,11 @@
   dependencies:
     "minimist" "^1.2.5"
 
+"mod10-check-digit@^1.0.0":
+  "integrity" "sha512-5QbAkF8zw6cVJHogHcRvKDYMvwzL7RNUFQ3DC+7YO9bDddCkBNh4HgXZjrrAvRKwEyZ6fzdMoH3Z77vvjpfydw=="
+  "resolved" "https://registry.npmjs.org/mod10-check-digit/-/mod10-check-digit-1.0.0.tgz"
+  "version" "1.0.0"
+
 "ms@^2.1.1", "ms@2.1.2":
   "integrity" "sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w=="
   "resolved" "https://registry.npmjs.org/ms/-/ms-2.1.2.tgz"
@@ -8273,6 +8283,14 @@
     "ansi-styles" "^5.0.0"
     "react-is" "^17.0.1"
 
+"prettyjson@^1.2.1":
+  "integrity" "sha512-rksPWtoZb2ZpT5OVgtmy0KHVM+Dca3iVwWY9ifwhcexfjebtgjg3wmrUt9PvJ59XIYBcknQeYHD8IAnVlh9lAw=="
+  "resolved" "https://registry.npmjs.org/prettyjson/-/prettyjson-1.2.5.tgz"
+  "version" "1.2.5"
+  dependencies:
+    "colors" "1.4.0"
+    "minimist" "^1.2.0"
+
 "process-nextick-args@~2.0.0":
   "integrity" "sha512-3ouUOpQhtgrbOa17J7+uxOTpITYWaGP7/AhoR3+A+/1e9skrzelGi/dXzEYyvbxubEF6Wn2ypscTKiKJFFn1ag=="
   "resolved" "https://registry.npmjs.org/process-nextick-args/-/process-nextick-args-2.0.1.tgz"
@@ -9218,6 +9236,14 @@
   "resolved" "https://registry.npmjs.org/sourcemap-codec/-/sourcemap-codec-1.4.8.tgz"
   "version" "1.4.8"
 
+"south-african-id-info@^1.0.1":
+  "integrity" "sha512-/dKm8QmBljG/kqKdsjH905CYocs4xowZk8qIE1yWMqx/SJgo7v0xXdnukQucP1V6G+4s62W6SEpmZOHJO6RqGw=="
+  "resolved" "https://registry.npmjs.org/south-african-id-info/-/south-african-id-info-1.0.1.tgz"
+  "version" "1.0.1"
+  dependencies:
+    "prettyjson" "^1.2.1"
+    "valid-south-african-id" "^1.0.1"
+
 "spdy-transport@^3.0.0":
   "integrity" "sha512-hsLVFE5SjA6TCisWeJXFKniGGOpBgMLmerfO2aCyCU5s7nJ/rpAepqmFifv/GCbSbueEeAJJnmSQ2rKC/g8Fcw=="
   "resolved" "https://registry.npmjs.org/spdy-transport/-/spdy-transport-3.0.0.tgz"
@@ -9885,6 +9911,13 @@
     "@types/istanbul-lib-coverage" "^2.0.1"
     "convert-source-map" "^1.6.0"
     "source-map" "^0.7.3"
+
+"valid-south-african-id@^1.0.1":
+  "integrity" "sha512-6XlhLzymSzgzD5V3R5jPi3HROc3ATmmBl8yLcZGsdejq0DO4tz1Ey2nMDcuIKjSrJI+vcUm0WX2Z22XdUP69YQ=="
+  "resolved" "https://registry.npmjs.org/valid-south-african-id/-/valid-south-african-id-1.0.2.tgz"
+  "version" "1.0.2"
+  dependencies:
+    "mod10-check-digit" "^1.0.0"
 
 "vary@~1.1.2":
   "integrity" "sha1-IpnwLG3tMNSllhsLn3RSShj2NPw= sha512-BNGbWLfd0eUPabhkXUVm0j8uuvREyTh5ovRa/dyow/BqAbZJyC+5fU+IzQOzmAKzYqYRAISoRhdQr3eIZ/PXqg=="

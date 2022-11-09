@@ -1,92 +1,34 @@
+import { Stack, Typography, Box } from "@mui/material";
+import { useState } from "react";
+import { GREYS } from '../../theme/palette';
+import StepperSteps from './stepData';
+import FormProvider from '../../components/hook-form';
+import RegistrationStepper from '../../components/stepper/stepper';
 import * as Yup from 'yup';
-// form
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Stack } from "@mui/material";
-import { useState } from "react";
-import RegistrationStepper from '../../components/stepper/stepper';
+import { FormValuesProps } from './types';
+
 import Step1 from './step1';
 import Step2 from './step2';
 import Step3 from './step3';
 
-export default function UpdatePassword() {
+export default function Register() {
   const [currentStep, setCurrentStep] = useState<number>(0)
 
-  type FormValuesProps = {
-    partner1 : {
-      firstname: string;
-      lastname: string;
-      email: string;
-      contactnumber: number;
-      nationality: string;
-      idnumber: number;
-      address: string;
-      dateofbirth: string;
-    },
-    haspartner: boolean,
-    partner2 : {
-      firstname: string;
-      lastname: string;
-      email: string;
-      contactnumber: number;
-      nationality: string;
-      idnumber: number;
-      address: string;
-      dateofbirth: string;
-    },
-    nameoncard: string;
-    cardnumber: number;
-    expirydate: string;
-    cvv: number;
-    afterSubmit?: string;
-  };
 
-  const  UpdatePasswordSchema = Yup.object().shape({
-    
-  });
-
-  const methods = useForm<FormValuesProps>({
-    resolver: yupResolver(UpdatePasswordSchema)
-  });
-
-  const {
-    reset,
-    setError,
-    handleSubmit,
-    formState: { errors, isSubmitting, isSubmitSuccessful },
-  } = methods;
-
-  const onSubmit = async (data: FormValuesProps) => {
-    try {
-      console.log(data)
-      // Leaving this here for now until API is set up
-    } catch (error) {
-      reset();
-      setError('afterSubmit', {
-        ...error,
-        message: error.message,
-      });
-    }
-  };
-
-  const StepperSteps = [
-    {
-      step: 0,
-      label: 'Partner 1 - Information',
-      key: 'registrationStep1'
-    },
-    {
-      step: 1,
-      label: 'Partner 2 -  Information',
-      key: 'registrationStep2'
-    },
-    {
-      step: 2,
-      label: 'Payment Information',
-      key: 'registrationStep3'
-    }
-  ]
-
+  // const onSubmit = async (data: FormValuesProps) => {
+  //   try {
+  //     console.log(data)
+  //     // Leaving this here for now until API is set up
+  //   } catch (error) {
+  //     reset();
+  //     setError('afterSubmit', {
+  //       ...error,
+  //       message: error.message,
+  //     });
+  //   }
+  // };
 
   return (
     <Stack sx={{
@@ -96,12 +38,54 @@ export default function UpdatePassword() {
       justifyContent: 'center',
       flex: 1,
       width: '100%',
-    }}>
-      <RegistrationStepper currentStep={currentStep} steps={StepperSteps} />
-      {currentStep === 0 ? <Step1 /> : null}
-      {currentStep === 1 ? <Step2 /> : null}
-      {currentStep === 2 ? <Step3 /> : null}
+      py: '100px'
+    }}>      
+      {
+        StepperSteps[currentStep].tickLabel || StepperSteps[currentStep].headerTitle
+        ? 
+        <>
+          <Typography variant="h3" dangerouslySetInnerHTML={{ __html: StepperSteps[currentStep].headerTitle ? StepperSteps[currentStep].headerTitle : StepperSteps[currentStep].tickLabel }} /> 
+          <Box m={1} />
+        </>
+        : 
+          null 
+      }
+      {
+        StepperSteps[currentStep].headerDescription 
+        ? 
+          <>
+            <Typography variant="body1" sx={{ textAlign: 'center', color: GREYS.grey3 }} dangerouslySetInnerHTML={{ __html: StepperSteps[currentStep].headerDescription }} /> 
+            <Box m={2} />
+          </>
+        : 
+          null 
+      }
+      <RegistrationStepper currentStep={currentStep} steps={StepperSteps} />     
+      <Box m={2}/>
+      {
+        currentStep === 0 
+        ? 
+          <Step1 
+            setCurrentStep={setCurrentStep} 
+          />
+        : null
+      }
+      {
+        currentStep === 1 
+        ? 
+          <Step2 
+            setCurrentStep={setCurrentStep} 
+          />
+        : null
+      }
+      {
+        currentStep === 2 
+        ? 
+          <Step2 
+            setCurrentStep={setCurrentStep} 
+          />
+        : null
+      }       
     </Stack>
   );
 }
-

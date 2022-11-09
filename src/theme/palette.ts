@@ -35,13 +35,12 @@ const GREY = {
   900: '#161C24',
 };
 
-const GREYS = {
+export const GREYS = {
   grey1: '#414141',
   grey2: '#637381',
   grey3: '#747474',
   grey4: '#BCBCBC',
 };
-
 
 const PRIMARY = {
   lighter: '#dfeaec',
@@ -125,7 +124,6 @@ export default function palette(themeMode: 'light' | 'dark') {
     text: {
       primary: GREYS.grey1,
       secondary: GREYS.grey2,
-      tertiary: GREYS.grey3,
       disabled: GREYS.grey4,
     },
     background: { paper: '#fff', default: '#fff', neutral: GREY[200] },

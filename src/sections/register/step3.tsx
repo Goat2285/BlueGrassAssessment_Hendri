@@ -34,16 +34,17 @@ export default function RegisterStep3({ setCurrentStep } : Step1Props){
         <RHFTextField name="dateofbirth" label="Date of Birth" />  */}
       </Stack>
       <Box m={2} />
-      <Stack direction={'row'} justifyContent={'space-between'}>
+      <Stack direction={'row'} justifyContent={'flex-end'}>
         <Button 
-          variant="outlined"
+          variant="text"
           onClick={()=>{
             navigate('/welcome');
           }}
           size={'large'}
         >
             Back
-          </Button>
+        </Button>
+        <Box m={1} />
         <Button 
           variant="contained" 
           onClick={nextStepHandler}

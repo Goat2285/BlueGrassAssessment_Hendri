@@ -43,7 +43,7 @@ export default function RegisterStep1({ setCurrentStep } : Step1Props){
         otherwise: Yup.string().required('ID or Passport number is required'),
       }),
     address: Yup.string().required('Address is required'),
-    dateofbirth: Yup.date().required('Date of birth is required').max(maxDate, 'Date of birth needs to be in the past'),
+    dateofbirth: Yup.date().required('Date of birth is required').max(maxDate, 'Date of birth needs to be in the past').nullable(true),
   });
 
   const methods = useForm<FormValuesProps>({
@@ -83,21 +83,22 @@ export default function RegisterStep1({ setCurrentStep } : Step1Props){
           </Stack>
           <Stack spacing={3} direction={'row'} flexWrap={'wrap'} justifyContent='center'>            
             <RHFTextField name="address" label="Address" sx={{ maxWidth: 448, margin: '12px !important' }} />            
-            <RHFDatePicker name="dateofbirth" label="Date of Birth" sx={{ maxWidth: 448,  margin: '12px !important' }}/>   
+            <RHFDatePicker name="dateofbirth" label="Date of Birth" sx={{ maxWidth: 448,  margin: '12px !important' }} />   
           </Stack>
       </FormProvider>
       
       <Box m={2} />
-      <Stack direction={'row'} justifyContent={'space-between'} m={1}>
+      <Stack direction={'row'} justifyContent={'flex-end'} m={1}>
         <Button 
-          variant="outlined"
+          variant="text"
           onClick={()=>{
             navigate(-1);
           }}
           size={'large'}
         >
           Back
-          </Button>
+        </Button>
+        <Box m={1} />
         <Button 
           variant="contained" 
           onClick={handleSubmit(onSubmit)}

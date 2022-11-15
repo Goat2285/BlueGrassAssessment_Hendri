@@ -7,9 +7,10 @@ import { DatePicker } from '@mui/x-date-pickers';
 
 type Props = TextFieldProps & {
   name: string;
+  disabled?: boolean;
 };
 
-export default function RHFDatePicker({ name, ...other }: Props) {
+export default function RHFDatePicker({ name, disabled, ...other }: Props) {
   const { control } = useFormContext();
 
   return (
@@ -22,6 +23,7 @@ export default function RHFDatePicker({ name, ...other }: Props) {
           value={field.value}          
           views={['day']}
           onChange={field.onChange}
+          disabled={disabled}
           renderInput={(field) => (
             <TextField
               {...field}

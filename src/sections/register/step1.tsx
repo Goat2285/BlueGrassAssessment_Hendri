@@ -1,10 +1,9 @@
-import {useEffect} from 'react'
 import * as Yup from 'yup';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, Box, Stack } from "@mui/material";
 import { useNavigate } from 'react-router-dom';
-import FormProvider, { RHFTextField, RHFSelect } from '../../components/hook-form';
+import FormProvider, { RHFTextField, RHFSelect, RHFDatePicker } from '../../components/hook-form';
 import { Step1Props } from './types';
 const southAfricanIdInfo = require('south-african-id-info')
 
@@ -22,8 +21,8 @@ type FormValuesProps = {
 
 export default function RegisterStep1({ setCurrentStep } : Step1Props){
   const navigate = useNavigate();
-
   const phoneRegex = /^\+[1-9]{1}[0-9 | \s]{3,14}$/;
+  const maxDate = new Date();
 
   const Step1Schema = Yup.object().shape({
     firstname: Yup.string().required('First name is required'),
@@ -44,7 +43,7 @@ export default function RegisterStep1({ setCurrentStep } : Step1Props){
         otherwise: Yup.string().required('ID or Passport number is required'),
       }),
     address: Yup.string().required('Address is required'),
-    dateofbirth: Yup.string().required('Date of birth is required'),
+    dateofbirth: Yup.date().required('Date of birth is required').max(maxDate, 'Date of birth needs to be in the past'),
   });
 
   const methods = useForm<FormValuesProps>({
@@ -84,7 +83,7 @@ export default function RegisterStep1({ setCurrentStep } : Step1Props){
           </Stack>
           <Stack spacing={3} direction={'row'} flexWrap={'wrap'} justifyContent='center'>            
             <RHFTextField name="address" label="Address" sx={{ maxWidth: 448, margin: '12px !important' }} />            
-            <RHFTextField name="dateofbirth" label="Date of Birth" sx={{ maxWidth: 448,  margin: '12px !important' }} />
+            <RHFDatePicker name="dateofbirth" label="Date of Birth" sx={{ maxWidth: 448,  margin: '12px !important' }}/>   
           </Stack>
       </FormProvider>
       
@@ -93,7 +92,7 @@ export default function RegisterStep1({ setCurrentStep } : Step1Props){
         <Button 
           variant="outlined"
           onClick={()=>{
-            navigate('/welcome');
+            navigate(-1);
           }}
           size={'large'}
         >

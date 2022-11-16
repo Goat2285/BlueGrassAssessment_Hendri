@@ -14,6 +14,12 @@ export default function LogsPage() {
       <Helmet>
         <title> Logs</title>
       </Helmet>
+
+      <Container maxWidth={themeStretch ? false : 'xl'}>
+        <Typography variant="h3" component="h1" paragraph>
+          Logs Page
+        </Typography>
+      </Container>
     </>
   );
 }

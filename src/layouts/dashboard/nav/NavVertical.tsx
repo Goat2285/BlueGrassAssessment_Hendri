@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 // @mui
 import { Box, Stack, Drawer } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 // hooks
 import useResponsive from '../../../hooks/useResponsive';
 // config
@@ -23,6 +24,7 @@ type Props = {
 
 export default function NavVertical({ openNav, onCloseNav }: Props) {
   const { pathname } = useLocation();
+  const theme = useTheme();
 
   const isDesktop = useResponsive('up', 'lg');
 
@@ -53,7 +55,10 @@ export default function NavVertical({ openNav, onCloseNav }: Props) {
           flexShrink: 0,
         }}
       >
-        <Logo />
+        <Logo
+        sx={{
+          mb: 1.895,
+        }}/>
 
         <NavAccount />
       </Stack>
@@ -80,7 +85,7 @@ export default function NavVertical({ openNav, onCloseNav }: Props) {
           PaperProps={{
             sx: {
               width: NAV.W_DASHBOARD,
-              bgcolor: 'transparent',
+              bgcolor: theme.palette.background.default,
               borderRightStyle: 'solid',
             },
           }}

@@ -68,6 +68,7 @@ export default function Header({ onOpenNav }: Props) {
         ...bgBlur({
           color: theme.palette.background.default,
         }),
+        bgcolor: theme.palette.background.default,
         transition: theme.transitions.create(['height'], {
           duration: theme.transitions.duration.shorter,
         }),

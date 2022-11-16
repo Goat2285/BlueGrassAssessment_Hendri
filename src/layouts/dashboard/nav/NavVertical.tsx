@@ -81,7 +81,7 @@ export default function NavVertical({ openNav, onCloseNav }: Props) {
             sx: {
               width: NAV.W_DASHBOARD,
               bgcolor: 'transparent',
-              borderRightStyle: 'dashed',
+              borderRightStyle: 'solid',
             },
           }}
         >

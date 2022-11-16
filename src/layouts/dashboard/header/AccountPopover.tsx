@@ -66,14 +66,18 @@ export default function AccountPopover() {
       <Typography variant="subtitle2" noWrap
         onClick={handleOpenPopover}
         sx={{
-          color: (theme) => alpha(theme.palette.grey[900], 0.8),
+          color: (theme) => alpha(theme.palette.grey[800], 1),
           cursor: 'pointer',
+          '&::after': {
+            content: "url(/assets/images/icons/ic_arrow-down.svg)",
+            pl: 2,
+          },
         }}
       >
         Adrian Stefan
       </Typography>
 
-      <MenuPopover open={openPopover} onClose={handleClosePopover} sx={{ width: 200, p: 0 }}>
+      <MenuPopover open={openPopover} onClose={handleClosePopover} sx={{ width: 200, p: 0, mt: 4.3 }}>
         <Box sx={{ my: 1.5, px: 2.5 }}>
           <Typography variant="subtitle2" noWrap>
             {user?.displayName}

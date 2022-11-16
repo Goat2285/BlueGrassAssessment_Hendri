@@ -14,12 +14,6 @@ export default function ManagePatientsPage() {
       <Helmet>
         <title> Manage Patients</title>
       </Helmet>
-
-      <Container maxWidth={themeStretch ? false : 'xl'}>
-        <Typography variant="h3" component="h1" paragraph>
-          Manage Patients Page
-        </Typography>
-      </Container>
     </>
   );
 }

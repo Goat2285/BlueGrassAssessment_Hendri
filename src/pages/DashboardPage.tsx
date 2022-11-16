@@ -14,12 +14,6 @@ export default function DashboardPage() {
       <Helmet>
         <title> Dashboard</title>
       </Helmet>
-
-      <Container maxWidth={themeStretch ? false : 'xl'}>
-        <Typography variant="h3" component="h1" paragraph>
-          Dashboard Page
-        </Typography>
-      </Container>
     </>
   );
 }

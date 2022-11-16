@@ -20,26 +20,55 @@ declare module '@mui/material/styles/createPalette' {
 
 // SETUP COLORS
 
+// const GREY = {
+//   0: '#FFFFFF',
+//   100: '#F9FAFB',
+//   200: '#F4F6F8',
+//   300: '#DFE3E8',
+//   400: '#C4CDD5',
+//   500: '#919EAB',
+//   600: '#637381',
+//   700: '#454F5B',
+//   800: '#212B36',
+//   900: '#161C24',
+// };
+
+// GREY FROM FIGMA FILE
+
 const GREY = {
   0: '#FFFFFF',
-  100: '#F9FAFB',
-  200: '#F4F6F8',
-  300: '#DFE3E8',
-  400: '#C4CDD5',
-  500: '#919EAB',
-  600: '#637381',
-  700: '#454F5B',
-  800: '#212B36',
-  900: '#161C24',
+  100: '#F5F5F5',
+  200: '#EDEDED',
+  300: '#DFDFDF',
+  400: '#BCBCBC',
+  500: '#9D9D9D',
+  600: '#747474',
+  700: '#606060',
+  800: '#414141',
+  900: '#202020',
 };
 
-const PRIMARY = {
-  lighter: '#C8FACD',
-  light: '#5BE584',
-  main: '#00AB55',
-  dark: '#007B55',
+export const GREYS = {
+  grey1: '#414141',
+  grey2: '#637381',
+  grey3: '#747474',
+  grey4: '#BCBCBC',
+  grey5: '#FAFAFA',
+};
+
+export const PRIMARY = {
+  lighter: '#dfeaec',
+  light: '#9FC0C6',
+  main: '#67ADB9',
+  dark: '#5F97A0',
   darker: '#005249',
   contrastText: '#fff',
+};
+
+export const CHART = {
+  green: '#54D62C',
+  orange: '#FFC107',
+  red: '#FF4842'
 };
 
 const SECONDARY = {
@@ -115,7 +144,7 @@ export default function palette(themeMode: 'light' | 'dark') {
     text: {
       primary: GREY[800],
       secondary: GREY[600],
-      disabled: GREY[500],
+      disabled: GREY[400],
     },
     background: { paper: '#fff', default: '#fff', neutral: GREY[200] },
     action: {

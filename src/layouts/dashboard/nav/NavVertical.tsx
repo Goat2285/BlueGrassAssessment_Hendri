@@ -12,6 +12,7 @@ import Scrollbar from '../../../components/scrollbar';
 import { NavSectionVertical } from '../../../components/nav-section';
 //
 import navConfig from './config';
+import NavAccount from './NavAccount';
 
 // ----------------------------------------------------------------------
 
@@ -53,11 +54,14 @@ export default function NavVertical({ openNav, onCloseNav }: Props) {
         }}
       >
         <Logo />
+
+        <NavAccount />
       </Stack>
 
       <NavSectionVertical data={navConfig} />
 
       <Box sx={{ flexGrow: 1 }} />
+
     </Scrollbar>
   );
 

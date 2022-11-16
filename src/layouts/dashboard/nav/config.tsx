@@ -17,14 +17,15 @@ const ICONS = {
 };
 
 const navConfig = [
+  // GENERAL
+  // ----------------------------------------------------------------------
   {
-    subheader: '',
     items: [
-      {
-        title: 'Dashboard',
-        path: PATH_DASHBOARD.landing,
-        icon: ICONS.user,
-      },
+      { title: 'Dashboard', path: PATH_DASHBOARD.app, icon: ICONS.dashboard },
+      { title: 'My Profile', path: PATH_DASHBOARD.profile, icon: ICONS.user },
+      { title: 'Manage Users', path: PATH_DASHBOARD.users, icon: ICONS.analytics },
+      { title: 'Manage Patients', path: PATH_DASHBOARD.patients, icon: ICONS.analytics },
+      { title: 'Logs', path: PATH_DASHBOARD.logs, icon: ICONS.ecommerce },
     ],
   },
 ];

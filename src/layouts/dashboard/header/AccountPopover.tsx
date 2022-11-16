@@ -70,7 +70,9 @@ export default function AccountPopover() {
           cursor: 'pointer',
           '&::after': {
             content: "url(/assets/images/icons/ic_arrow-down.svg)",
-            pl: 2,
+            pl: 1.9,
+            position: 'relative',
+            bottom: '2px',
           },
         }}
       >

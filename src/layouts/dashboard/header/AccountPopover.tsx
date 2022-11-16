@@ -81,13 +81,13 @@ export default function AccountPopover() {
 
       <MenuPopover open={openPopover} onClose={handleClosePopover} sx={{ width: 200, p: 0, mt: 4.3 }}>
         <Box sx={{ my: 1.5, px: 2.5 }}>
-          <Typography variant="subtitle2" noWrap>
+          <Typography variant="subtitle1" noWrap>
             {user?.displayName}
             {/* To be removed later */}
             Adrian Stefan
           </Typography>
 
-          <Typography variant="body2" sx={{ color: 'text.secondary' }} noWrap>
+          <Typography variant="body2" sx={{ color: (theme) => alpha(theme.palette.grey[600], 1), }} noWrap>
             {/* To be removed */}
             adrian@mrfertility.co.za
             {user?.email}

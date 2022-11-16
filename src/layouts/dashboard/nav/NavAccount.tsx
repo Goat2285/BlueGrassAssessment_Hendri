@@ -34,7 +34,7 @@ export default function NavAccount() {
                 }} />
 
             <Box sx={{ ml: 2, minWidth: 0 }}>
-                <Typography variant="subtitle2" noWrap>
+                <Typography variant="subtitle1" noWrap>
                     {user?.displayName}
                     {/* Remove this when we have authentication */}
                     Cape Fertility Clinic

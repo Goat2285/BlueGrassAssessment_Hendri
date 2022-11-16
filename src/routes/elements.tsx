@@ -13,14 +13,21 @@ const Loadable = (Component: ElementType) => (props: any) =>
 
 // ----------------------------------------------------------------------
 
+
+//  Auth Pages 
 export const LoginPage = Loadable(lazy(() => import('../pages/LoginPage')));
-export const ResetPasswordPage = Loadable(lazy(() => import('../pages/ResetPasswordPage')));
+export const ResetPasswordPage = Loadable(lazy(() => import('../pages/UpdatePasswordPage')));
+export const AccountDisabledPage = Loadable(lazy(() => import('../pages/AccountDisabledPage')));
+export const ForgotPasswordPage = Loadable(lazy(() => import('../pages/ForgotPasswordPage')));
+export const UpdatePasswordPage = Loadable(lazy(() => import('../pages/UpdatePasswordPage')));
 
+// Register
+export const RegisterPage = Loadable(lazy(() => import('../pages/RegisterPage')));
+
+// Dashboard
 export const LandingPage = Loadable(lazy(() => import('../pages/LandingPage')));
-export const ManageUsersPage = Loadable(lazy(() => import('../pages/ManageUsersPage')));
-export const ProfilePage = Loadable(lazy(() => import('../pages/ProfilePage')));
-export const PatientsPage = Loadable(lazy(() => import('../pages/PatientsPage')));
-export const LogsPage = Loadable(lazy(() => import('../pages/LogsPage')));
-export const ManagePractisesPage = Loadable(lazy(() => import('../pages/ManagePractisesPage')));
 
+// Other
 export const Page404 = Loadable(lazy(() => import('../pages/Page404')));
+export const WelcomePage = Loadable(lazy(() => import('../pages/WelcomePage')));
+

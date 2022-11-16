@@ -20,6 +20,8 @@ declare module '@mui/material/styles/createPalette' {
 
 // SETUP COLORS
 
+
+// Will need to replace these at some point, at the m,oment they are being used in to may components
 const GREY = {
   0: '#FFFFFF',
   100: '#F9FAFB',
@@ -33,11 +35,18 @@ const GREY = {
   900: '#161C24',
 };
 
+export const GREYS = {
+  grey1: '#414141',
+  grey2: '#637381',
+  grey3: '#747474',
+  grey4: '#BCBCBC',
+};
+
 const PRIMARY = {
-  lighter: '#C8FACD',
-  light: '#5BE584',
-  main: '#00AB55',
-  dark: '#007B55',
+  lighter: '#dfeaec',
+  light: '#9FC0C6',
+  main: '#67ADB9',
+  dark: '#5F97A0',
   darker: '#005249',
   contrastText: '#fff',
 };
@@ -113,9 +122,9 @@ export default function palette(themeMode: 'light' | 'dark') {
     ...COMMON,
     mode: 'light',
     text: {
-      primary: GREY[800],
-      secondary: GREY[600],
-      disabled: GREY[500],
+      primary: GREYS.grey1,
+      secondary: GREYS.grey2,
+      disabled: GREYS.grey4,
     },
     background: { paper: '#fff', default: '#fff', neutral: GREY[200] },
     action: {

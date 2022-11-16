@@ -4,24 +4,29 @@ import * as Yup from 'yup';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 // @mui
-import { Link, Stack, Alert, IconButton, InputAdornment } from '@mui/material';
+import { Link, Stack, Alert, IconButton, InputAdornment, Button } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 // auth
 import { useAuthContext } from '../../auth/useAuthContext';
 // components
 import Iconify from '../../components/iconify';
-import FormProvider, { RHFTextField } from '../../components/hook-form';
+import FormProvider, { RHFTextField, RHFCheckbox } from '../../components/hook-form';
 
 // ----------------------------------------------------------------------
+
+import { useNavigate } from 'react-router-dom';
 
 type FormValuesProps = {
   email: string;
   password: string;
+  rememberMe?: boolean;
+  redirectUrl?: string;
   afterSubmit?: string;
 };
 
 export default function AuthLoginForm() {
   const { login } = useAuthContext();
+  const navigate = useNavigate();
 
   const [showPassword, setShowPassword] = useState(false);
 
@@ -30,14 +35,8 @@ export default function AuthLoginForm() {
     password: Yup.string().required('Password is required'),
   });
 
-  const defaultValues = {
-    email: 'demo@minimals.cc',
-    password: 'demo1234',
-  };
-
   const methods = useForm<FormValuesProps>({
-    resolver: yupResolver(LoginSchema),
-    defaultValues,
+    resolver: yupResolver(LoginSchema)
   });
 
   const {
@@ -49,12 +48,9 @@ export default function AuthLoginForm() {
 
   const onSubmit = async (data: FormValuesProps) => {
     try {
-      await login(data.email, data.password);
+      // await login(data.email, data.password, data.rememberMe = false, data.redirectUrl = './');
     } catch (error) {
-      console.error(error);
-
       reset();
-
       setError('afterSubmit', {
         ...error,
         message: error.message,
@@ -77,7 +73,7 @@ export default function AuthLoginForm() {
             endAdornment: (
               <InputAdornment position="end">
                 <IconButton onClick={() => setShowPassword(!showPassword)} edge="end">
-                  <Iconify icon={showPassword ? 'eva:eye-fill' : 'eva:eye-off-fill'} />
+                  <Iconify icon={showPassword ? 'eva:eye-fill' : 'eva:eye-off-fill'} color={'text.disabled'} width={25} />
                 </IconButton>
               </InputAdornment>
             ),
@@ -85,8 +81,9 @@ export default function AuthLoginForm() {
         />
       </Stack>
 
-      <Stack alignItems="flex-end" sx={{ my: 2 }}>
-        <Link variant="body2" color="inherit" underline="always">
+      <Stack justifyContent="space-between" sx={{ my: 2 }} direction='row' alignItems='center'>
+        <RHFCheckbox name={'rememberMe'} label={'Remember me'} sx={{paddingLeft: '10px'}} />
+        <Link variant="body2" color="inherit" underline='hover'  sx={{ cursor: "pointer", color: 'primary.dark', fontWeight: 'bold' }} href={'/auth/forgotpassword'}>
           Forgot password?
         </Link>
       </Stack>
@@ -99,16 +96,24 @@ export default function AuthLoginForm() {
         variant="contained"
         loading={isSubmitSuccessful || isSubmitting}
         sx={{
-          bgcolor: 'text.primary',
+          bgcolor: 'primary.main',
           color: (theme) => (theme.palette.mode === 'light' ? 'common.white' : 'grey.800'),
           '&:hover': {
-            bgcolor: 'text.primary',
+            bgcolor: 'primary.light',
             color: (theme) => (theme.palette.mode === 'light' ? 'common.white' : 'grey.800'),
           },
         }}
       >
-        Login
+        Sign in
       </LoadingButton>
+
+
+      <Button variant="text" onClick={()=>{
+        navigate('/auth/disabled');
+      }}>Go to Disabled screen</Button>
+      <Button variant="text" onClick={()=>{
+        navigate('/auth/updatepassword');
+      }}>Go to updatepassword screen</Button>
     </FormProvider>
   );
 }

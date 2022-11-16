@@ -1,46 +1,32 @@
 // @mui
-import { Alert, Tooltip, Stack, Typography, Link, Box } from '@mui/material';
-// hooks
-import { useAuthContext } from '../../auth/useAuthContext';
+import { Stack, Typography, Link } from '@mui/material';
+
 // layouts
 import LoginLayout from '../../layouts/login';
-//
+
+// Components
 import AuthLoginForm from './AuthLoginForm';
-import AuthWithSocial from './AuthWithSocial';
+
+// Styles
+import { StylesGettingStarted } from './styles';
 
 // ----------------------------------------------------------------------
 
 export default function Login() {
-  const { method } = useAuthContext();
-
   return (
     <LoginLayout>
-      <Stack spacing={2} sx={{ mb: 5, position: 'relative' }}>
-        <Typography variant="h4">Sign in to Minimal</Typography>
-
+      <StylesGettingStarted>
+        <Typography variant="body2">Don’t have an account? &nbsp;
+          <Link variant="body2" color="inherit" underline='hover' sx={{ cursor: "pointer", color: 'primary.dark', fontWeight: 'bold' }} href="auth/register">Get started</Link>
+        </Typography>
+      </StylesGettingStarted>
+      <Stack spacing={2} sx={{ mb: 5, position: 'relative' }}>        
+        <Typography variant="h4">Sign in</Typography>     
         <Stack direction="row" spacing={0.5}>
-          <Typography variant="body2">New user?</Typography>
-
-          <Link variant="subtitle2">Create an account</Link>
+          <Typography variant="body1" color='text.secondary'>Please enter your details to continue.</Typography>
         </Stack>
-
-        <Tooltip title={method} placement="left">
-          <Box
-            component="img"
-            alt={method}
-            src={`/assets/icons/auth/ic_${method}.png`}
-            sx={{ width: 32, height: 32, position: 'absolute', right: 0 }}
-          />
-        </Tooltip>
       </Stack>
-
-      <Alert severity="info" sx={{ mb: 3 }}>
-        Use email : <strong>demo@minimals.cc</strong> / password :<strong> demo1234</strong>
-      </Alert>
-
       <AuthLoginForm />
-
-      <AuthWithSocial />
     </LoginLayout>
   );
 }

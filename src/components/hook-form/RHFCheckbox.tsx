@@ -55,6 +55,7 @@ export function RHFMultiCheckbox({ name, options, ...other }: RHFMultiCheckboxPr
                   <Checkbox
                     checked={field.value.includes(option.value)}
                     onChange={() => field.onChange(onSelected(option.value))}
+                    sx={{borderRadius: '2px' }}
                   />
                 }
                 label={option.label}

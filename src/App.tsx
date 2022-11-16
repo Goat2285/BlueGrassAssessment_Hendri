@@ -6,23 +6,25 @@ import ThemeProvider from './theme';
 import ThemeLocalization from './locales';
 // components
 import SnackbarProvider from './components/snackbar';
-import { ThemeSettings } from './components/settings';
 import { MotionLazyContainer } from './components/animate';
+// @mui
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import { LocalizationProvider } from '@mui/x-date-pickers';
 
 // ----------------------------------------------------------------------
 
 export default function App() {
   return (
     <MotionLazyContainer>
-      <ThemeProvider>
-        <ThemeSettings>
+      <LocalizationProvider dateAdapter={AdapterDateFns}>
+        <ThemeProvider>       
           <ThemeLocalization>
             <SnackbarProvider>
               <Router />
             </SnackbarProvider>
-          </ThemeLocalization>
-        </ThemeSettings>
-      </ThemeProvider>
+          </ThemeLocalization>        
+        </ThemeProvider>
+      </LocalizationProvider>
     </MotionLazyContainer>
   );
 }

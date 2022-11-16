@@ -1,11 +1,5 @@
 import { useContext } from 'react';
-//
-import { AuthContext } from './JwtContext';
-// import { AuthContext } from './Auth0Context';
-// import { AuthContext } from './FirebaseContext';
-// import { AuthContext } from './AwsCognitoContext';
-
-// ----------------------------------------------------------------------
+import { AuthContext } from './AuthContext';
 
 export const useAuthContext = () => {
   const context = useContext(AuthContext);

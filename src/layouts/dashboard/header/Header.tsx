@@ -14,6 +14,7 @@ import Iconify from '../../../components/iconify';
 import { useSettingsContext } from '../../../components/settings';
 //
 import NotificationsPopover from './NotificationsPopover';
+import AccountPopover from './AccountPopover';
 
 // ----------------------------------------------------------------------
 
@@ -53,6 +54,7 @@ export default function Header({ onOpenNav }: Props) {
       >
 
         <NotificationsPopover />
+        <AccountPopover />
       </Stack>
     </>
   );

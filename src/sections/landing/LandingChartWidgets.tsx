@@ -50,18 +50,18 @@ export default function LandingChartWidgets({ chart, ...other }: Props) {
         },
       },
     },
-    colors: [CHART.green],
+    colors: [CHART.orange],
     ...options,
   });
 
-  const chartOptionsMedium = {
+  const chartOptionsSecond = {
     ...chartOptions,
-    colors: [CHART.orange],
+    colors: [CHART.green],
   };
 
-  const chartOptionsLow = {
+  const chartOptionsThird = {
     ...chartOptions,
-    colors: [CHART.red],
+    colors: [CHART.blue],
   };
 
   return (
@@ -79,11 +79,7 @@ export default function LandingChartWidgets({ chart, ...other }: Props) {
               type="radialBar"
               series={[item.percent]}
               options={
-                item.percent > 64
-                  ? chartOptions
-                  : item.percent > 40
-                  ? chartOptionsMedium
-                  : chartOptionsLow
+                index === 0 ? chartOptions : index === 1 ? chartOptionsSecond : chartOptionsThird
               }
               {...CHART_SIZE}
             />

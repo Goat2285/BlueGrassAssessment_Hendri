@@ -1,6 +1,5 @@
 import { Helmet } from 'react-helmet-async';
-import Landing from 'src/sections/landing/Landing';
-
+import Landing from 'src/sections/landing';
 
 // ----------------------------------------------------------------------
 

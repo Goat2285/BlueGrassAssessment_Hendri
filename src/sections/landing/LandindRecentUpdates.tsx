@@ -13,6 +13,7 @@ import {
   TableRow,
   Typography,
 } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 import { IconButtonAnimate } from 'src/components/animate';
 import { CustomAvatar } from 'src/components/custom-avatar';
 import Iconify from 'src/components/iconify';
@@ -31,6 +32,8 @@ interface Props extends CardProps {
 }
 
 export default function LandingRecentUpdates({ title, tableData, ...other }: Props) {
+  const navigate = useNavigate();
+
   return (
     <Card {...other}>
       <CardHeader title={title} sx={{ mb: 3 }} />
@@ -49,8 +52,22 @@ export default function LandingRecentUpdates({ title, tableData, ...other }: Pro
 
       <Divider />
 
-      <Box sx={{ p: 2, textAlign: 'right' }}>
-        <Button size="small" endIcon={<Iconify icon="eva:arrow-ios-forward-fill" />}>
+      <Box
+        sx={{
+          p: 2,
+          textAlign: 'right',
+          display: 'flex',
+          justifyContent: 'right',
+          alignItems: 'center',
+        }}
+      >
+        <Button
+          size="small"
+          endIcon={<Iconify icon="eva:arrow-ios-forward-fill" />}
+          onClick={() => {
+            navigate('/dashboard/logs');
+          }}
+        >
           See All
         </Button>
       </Box>

@@ -67,8 +67,8 @@ export const PRIMARY = {
 
 export const CHART = {
   green: '#54D62C',
-  orange: '#FFC107',
-  red: '#FF4842'
+  orange: '#FF966B',
+  blue: '#1890FF'
 };
 
 const SECONDARY = {

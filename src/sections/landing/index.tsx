@@ -3,9 +3,9 @@ import ConsentsIllustration from 'src/assets/illustrations/ConsentsIllustration'
 import StethoscopeIllustration from 'src/assets/illustrations/StethoscopeIllustration';
 import TreatmentsIllustration from 'src/assets/illustrations/TreatmentsIllustration';
 import { useAuthContext } from 'src/auth/useAuthContext';
+import TotalSummary from 'src/components/total-summary';
 import LandingRecentUpdates from './LandindRecentUpdates';
 import LandingChartWidgets from './LandingChartWidgets';
-import LandingWidgetSummary from './LandingWidgetSummary';
 import TableData from './TableData';
 
 export default function Landing() {
@@ -26,7 +26,7 @@ export default function Landing() {
       </Stack>
       <Grid container spacing={3} sx={{ mt: 3 }}>
         <Grid item xs={12} md={4}>
-          <LandingWidgetSummary
+          <TotalSummary
             title="Total Patients"
             percent={15}
             total={11}
@@ -34,7 +34,7 @@ export default function Landing() {
           />
         </Grid>
         <Grid item xs={12} md={4}>
-          <LandingWidgetSummary
+          <TotalSummary
             title="Total Consents Signed"
             percent={15}
             total={261}
@@ -42,7 +42,7 @@ export default function Landing() {
           />
         </Grid>
         <Grid item xs={12} md={4}>
-          <LandingWidgetSummary
+          <TotalSummary
             title="Total Treatments Performed"
             percent={15}
             total={135}

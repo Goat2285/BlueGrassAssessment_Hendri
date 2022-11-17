@@ -155,6 +155,7 @@ export default function ManageUsers() {
           rowsPerPage={rowsPerPage}
           onPageChange={onChangePage}
           onRowsPerPageChange={onChangeRowsPerPage}
+          sx={{ bgcolor: 'common.white' }}
         />
       </Card>
     </Stack>

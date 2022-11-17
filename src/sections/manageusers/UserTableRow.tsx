@@ -45,7 +45,7 @@ export default function UserTableRow({ row }: Props) {
           <IconButtonAnimate sx={{ color: 'primary.main' }}>
             <Iconify icon="ri:edit-line" />
           </IconButtonAnimate>
-          <IconButtonAnimate sx={{ color: 'primary.main', ml: 1 }}>
+          <IconButtonAnimate sx={{ color: 'primary.main', ml: 0.5 }}>
             <Iconify icon="eva:trash-2-outline" />
           </IconButtonAnimate>
         </TableCell>

@@ -15,4 +15,5 @@ export const PATH_AUTH = {
 export const PATH_DASHBOARD = {
   root: ROOTS_DASHBOARD,
   landing: path(ROOTS_DASHBOARD, '/landing'),
+  users: path(ROOTS_DASHBOARD, '/users'),
 };

@@ -24,15 +24,15 @@ declare module '@mui/material/styles/createPalette' {
 // Will need to replace these at some point, at the m,oment they are being used in to may components
 const GREY = {
   0: '#FFFFFF',
-  100: '#F9FAFB',
-  200: '#F4F6F8',
-  300: '#DFE3E8',
-  400: '#C4CDD5',
-  500: '#919EAB',
-  600: '#637381',
-  700: '#454F5B',
-  800: '#212B36',
-  900: '#161C24',
+  100: '#F5F5F5',
+  200: '#EDEDED',
+  300: '#DFDFDF',
+  400: '#BCBCBC',
+  500: '#9D9D9D',
+  600: '#747474',
+  700: '#606060',
+  800: '#414141',
+  900: '#202020',
 };
 
 export const GREYS = {
@@ -40,6 +40,8 @@ export const GREYS = {
   grey2: '#637381',
   grey3: '#747474',
   grey4: '#BCBCBC',
+  grey5: '#FAFAFA',
+  grey6: '#828282'
 };
 
 const PRIMARY = {

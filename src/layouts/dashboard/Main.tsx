@@ -6,6 +6,7 @@ import useResponsive from '../../hooks/useResponsive';
 import { HEADER, NAV } from '../../config';
 // components
 import { useSettingsContext } from '../../components/settings';
+import { GREYS } from 'src/theme/palette';
 
 // ----------------------------------------------------------------------
 
@@ -27,11 +28,13 @@ export default function Main({ children, sx, ...other }: BoxProps) {
         sx={{
           pt: `${HEADER.H_MOBILE + SPACING}px`,
           pb: `${HEADER.H_MOBILE + SPACING}px`,
+          px: 3,
           ...(isDesktop && {
-            px: 2,
+            px: 5,
             pt: `${HEADER.H_DASHBOARD_DESKTOP + 80}px`,
             pb: `${HEADER.H_DASHBOARD_DESKTOP + SPACING}px`,
           }),
+          bgcolor: GREYS.grey5,
         }}
       >
         {children}
@@ -44,15 +47,17 @@ export default function Main({ children, sx, ...other }: BoxProps) {
       component="main"
       sx={{
         flexGrow: 1,
+        px: 3,
         py: `${HEADER.H_MOBILE + SPACING}px`,
         ...(isDesktop && {
-          px: 2,
+          px: 5,
           py: `${HEADER.H_DASHBOARD_DESKTOP + SPACING}px`,
           width: `calc(100% - ${NAV.W_DASHBOARD}px)`,
           ...(isNavMini && {
             width: `calc(100% - ${NAV.W_DASHBOARD_MINI}px)`,
           }),
         }),
+        bgcolor: GREYS.grey5,
         ...sx,
       }}
       {...other}

@@ -1,6 +1,7 @@
 import { useRoutes } from 'react-router-dom';
 // layouts
 import SingleColumnLayout from '../layouts/singleColumn';
+import DashboardLayout from '../layouts/dashboard';
 
 //
 import {
@@ -9,8 +10,9 @@ import {
   LoginPage,
   AccountDisabledPage,
   ForgotPasswordPage,
-  UpdatePasswordPage,  
-  RegisterPage
+  UpdatePasswordPage,
+  RegisterPage,
+  SuperAdminDashboardPage,
 } from './elements';
 
 // ----------------------------------------------------------------------
@@ -19,35 +21,40 @@ export default function Router() {
   return useRoutes([
     {
       children: [
-        { 
-          path: '/', 
+        {
+          path: '/',
           children: [
-            { 
-              path: 'welcome', 
-              element: <WelcomePage /> 
-            },
-            { 
-              path: 'login', 
-              element: <LoginPage /> 
+            {
+              path: 'welcome',
+              element: <WelcomePage />,
             },
             {
-              path: 'auth', element: <SingleColumnLayout />, 
-              children: [  
+              path: 'login',
+              element: <LoginPage />,
+            },
+            {
+              path: 'auth',
+              element: <SingleColumnLayout />,
+              children: [
                 { path: 'disabled', element: <AccountDisabledPage /> },
                 { path: 'forgotpassword', element: <ForgotPasswordPage /> },
                 { path: 'updatepassword', element: <UpdatePasswordPage /> },
-                { path: 'register', element: <RegisterPage /> }
-              ]
+                { path: 'register', element: <RegisterPage /> },
+              ],
             },
             {
-              path: '*', element: <SingleColumnLayout />, 
-              children: [  
-                { path: '*', element: <Page404 /> },
-              ]
+              path: 'admin',
+              element: <DashboardLayout />,
+              children: [{ path: 'dashboard', element: <SuperAdminDashboardPage /> }],
             },
-          ]
+            {
+              path: '*',
+              element: <SingleColumnLayout />,
+              children: [{ path: '*', element: <Page404 /> }],
+            },
+          ],
         },
-      ]
+      ],
     },
   ]);
 }

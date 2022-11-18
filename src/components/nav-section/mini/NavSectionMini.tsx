@@ -17,9 +17,6 @@ function NavSectionMini({ data, sx, ...other }: NavSectionProps) {
       }}
       {...other}
     >
-      {data.map((group) => (
-        <Items key={group.subheader} items={group.items} />
-      ))}
     </Stack>
   );
 }

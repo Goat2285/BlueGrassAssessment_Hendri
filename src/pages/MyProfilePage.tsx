@@ -1,23 +1,24 @@
 import { Helmet } from 'react-helmet-async';
-import ManageUsers from 'src/sections/manageusers';
 // @mui
-import { Container } from '@mui/material';
+import { Container, Typography } from '@mui/material';
 // components
 import { useSettingsContext } from '../components/settings';
 
 // ----------------------------------------------------------------------
 
-export default function ManageUsersPage() {
+export default function ProfilePage() {
   const { themeStretch } = useSettingsContext();
 
   return (
     <>
       <Helmet>
-        <title> Manage Users</title>
+        <title> My Profile</title>
       </Helmet>
 
       <Container maxWidth={themeStretch ? false : 'xl'}>
-        <ManageUsers />
+        <Typography variant="h3" component="h1" paragraph>
+          Profile Page
+        </Typography>
       </Container>
     </>
   );

@@ -17,16 +17,8 @@ import { IconButtonAnimate } from '../../../components/animate';
 
 const OPTIONS = [
   {
-    label: 'Home',
-    linkTo: '/',
-  },
-  {
     label: 'Profile',
-    linkTo: '/',
-  },
-  {
-    label: 'Settings',
-    linkTo: '/',
+    linkTo: '/dashboard/profile',
   },
 ];
 
@@ -67,38 +59,38 @@ export default function AccountPopover() {
 
   return (
     <>
-      <IconButtonAnimate
+      <Typography variant="subtitle2" noWrap
         onClick={handleOpenPopover}
         sx={{
-          p: 0,
-          ...(openPopover && {
-            '&:before': {
-              zIndex: 1,
-              content: "''",
-              width: '100%',
-              height: '100%',
-              borderRadius: '50%',
-              position: 'absolute',
-              bgcolor: (theme) => alpha(theme.palette.grey[900], 0.8),
-            },
-          }),
+          color: (theme) => alpha(theme.palette.grey[800], 1),
+          cursor: 'pointer',
+          '&::after': {
+            content: "url(/assets/images/icons/ic_arrow-down.svg)",
+            pl: 1.9,
+            position: 'relative',
+            bottom: '2px',
+          },
         }}
       >
-        <CustomAvatar src={user?.photoURL} alt={user?.displayName} name={user?.displayName} />
-      </IconButtonAnimate>
+        Adrian Stefan
+      </Typography>
 
-      <MenuPopover open={openPopover} onClose={handleClosePopover} sx={{ width: 200, p: 0 }}>
+      <MenuPopover open={openPopover} onClose={handleClosePopover} sx={{ width: 200, p: 0, mt: 4.3 }}>
         <Box sx={{ my: 1.5, px: 2.5 }}>
-          <Typography variant="subtitle2" noWrap>
+          <Typography variant="subtitle1" noWrap>
             {user?.displayName}
+            {/* To be removed later */}
+            Adrian Stefan
           </Typography>
 
-          <Typography variant="body2" sx={{ color: 'text.secondary' }} noWrap>
+          <Typography variant="body2" sx={{ color: (theme) => alpha(theme.palette.grey[600], 1), }} noWrap>
+            {/* To be removed */}
+            adrian@mrfertility.co.za
             {user?.email}
           </Typography>
         </Box>
 
-        <Divider sx={{ borderStyle: 'dashed' }} />
+        <Divider sx={{ borderStyle: 'solid' }} />
 
         <Stack sx={{ p: 1 }}>
           {OPTIONS.map((option) => (
@@ -108,7 +100,7 @@ export default function AccountPopover() {
           ))}
         </Stack>
 
-        <Divider sx={{ borderStyle: 'dashed' }} />
+        <Divider sx={{ borderStyle: 'solid' }} />
 
         <MenuItem onClick={handleLogout} sx={{ m: 1 }}>
           Logout

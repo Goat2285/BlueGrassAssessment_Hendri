@@ -1,6 +1,6 @@
 // @mui
-import { useTheme } from '@mui/material/styles';
-import { Stack, AppBar, Toolbar, IconButton } from '@mui/material';
+import { useTheme, alpha } from '@mui/material/styles';
+import { Stack, AppBar, Toolbar, IconButton, Typography } from '@mui/material';
 // utils
 import { bgBlur } from '../../../utils/cssStyles';
 // hooks
@@ -14,6 +14,7 @@ import Iconify from '../../../components/iconify';
 import { useSettingsContext } from '../../../components/settings';
 //
 import NotificationsPopover from './NotificationsPopover';
+import AccountPopover from './AccountPopover';
 
 // ----------------------------------------------------------------------
 
@@ -53,6 +54,18 @@ export default function Header({ onOpenNav }: Props) {
       >
 
         <NotificationsPopover />
+
+        <Typography variant="subtitle2" noWrap
+          sx={{
+            p: 2,
+            color: theme.palette.primary.darker,
+            borderRadius: '100%',
+            backgroundColor: alpha(theme.palette.primary.main, 0.08)
+          }}>
+          {/* To be replaced later */}
+          AS
+        </Typography>
+        <AccountPopover />
       </Stack>
     </>
   );
@@ -66,6 +79,7 @@ export default function Header({ onOpenNav }: Props) {
         ...bgBlur({
           color: theme.palette.background.default,
         }),
+        bgcolor: theme.palette.background.default,
         transition: theme.transitions.create(['height'], {
           duration: theme.transitions.duration.shorter,
         }),

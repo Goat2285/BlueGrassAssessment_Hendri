@@ -1,7 +1,12 @@
-import { useRoutes } from 'react-router-dom';
+import { Navigate, useRoutes } from 'react-router-dom';
+// auth
+import AuthGuard from '../auth/AuthGuard';
+import GuestGuard from '../auth/GuestGuard';
 // layouts
-import SingleColumnLayout from '../layouts/singleColumn';
 import DashboardLayout from '../layouts/dashboard';
+import SingleColumnLayout from '../layouts/singleColumn';
+// config
+import { PATH_AFTER_LOGIN } from '../config';
 
 //
 import {
@@ -12,7 +17,11 @@ import {
   ForgotPasswordPage,
   UpdatePasswordPage,
   RegisterPage,
+  DashboardPage,
+  MyProfilePage,
   ManageUsersPage,
+  ManagePatientsPage,
+  LogsPage,
 } from './elements';
 
 // ----------------------------------------------------------------------
@@ -33,11 +42,6 @@ export default function Router() {
               element: <LoginPage />,
             },
             {
-              path: 'dashboard',
-              element: <DashboardLayout />,
-              children: [{ path: 'users', element: <ManageUsersPage /> }],
-            },
-            {
               path: 'auth',
               element: <SingleColumnLayout />,
               children: [
@@ -45,6 +49,22 @@ export default function Router() {
                 { path: 'forgotpassword', element: <ForgotPasswordPage /> },
                 { path: 'updatepassword', element: <UpdatePasswordPage /> },
                 { path: 'register', element: <RegisterPage /> },
+              ],
+            },
+            {
+              path: 'dashboard',
+              element: (
+                //<AuthGuard>
+                <DashboardLayout />
+                //</AuthGuard>
+              ),
+              children: [
+                { element: <Navigate to={PATH_AFTER_LOGIN} replace />, index: true },
+                { path: 'app', element: <DashboardPage /> },
+                { path: 'profile', element: <MyProfilePage /> },
+                { path: 'users', element: <ManageUsersPage /> },
+                { path: 'patients', element: <ManagePatientsPage /> },
+                { path: 'logs', element: <LogsPage /> },
               ],
             },
             {

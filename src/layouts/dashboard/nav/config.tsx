@@ -10,21 +10,23 @@ const icon = (name: string) => (
 );
 
 const ICONS = {
-  user: icon('ic_user'),
-  ecommerce: icon('ic_ecommerce'),
-  analytics: icon('ic_analytics'),
-  dashboard: icon('ic_dashboard'),
+  dashboard: <SvgColor src="/assets/images/icons/ic_dashboard.svg" sx={{ height: '18.33px', color: 'primary.main' }} />,
+  profile: <SvgColor src="/assets/images/icons/ic_profile.svg" sx={{ height: '18.33px', color: 'primary.main' }} />,
+  users: <SvgColor src="/assets/images/icons/ic_users.svg" sx={{ height: '18.33px', color: 'primary.main' }} />,
+  patients: <SvgColor src="/assets/images/icons/ic_patients.svg" sx={{ height: '18.33px', color: 'primary.main' }} />,
+  logs: <SvgColor src="/assets/images/icons/ic_logs.svg" sx={{ height: '18.33px', color: 'primary.main' }} />,
 };
 
 const navConfig = [
+  // GENERAL
+  // ----------------------------------------------------------------------
   {
-    subheader: '',
     items: [
-      {
-        title: 'Dashboard',
-        path: PATH_DASHBOARD.landing,
-        icon: ICONS.user,
-      },
+      { title: 'Dashboard', path: PATH_DASHBOARD.app, icon: ICONS.dashboard },
+      { title: 'My Profile', path: PATH_DASHBOARD.profile, icon: ICONS.profile },
+      { title: 'Manage Users', path: PATH_DASHBOARD.users, icon: ICONS.users },
+      { title: 'Manage Patients', path: PATH_DASHBOARD.patients, icon: ICONS.patients },
+      { title: 'Logs', path: PATH_DASHBOARD.logs, icon: ICONS.logs },
     ],
   },
 ];

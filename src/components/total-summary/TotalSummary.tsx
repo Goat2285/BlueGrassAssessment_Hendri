@@ -1,4 +1,12 @@
 import { alpha, Box, Card, CardProps, Stack, Typography } from '@mui/material';
+import React from 'react';
+import {
+  BabyCarriageIllustration,
+  BulbIllustration,
+  ConsentsIllustration,
+  StethoscopeIllustration,
+  TreatmentsIllustration,
+} from 'src/assets/illustrations';
 import Iconify from 'src/components/iconify';
 import { fNumber, fPercent } from 'src/utils/formatNumber';
 
@@ -6,10 +14,20 @@ interface Props extends CardProps {
   title: string;
   total: number;
   percent: number;
-  icon: React.ReactElement;
+  icon: string;
 }
 
+const IconComponents: { [name: string]: React.ReactNode } = {
+  Stethoscope: <StethoscopeIllustration />,
+  Consents: <ConsentsIllustration />,
+  Treatments: <TreatmentsIllustration />,
+  BabyCarriage: <BabyCarriageIllustration />,
+  Bulb: <BulbIllustration />,
+};
+
 export default function TotalSummary({ title, percent, total, icon, sx, ...other }: Props) {
+  const Icon = IconComponents[icon];
+
   return (
     <Card sx={{ display: 'flex', alignItems: 'center', p: 3, ...sx }} {...other}>
       <Box sx={{ flexGrow: 1 }}>
@@ -28,7 +46,7 @@ export default function TotalSummary({ title, percent, total, icon, sx, ...other
           bgcolor: 'background.neutral',
         }}
       >
-        {icon}
+        {Icon}
       </Box>
     </Card>
   );

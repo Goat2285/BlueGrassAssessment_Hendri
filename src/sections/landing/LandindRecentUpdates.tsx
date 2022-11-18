@@ -14,7 +14,6 @@ import {
   Typography,
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import { IconButtonAnimate } from 'src/components/animate';
 import { CustomAvatar } from 'src/components/custom-avatar';
 import Iconify from 'src/components/iconify';
 import Scrollbar from 'src/components/scrollbar';
@@ -80,10 +79,6 @@ type LandingRecentUpdatesRowProps = {
 };
 
 function LandingRecentUpdatesRow({ row }: LandingRecentUpdatesRowProps) {
-  const handleDelete = () => {
-    console.log('DELETE', row.id);
-  };
-
   return (
     <TableRow>
       <TableCell>
@@ -94,11 +89,6 @@ function LandingRecentUpdatesRow({ row }: LandingRecentUpdatesRowProps) {
             <Typography variant="body2">{row.name}</Typography>
           </Stack>
         </Stack>
-      </TableCell>
-      <TableCell align="right">
-        <IconButtonAnimate sx={{ width: 52, height: 52 }} onClick={handleDelete}>
-          <Iconify icon="eva:trash-2-outline" />
-        </IconButtonAnimate>
       </TableCell>
     </TableRow>
   );

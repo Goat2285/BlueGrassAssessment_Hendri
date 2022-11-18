@@ -20,21 +20,8 @@ declare module '@mui/material/styles/createPalette' {
 
 // SETUP COLORS
 
-// const GREY = {
-//   0: '#FFFFFF',
-//   100: '#F9FAFB',
-//   200: '#F4F6F8',
-//   300: '#DFE3E8',
-//   400: '#C4CDD5',
-//   500: '#919EAB',
-//   600: '#637381',
-//   700: '#454F5B',
-//   800: '#212B36',
-//   900: '#161C24',
-// };
 
-// GREY FROM FIGMA FILE
-
+// Will need to replace these at some point, at the moment they are being used in to may components
 const GREY = {
   0: '#FFFFFF',
   100: '#F5F5F5',
@@ -72,48 +59,48 @@ export const CHART = {
 };
 
 const SECONDARY = {
-  lighter: '#D6E4FF',
-  light: '#84A9FF',
-  main: '#3366FF',
-  dark: '#1939B7',
-  darker: '#091A7A',
-  contrastText: '#fff',
+  lighter: '#FBEBE8',
+  light: '#FFD0BF',
+  main: '#FF966B',
+  dark: '#FF6928',
+  darker: '#C04713',
+  contrastText: '#ffffff',
 };
 
 const INFO = {
-  lighter: '#CAFDF5',
-  light: '#61F3F3',
-  main: '#00B8D9',
-  dark: '#006C9C',
-  darker: '#003768',
-  contrastText: '#fff',
+  lighter: '#D0F2FF',
+  light: '#74CAFF',
+  main: '#1890FF',
+  dark: '#0C53B7',
+  darker: '#04297A',
+  contrastText: '#ffffff',
 };
 
 const SUCCESS = {
-  lighter: '#D8FBDE',
-  light: '#86E8AB',
-  main: '#36B37E',
-  dark: '#1B806A',
-  darker: '#0A5554',
-  contrastText: '#fff',
+  lighter: '#E9FCD4',
+  light: '#AAF27F',
+  main: '#54D62C',
+  dark: '#229A16',
+  darker: '#08660D',
+  contrastText: '#ffffff',
 };
 
 const WARNING = {
-  lighter: '#FFF5CC',
-  light: '#FFD666',
-  main: '#FFAB00',
-  dark: '#B76E00',
-  darker: '#7A4100',
-  contrastText: GREY[800],
+  lighter: '#FFF7CD',
+  light: '#FFE16A',
+  main: '#FFC107',
+  dark: '#B78103',
+  darker: '#7A4F01',
+  contrastText: '#ffffff',
 };
 
 const ERROR = {
-  lighter: '#FFE9D5',
-  light: '#FFAC82',
-  main: '#FF5630',
-  dark: '#B71D18',
-  darker: '#7A0916',
-  contrastText: '#fff',
+  lighter: '#FFE7D9',
+  light: '#FFA48D',
+  main: '#FF4842',
+  dark: '#B72136',
+  darker: '#7A0C2E',
+  contrastText: '#ffffff',
 };
 
 const COMMON = {
@@ -142,9 +129,9 @@ export default function palette(themeMode: 'light' | 'dark') {
     ...COMMON,
     mode: 'light',
     text: {
-      primary: GREY[800],
-      secondary: GREY[600],
-      disabled: GREY[400],
+      primary: GREYS.grey1,
+      secondary: GREYS.grey2,
+      disabled: GREYS.grey4,
     },
     background: { paper: '#fff', default: '#fff', neutral: GREY[200] },
     action: {

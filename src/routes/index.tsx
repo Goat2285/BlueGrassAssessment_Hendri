@@ -22,7 +22,8 @@ import {
   MyProfilePage,
   ManageUsersPage,
   ManagePatientsPage,
-  LogsPage
+  LogsPage,
+  ManagePractisesPage,
 } from './elements';
 
 // ----------------------------------------------------------------------
@@ -36,11 +37,11 @@ export default function Router() {
           children: [
             {
               path: 'welcome',
-              element: <WelcomePage />
+              element: <WelcomePage />,
             },
             {
               path: 'login',
-              element: <LoginPage />
+              element: <LoginPage />,
             },
             {
               path: 'auth',
@@ -49,8 +50,13 @@ export default function Router() {
                 { path: 'disabled', element: <AccountDisabledPage /> },
                 { path: 'forgotpassword', element: <ForgotPasswordPage /> },
                 { path: 'updatepassword', element: <UpdatePasswordPage /> },
-                { path: 'register', element: <RegisterPage /> }
-              ]
+                { path: 'register', element: <RegisterPage /> },
+              ],
+            },
+            {
+              path: 'admin',
+              element: <DashboardLayout />,
+              children: [{ path: 'practises', element: <ManagePractisesPage /> }],
             },
             {
               path: 'dashboard',
@@ -69,14 +75,13 @@ export default function Router() {
               ],
             },
             {
-              path: '*', element: <SingleColumnLayout />,
-              children: [
-                { path: '*', element: <Page404 /> },
-              ]
+              path: '*',
+              element: <SingleColumnLayout />,
+              children: [{ path: '*', element: <Page404 /> }],
             },
-          ]
+          ],
         },
-      ]
+      ],
     },
   ]);
 }

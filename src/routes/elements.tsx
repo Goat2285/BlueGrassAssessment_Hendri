@@ -25,7 +25,11 @@ export const UpdatePasswordPage = Loadable(lazy(() => import('../pages/UpdatePas
 export const RegisterPage = Loadable(lazy(() => import('../pages/RegisterPage')));
 
 // Dashboard
-export const LandingPage = Loadable(lazy(() => import('../pages/LandingPage')));
+export const DashboardPage = Loadable(lazy(() => import('../pages/DashboardPage')));
+export const MyProfilePage = Loadable(lazy(() => import('../pages/MyProfilePage')));
+export const ManageUsersPage = Loadable(lazy(() => import('../pages/ManageUsersPage')));
+export const ManagePatientsPage = Loadable(lazy(() => import('../pages/ManagePatientsPage')));
+export const LogsPage = Loadable(lazy(() => import('../pages/LogsPage')));
 
 // Other
 export const Page404 = Loadable(lazy(() => import('../pages/Page404')));

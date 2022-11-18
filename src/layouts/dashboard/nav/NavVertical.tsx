@@ -56,6 +56,7 @@ export default function NavVertical({ openNav, onCloseNav }: Props) {
         }}
       >
         <Logo
+        logoStyle={3}
         sx={{
           mb: 1.895,
         }}/>

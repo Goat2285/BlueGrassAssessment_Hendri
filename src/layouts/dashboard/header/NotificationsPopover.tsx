@@ -84,10 +84,11 @@ export default function NotificationsPopover() {
           )}
         </Box>
 
-        <Divider sx={{ borderStyle: 'dashed' }} />
+        <Divider sx={{ borderStyle: 'solid' }} />
 
         <Scrollbar sx={{ height: { xs: 340, sm: 'auto' } }}>
-          <List
+          {/* To be reconfigured when we have the notifications pulling in */}
+          {/* <List
             disablePadding
             subheader={
               <ListSubheader disableSticky sx={{ py: 1, px: 2.5, typography: 'overline' }}>
@@ -111,14 +112,14 @@ export default function NotificationsPopover() {
             {notifications.slice(2, 5).map((notification) => (
               <NotificationItem key={notification.id} notification={notification} />
             ))}
-          </List>
+          </List> */}
         </Scrollbar>
 
-        <Divider sx={{ borderStyle: 'dashed' }} />
+        <Divider sx={{ borderStyle: 'solid' }} />
 
         <Box sx={{ p: 1 }}>
           <Button fullWidth disableRipple>
-            View All
+            Clear All
           </Button>
         </Box>
       </MenuPopover>

@@ -11,7 +11,7 @@ import { CustomAvatar } from '../../../components/custom-avatar';
 const StyledRoot = styled('div')(({ theme }) => ({
     display: 'flex',
     alignItems: 'center',
-    padding: theme.spacing(3.5, 2.5),
+    padding: theme.spacing(3.25, 2.5),
     borderRadius: Number(theme.shape.borderRadius) * 1.5,
     backgroundColor: alpha(theme.palette.grey[500], 0.12),
 }));
@@ -33,7 +33,7 @@ export default function NavAccount() {
                     borderRadius: 'unset'
                 }} />
 
-            <Box sx={{ ml: 2, minWidth: 0 }}>
+            <Box sx={{ ml: 2.25, minWidth: 0 }}>
                 <Typography variant="subtitle1" noWrap>
                     {user?.displayName}
                     {/* Remove this when we have authentication */}

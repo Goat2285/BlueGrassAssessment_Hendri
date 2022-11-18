@@ -1,6 +1,6 @@
 // @mui
-import { useTheme } from '@mui/material/styles';
-import { Stack, AppBar, Toolbar, IconButton } from '@mui/material';
+import { useTheme, alpha } from '@mui/material/styles';
+import { Stack, AppBar, Toolbar, IconButton, Typography } from '@mui/material';
 // utils
 import { bgBlur } from '../../../utils/cssStyles';
 // hooks
@@ -54,6 +54,17 @@ export default function Header({ onOpenNav }: Props) {
       >
 
         <NotificationsPopover />
+
+        <Typography variant="subtitle2" noWrap
+          sx={{
+            p: 2,
+            color: theme.palette.primary.darker,
+            borderRadius: '100%',
+            backgroundColor: alpha(theme.palette.primary.main, 0.08)
+          }}>
+          {/* To be replaced later */}
+          AS
+        </Typography>
         <AccountPopover />
       </Stack>
     </>

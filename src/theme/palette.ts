@@ -40,6 +40,8 @@ export const GREYS = {
   grey2: '#637381',
   grey3: '#747474',
   grey4: '#BCBCBC',
+  grey5: '#FAFAFA',
+  grey6: '#828282'
 };
 
 const PRIMARY = {

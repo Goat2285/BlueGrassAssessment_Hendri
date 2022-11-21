@@ -6,6 +6,7 @@ import useResponsive from '../../hooks/useResponsive';
 import { HEADER, NAV } from '../../config';
 // components
 import { useSettingsContext } from '../../components/settings';
+import { GREYS } from 'src/theme/palette';
 
 // ----------------------------------------------------------------------
 
@@ -53,6 +54,7 @@ export default function Main({ children, sx, ...other }: BoxProps) {
             width: `calc(100% - ${NAV.W_DASHBOARD_MINI}px)`,
           }),
         }),
+        bgcolor: GREYS.grey5,
         ...sx,
       }}
       {...other}

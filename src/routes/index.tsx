@@ -3,7 +3,6 @@ import { Navigate, useRoutes } from 'react-router-dom';
 import AuthGuard from '../auth/AuthGuard';
 import GuestGuard from '../auth/GuestGuard';
 // layouts
-import CompactLayout from '../layouts/compact';
 import DashboardLayout from '../layouts/dashboard';
 import SingleColumnLayout from '../layouts/singleColumn';
 // config
@@ -22,7 +21,7 @@ import {
   MyProfilePage,
   ManageUsersPage,
   ManagePatientsPage,
-  LogsPage
+  LogsPage,
 } from './elements';
 
 // ----------------------------------------------------------------------
@@ -36,11 +35,11 @@ export default function Router() {
           children: [
             {
               path: 'welcome',
-              element: <WelcomePage />
+              element: <WelcomePage />,
             },
             {
               path: 'login',
-              element: <LoginPage />
+              element: <LoginPage />,
             },
             {
               path: 'auth',
@@ -49,8 +48,8 @@ export default function Router() {
                 { path: 'disabled', element: <AccountDisabledPage /> },
                 { path: 'forgotpassword', element: <ForgotPasswordPage /> },
                 { path: 'updatepassword', element: <UpdatePasswordPage /> },
-                { path: 'register', element: <RegisterPage /> }
-              ]
+                { path: 'register', element: <RegisterPage /> },
+              ],
             },
             {
               path: 'dashboard',
@@ -69,14 +68,13 @@ export default function Router() {
               ],
             },
             {
-              path: '*', element: <SingleColumnLayout />,
-              children: [
-                { path: '*', element: <Page404 /> },
-              ]
+              path: '*',
+              element: <SingleColumnLayout />,
+              children: [{ path: '*', element: <Page404 /> }],
             },
-          ]
+          ],
         },
-      ]
+      ],
     },
   ]);
 }

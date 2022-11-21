@@ -31,6 +31,14 @@ export default function Table(theme: Theme) {
         head: {
           color: theme.palette.text.secondary,
           backgroundColor: theme.palette.background.neutral,
+          '&:first-of-type': {
+            borderTopLeftRadius: 8,
+            borderBottomLeftRadius: 8,
+          },
+          '&:last-of-type': {
+            borderTopRightRadius: 8,
+            borderBottomRightRadius: 8,
+          },
         },
         stickyHeader: {
           backgroundColor: theme.palette.background.paper,

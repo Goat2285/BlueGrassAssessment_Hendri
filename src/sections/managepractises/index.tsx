@@ -1,6 +1,7 @@
 import { Stack, Button } from '@mui/material';
 import DashboardWelcome from 'src/components/dashboard-welcome';
 import PractisesTable from 'src/components/practises-table';
+import { useGetPractices } from 'src/hooks/api/practices/useGetPractices';
 import TableData from './TableData';
 
 const TABLE_HEAD = [
@@ -13,6 +14,9 @@ const TABLE_HEAD = [
 ];
 
 export default function ManagePractises() {
+  const { data } = useGetPractices();
+  console.log(data);
+
   const addPractise = () => {
     console.log('Add practise');
   };

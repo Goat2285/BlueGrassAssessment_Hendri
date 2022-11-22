@@ -24,10 +24,7 @@ export default function RHFTextField({ name, ...other }: Props) {
           error={!!error}
           helperText={error?.message}
           sx={{
-            "& .MuiInputLabel-root": { color: "text.disabled" },
-            "& .MuiOutlinedInput-root": {
-              "& > fieldset": { borderColor: "text.disabled" },
-            },
+            '& .MuiInputLabel-root': { color: 'text.disabled' },
           }}
           {...other}
         />

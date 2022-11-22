@@ -1,5 +1,5 @@
 export type IUserAccountGeneral = {
-  id: string;
+  id: number;
   avatar?: string;
   name: string;
   email: string;

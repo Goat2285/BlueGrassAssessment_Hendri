@@ -7,15 +7,43 @@ import { CustomAvatar } from 'src/components/custom-avatar';
 import { format } from 'date-fns';
 import { GREYS } from 'src/theme/palette';
 import { IconButtonAnimate } from 'src/components/animate';
+import ConfirmDialog from 'src/components/confirm-dialog';
+import UserEditForm from './UserEditForm';
+import { useState } from 'react';
+import UserDeleteForm from './UserDeleteForm';
 
 // ----------------------------------------------------------------------
 
 type Props = {
   row: IUserAccountGeneral;
+  handleRefetch: () => void;
 };
 
-export default function UserTableRow({ row }: Props) {
-  const { name, avatar, email, role, date } = row;
+export default function UserTableRow({ row, handleRefetch }: Props) {
+  const { id, name, avatar, email, role, date } = row;
+
+  const [isOpenEditDialog, setIsOpenEditDialog] = useState(false);
+  const [isOpenDeleteDialog, setIsOpenDeleteDialog] = useState(false);
+
+  const closeEditDialog = () => {
+    setIsOpenEditDialog(false);
+  };
+
+  const closeDeleteDialog = () => {
+    setIsOpenDeleteDialog(false);
+  };
+
+  const refetch = () => {
+    handleRefetch();
+  };
+
+  const handleOpenEditDialog = () => {
+    setIsOpenEditDialog(true);
+  };
+
+  const handleOpenDeleteDialog = () => {
+    setIsOpenDeleteDialog(true);
+  };
 
   return (
     <>
@@ -42,14 +70,38 @@ export default function UserTableRow({ row }: Props) {
         <TableCell align="left">{format(date, 'MM/dd/yyyy')}</TableCell>
 
         <TableCell align="right">
-          <IconButtonAnimate sx={{ color: 'primary.main' }}>
+          <IconButtonAnimate sx={{ color: 'primary.main' }} onClick={handleOpenEditDialog}>
             <Iconify icon="ri:edit-line" />
           </IconButtonAnimate>
-          <IconButtonAnimate sx={{ color: 'primary.main', ml: 0.5 }}>
+          <IconButtonAnimate
+            sx={{ color: 'primary.main', ml: 0.5 }}
+            onClick={handleOpenDeleteDialog}
+          >
             <Iconify icon="eva:trash-2-outline" />
           </IconButtonAnimate>
         </TableCell>
       </TableRow>
+      <ConfirmDialog
+        open={isOpenEditDialog}
+        onClose={closeEditDialog}
+        title="Edit user"
+        content={
+          <UserEditForm
+            id={id}
+            fullname={name}
+            email={email}
+            role={role}
+            closeDialog={closeEditDialog}
+            refetch={refetch}
+          />
+        }
+      />
+      <ConfirmDialog
+        open={isOpenDeleteDialog}
+        onClose={closeDeleteDialog}
+        title="Confirm Delete?"
+        content={<UserDeleteForm id={id} closeDialog={closeDeleteDialog} refetch={refetch} />}
+      />
     </>
   );
 }

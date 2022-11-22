@@ -77,6 +77,10 @@ export default function ManageUsers() {
     console.log('Add Users');
   };
 
+  const handleRefetch = () => {
+    console.log('Refetching');
+  };
+
   return (
     <Stack>
       <DashboardWelcome
@@ -134,7 +138,7 @@ export default function ManageUsers() {
                   {dataFiltered
                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                     .map((row) => (
-                      <UserTableRow key={row.id} row={row} />
+                      <UserTableRow key={row.id} row={row} handleRefetch={handleRefetch} />
                     ))}
 
                   <TableEmptyRows

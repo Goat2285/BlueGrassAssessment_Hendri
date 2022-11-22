@@ -9,7 +9,7 @@ export default function Dialog(theme: Theme) {
         root: {
           '& .MuiBackdrop-root': {
             background: 'linear-gradient(256.42deg, #161C24 0%, rgba(22, 28, 36, 0.48) 91.29%)',
-          }
+          },
         },
         paper: {
           boxShadow: theme.customShadows.dialog,
@@ -25,7 +25,7 @@ export default function Dialog(theme: Theme) {
           },
           '&.MuiDialog-paper .MuiTypography-root': {
             fontSize: 24,
-            lineHeight: 36/24,
+            lineHeight: 36 / 24,
             textAlign: 'center',
             padding: 0,
           },
@@ -47,9 +47,9 @@ export default function Dialog(theme: Theme) {
       styleOverrides: {
         root: {
           padding: theme.spacing(3),
-          '&.MuiDialogTitle-root+.css-dfihuu-MuiDialogContent-root': {
-            paddingTop: theme.spacing(3)
-          },
+          // '&.MuiDialogTitle-root+.css-dfihuu-MuiDialogContent-root': {
+          //   paddingTop: theme.spacing(3)
+          // },
         },
       },
     },
@@ -57,6 +57,7 @@ export default function Dialog(theme: Theme) {
       styleOverrides: {
         root: {
           padding: theme.spacing(0, 3),
+          paddingTop: `${theme.spacing(3)} !important`,
         },
         dividers: {
           borderTop: 0,

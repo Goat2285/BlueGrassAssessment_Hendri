@@ -14,9 +14,10 @@ export type UserFormProps = {
 type Props = {
   closeDialog: () => void;
   refetch: () => void;
+  roles?: string[];
 };
 
-export default function UserAddForm({ closeDialog, refetch }: Props) {
+export default function UserAddForm({ closeDialog, refetch, roles }: Props) {
   const schema = Yup.object().shape({
     fullname: Yup.string().required('Fullname is required'),
     email: Yup.string().email('Email must be a valid email address').required('Email is required'),
@@ -41,8 +42,7 @@ export default function UserAddForm({ closeDialog, refetch }: Props) {
   const { handleSubmit } = methods;
 
   const onSubmit = (data: UserFormProps) => {
-    //postSubmit(data);
-    console.log(data);
+    postSubmit(data);
     closeDialog();
   };
 
@@ -54,8 +54,11 @@ export default function UserAddForm({ closeDialog, refetch }: Props) {
           <RHFTextField name="email" label="Email" />
           <RHFSelect name="role" label="Role">
             <option />
-            <option value={'Doctor'}>Doctor</option>
-            <option value={'Staff'}>Staff</option>
+            {roles?.map((role) => (
+              <option key={role} value={role}>
+                {role}
+              </option>
+            ))}
           </RHFSelect>
         </Stack>
 

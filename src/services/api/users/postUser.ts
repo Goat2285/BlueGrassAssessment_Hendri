@@ -1,4 +1,4 @@
-import { axiosRequest } from "src/services/axiosConfig";
+import { axiosRequest } from 'src/services/axiosConfig';
 
 export interface IPostUserRequest {
   email: string;
@@ -8,10 +8,10 @@ export interface IPostUserRequest {
 
 // After creating getUsers service swap any with IPostUserResponse
 
-export const postUser = async ( userData: IPostUserRequest ): Promise<any> => {
-  const { data } = await axiosRequest('POST', '/api/Clinic/Users', {
-    data: userData
+export const postUser = async (userData: IPostUserRequest): Promise<any> => {
+  const { data } = await axiosRequest('POST', '/api/Clinic/User/Create', {
+    data: userData,
   });
 
   return data;
-}
+};

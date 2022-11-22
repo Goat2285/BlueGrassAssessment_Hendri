@@ -26,6 +26,7 @@ import UserTableRow from './UserTableRow';
 import DashboardWelcome from 'src/components/dashboard-welcome';
 import ConfirmDialog from 'src/components/confirm-dialog';
 import UserAddForm from './UserAddForm';
+import { useGetRoles } from 'src/hooks/api/roles/useGetRoles';
 
 const STATUS_OPTIONS = ['all users', 'Doctor', 'Staff'];
 
@@ -39,6 +40,8 @@ const TABLE_HEAD = [
 export default function ManageUsers() {
   const { setPage, onChangePage, onChangeRowsPerPage, page, order, orderBy, rowsPerPage } =
     useTable();
+
+  const { data: roles } = useGetRoles();
 
   const [tableData, setTableData] = useState(TableUsersData);
 
@@ -180,7 +183,7 @@ export default function ManageUsers() {
         open={openDialog}
         onClose={handleCloseDialog}
         title="Add new user"
-        content={<UserAddForm closeDialog={closeDialog} refetch={refetch} />}
+        content={<UserAddForm closeDialog={closeDialog} refetch={refetch} roles={roles} />}
       />
     </>
   );

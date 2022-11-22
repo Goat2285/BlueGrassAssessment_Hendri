@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { usePutUser } from 'src/hooks/api/users/usePutUser';
 
-export type UserFormProps = {
+export type UserEditFormProps = {
   id: number;
   email: string;
   fullname: string;
@@ -36,7 +36,7 @@ export default function UserEditForm({ closeDialog, refetch, id, fullname, email
     role: role,
   };
 
-  const methods = useForm<UserFormProps>({
+  const methods = useForm<UserEditFormProps>({
     resolver: yupResolver(schema),
     defaultValues,
   });
@@ -47,7 +47,7 @@ export default function UserEditForm({ closeDialog, refetch, id, fullname, email
     onSuccess: refetch,
   });
 
-  const onSubmit = (data: UserFormProps) => {
+  const onSubmit = (data: UserEditFormProps) => {
     updateSubmit({
       id: data.id,
       putData: {

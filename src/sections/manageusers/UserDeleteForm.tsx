@@ -1,10 +1,11 @@
 import * as Yup from 'yup';
 import { Box, Button, Stack, Typography } from '@mui/material';
-import FormProvider, { RHFTextField } from '../../components/hook-form';
+import FormProvider from '../../components/hook-form';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useDeleteUser } from 'src/hooks/api/users/useDeleteUser';
 
-export type UserFormProps = {
+export type UserDeleteFormProps = {
   id: number;
 };
 
@@ -23,27 +24,27 @@ export default function UserDeleteForm({ closeDialog, refetch, id }: Props) {
     id: id,
   };
 
-  const methods = useForm<UserFormProps>({
+  const methods = useForm<UserDeleteFormProps>({
     resolver: yupResolver(schema),
     defaultValues,
   });
 
   const { handleSubmit } = methods;
 
+  const { mutate: deleteSubmit } = useDeleteUser({
+    onSuccess: refetch,
+  });
+
+  const onSubmit = (data: UserDeleteFormProps) => {
+    deleteSubmit({
+      id: data.id,
+    });
+    closeDialog();
+  };
+
   return (
     <Box sx={{ width: '100%' }}>
       <FormProvider methods={methods}>
-        <RHFTextField
-          name="id"
-          type="hidden"
-          sx={{
-            height: 0,
-            '& fieldset': {
-              display: 'none',
-            },
-          }}
-        />
-
         <Typography variant="body1" sx={{ textAlign: 'center' }}>
           Are you sure you want to delete this user?
         </Typography>
@@ -52,7 +53,12 @@ export default function UserDeleteForm({ closeDialog, refetch, id }: Props) {
           <Button variant="outlined" onClick={closeDialog} size={'large'} sx={{ flex: 1 }}>
             No, Cancel
           </Button>
-          <Button variant="contained" size={'large'} sx={{ flex: 1, mt: { xs: 2 } }}>
+          <Button
+            variant="contained"
+            size={'large'}
+            sx={{ flex: 1, mt: { xs: 2 } }}
+            onClick={handleSubmit(onSubmit)}
+          >
             Yes, Confirm
           </Button>
         </Stack>

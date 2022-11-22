@@ -99,6 +99,11 @@ export default function UserTableRow({ row, handleRefetch }: Props) {
       <ConfirmDialog
         open={isOpenDeleteDialog}
         onClose={closeDeleteDialog}
+        sx={{
+          '& .MuiDialogTitle-root+.css-dfihuu-MuiDialogContent-root': {
+            paddingTop: 1,
+          },
+        }}
         title="Confirm Delete?"
         content={<UserDeleteForm id={id} closeDialog={closeDeleteDialog} refetch={refetch} />}
       />

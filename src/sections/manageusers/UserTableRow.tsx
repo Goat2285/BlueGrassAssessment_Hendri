@@ -2,7 +2,6 @@
 import { Stack, TableRow, TableCell, Typography } from '@mui/material';
 // components
 import Iconify from '../../components/iconify';
-import { IUserAccountGeneral } from './types';
 import { CustomAvatar } from 'src/components/custom-avatar';
 import { format } from 'date-fns';
 import { GREYS } from 'src/theme/palette';

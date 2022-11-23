@@ -1,6 +1,7 @@
 import * as Yup from 'yup';
 import { Box, Button, Stack } from '@mui/material';
 import FormProvider, { RHFTextField, RHFSelect } from '../../components/hook-form';
+import { useSnackbar } from '../../components/snackbar';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { usePostUser } from 'src/hooks/api/users/usePostUser';
@@ -24,8 +25,16 @@ export default function UserAddForm({ closeDialog, refetch, roles }: Props) {
     role: Yup.string().required('Role is required'),
   });
 
+  const { enqueueSnackbar } = useSnackbar();
+
   const { mutate: postSubmit } = usePostUser({
-    onSuccess: refetch,
+    onSuccess: () => {
+      refetch();
+      enqueueSnackbar('User has been added!');
+    },
+    onError: () => {
+      enqueueSnackbar('Error, user not added!', { variant: 'error' });
+    },
   });
 
   const defaultValues = {

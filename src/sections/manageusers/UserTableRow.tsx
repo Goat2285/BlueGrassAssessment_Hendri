@@ -2,20 +2,20 @@
 import { Stack, TableRow, TableCell, Typography } from '@mui/material';
 // components
 import Iconify from '../../components/iconify';
-import { IUserAccountGeneral } from './types';
 import { CustomAvatar } from 'src/components/custom-avatar';
 import { format } from 'date-fns';
 import { GREYS } from 'src/theme/palette';
 import { IconButtonAnimate } from 'src/components/animate';
+import { IUserResponse } from 'src/services/api/users/getUsers';
 
 // ----------------------------------------------------------------------
 
 type Props = {
-  row: IUserAccountGeneral;
+  row: IUserResponse;
 };
 
 export default function UserTableRow({ row }: Props) {
-  const { name, avatar, email, role, date } = row;
+  const { name, avatar, email, roles, createDate, id } = row;
 
   return (
     <>
@@ -36,10 +36,10 @@ export default function UserTableRow({ row }: Props) {
         </TableCell>
 
         <TableCell align="left" sx={{ textTransform: 'capitalize' }}>
-          {role}
+          {roles[0]}
         </TableCell>
 
-        <TableCell align="left">{format(date, 'MM/dd/yyyy')}</TableCell>
+        <TableCell align="left">{format(new Date(createDate), 'MM/dd/yyyy')}</TableCell>
 
         <TableCell align="right">
           <IconButtonAnimate sx={{ color: 'primary.main' }}>

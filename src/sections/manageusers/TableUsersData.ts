@@ -5,7 +5,7 @@ const TableUsersData = [
     name: 'Robert James',
     email: 'robertj@fertile.com',
     role: 'Doctor',
-    date: new Date('2020-01-11 10:41:25.410')
+    date: '2020-01-11 10:41:25.410',
   },
   {
     id: 'e99f09a7-dd88-49d5-b1c8-1daf80c2d7b-2',
@@ -13,14 +13,14 @@ const TableUsersData = [
     name: 'Penelope Dupont',
     email: 'peneloped@fertile.com',
     role: 'Staff',
-    date: new Date('2020-03-11 10:41:25.410')
+    date: '2020-03-11 10:41:25.410',
   },
   {
     id: 'e99f09a7-dd88-49d5-b1c8-1daf80c2d7b-3',
     name: 'Megan Rogers',
     email: 'meganer@fertile.com',
     role: 'Admin',
-    date: new Date('2020-03-11 10:41:25.410')
+    date: '2020-03-11 10:41:25.410',
   },
   {
     id: 'e99f09a7-dd88-49d5-b1c8-1daf80c2d7b-4',
@@ -28,7 +28,7 @@ const TableUsersData = [
     name: 'Penelope Dupont',
     email: 'peneloped@fertile.com',
     role: 'Staff',
-    date: new Date('2020-03-11 10:41:25.410')
+    date: '2020-03-11 10:41:25.410',
   },
   {
     id: 'e99f09a7-dd88-49d5-b1c8-1daf80c2d7b-5',
@@ -36,14 +36,14 @@ const TableUsersData = [
     name: 'Penelope Dupont',
     email: 'peneloped@fertile.com',
     role: 'Staff',
-    date: new Date('2020-03-11 10:41:25.410')
+    date: '2020-03-11 10:41:25.410',
   },
   {
     id: 'e99f09a7-dd88-49d5-b1c8-1daf80c2d7b-6',
     name: 'Alex Dupont',
     email: 'peneloped@fertile.com',
     role: 'Staff',
-    date: new Date('2020-03-11 10:41:25.410')
+    date: '2020-03-11 10:41:25.410',
   },
 ];
 

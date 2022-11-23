@@ -11,16 +11,17 @@ import ConfirmDialog from 'src/components/confirm-dialog';
 import UserEditForm from './UserEditForm';
 import { useState } from 'react';
 import UserDeleteForm from './UserDeleteForm';
+import { IUserResponse } from 'src/services/users/getUsers';
 
 // ----------------------------------------------------------------------
 
 type Props = {
-  row: IUserAccountGeneral;
+  row: IUserResponse;
   handleRefetch: () => void;
 };
 
 export default function UserTableRow({ row, handleRefetch }: Props) {
-  const { id, name, avatar, email, role, date } = row;
+  const { name, avatar, email, roles, createDate, id } = row;
 
   const [isOpenEditDialog, setIsOpenEditDialog] = useState(false);
   const [isOpenDeleteDialog, setIsOpenDeleteDialog] = useState(false);
@@ -64,10 +65,10 @@ export default function UserTableRow({ row, handleRefetch }: Props) {
         </TableCell>
 
         <TableCell align="left" sx={{ textTransform: 'capitalize' }}>
-          {role}
+          {roles[0]}
         </TableCell>
 
-        <TableCell align="left">{format(date, 'MM/dd/yyyy')}</TableCell>
+        <TableCell align="left">{format(new Date(createDate), 'MM/dd/yyyy')}</TableCell>
 
         <TableCell align="right">
           <IconButtonAnimate sx={{ color: 'primary.main' }} onClick={handleOpenEditDialog}>
@@ -90,7 +91,7 @@ export default function UserTableRow({ row, handleRefetch }: Props) {
             id={id}
             fullname={name}
             email={email}
-            role={role}
+            role={roles[0]}
             closeDialog={closeEditDialog}
             refetch={refetch}
           />

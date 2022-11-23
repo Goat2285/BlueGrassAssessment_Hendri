@@ -24,8 +24,9 @@ import TableUsersData from './TableUsersData';
 import Scrollbar from 'src/components/scrollbar';
 import UserTableRow from './UserTableRow';
 import DashboardWelcome from 'src/components/dashboard-welcome';
-
-const STATUS_OPTIONS = ['all users', 'Doctor', 'Staff'];
+import { useGetRoles } from 'src/hooks/api/roles/useGetRoles';
+import { useGetUsers } from 'src/hooks/api/users/useGetUsers';
+import { useQueryClient } from '@tanstack/react-query';
 
 const TABLE_HEAD = [
   { id: 'name', label: 'Name', align: 'left' },
@@ -38,14 +39,20 @@ export default function ManageUsers() {
   const { setPage, onChangePage, onChangeRowsPerPage, page, order, orderBy, rowsPerPage } =
     useTable();
 
-  const [tableData, setTableData] = useState(TableUsersData);
+  const queryClient = useQueryClient();
+
+  const { data: users } = useGetUsers();
+
+  const { data: roles } = useGetRoles();
+
+  const ROLE_OPTIONS = roles ? ['all users', ...roles] : ['all users'];
 
   const [filterStatus, setFilterStatus] = useState('all users');
 
   const [filterName, setFilterName] = useState('');
 
   const dataFiltered = applyFilter({
-    inputData: tableData,
+    inputData: users,
     comparator: getComparator(order, orderBy),
     filterName,
     filterStatus,
@@ -56,7 +63,7 @@ export default function ManageUsers() {
   const isFiltered = filterName !== '' || filterStatus !== 'all users';
 
   const isNotFound =
-    (!dataFiltered.length && !!filterName) || (!dataFiltered.length && !!filterStatus);
+    (!dataFiltered?.length && !!filterName) || (!dataFiltered?.length && !!filterStatus);
 
   const handleFilterStatus = (event: React.SyntheticEvent<Element, Event>, newValue: string) => {
     setPage(0);
@@ -78,7 +85,8 @@ export default function ManageUsers() {
   };
 
   const handleRefetch = () => {
-    console.log('Refetching');
+    queryClient.refetchQueries(['getUsers']);
+    console.log('refetch');
   };
 
   return (
@@ -108,7 +116,7 @@ export default function ManageUsers() {
             bgcolor: 'background.neutral',
           }}
         >
-          {STATUS_OPTIONS.map((tab) => (
+          {ROLE_OPTIONS.map((tab) => (
             <Tab key={tab} label={tab} value={tab} />
           ))}
         </Tabs>
@@ -130,20 +138,20 @@ export default function ManageUsers() {
                   order={order}
                   orderBy={orderBy}
                   headLabel={TABLE_HEAD}
-                  rowCount={tableData.length}
+                  rowCount={users?.length}
                   sx={{ borderRadius: 1 }}
                 />
 
                 <TableBody>
                   {dataFiltered
-                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                    ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                     .map((row) => (
                       <UserTableRow key={row.id} row={row} handleRefetch={handleRefetch} />
                     ))}
 
                   <TableEmptyRows
                     height={denseHeight}
-                    emptyRows={emptyRows(page, rowsPerPage, tableData.length)}
+                    emptyRows={emptyRows(page, rowsPerPage, users ? users.length : 0)}
                   />
 
                   <TableNoData isNotFound={isNotFound} />
@@ -154,7 +162,7 @@ export default function ManageUsers() {
         </TableContainer>
 
         <TablePaginationCustom
-          count={dataFiltered.length}
+          count={dataFiltered ? dataFiltered.length : 0}
           page={page}
           rowsPerPage={rowsPerPage}
           onPageChange={onChangePage}

@@ -20,15 +20,12 @@ import {
 } from '../../components/table';
 import UserTableToolbar from './UserTableToolbar';
 import { applyFilter, getComparator } from './utils';
-import TableUsersData from './TableUsersData';
 import Scrollbar from 'src/components/scrollbar';
 import UserTableRow from './UserTableRow';
 import DashboardWelcome from 'src/components/dashboard-welcome';
 import { useGetUsers } from 'src/hooks/api/users/useGetUsers';
 import { IUserResponse } from 'src/services/users/getUsers';
-
-// Need to copy from add users role service and hook
-const STATUS_OPTIONS = ['all users', 'Doctor', 'Staff'];
+import { useGetRoles } from 'src/hooks/api/roles/useGetRoles';
 
 const TABLE_HEAD = [
   { id: 'name', label: 'Name', align: 'left' },
@@ -41,10 +38,11 @@ export default function ManageUsers() {
   const { setPage, onChangePage, onChangeRowsPerPage, page, order, orderBy, rowsPerPage } =
     useTable();
 
-  // const [tableData, setTableData] = useState(TableUsersData);
-
-  // Need to change schema on BE
   const { data: users } = useGetUsers();
+
+  const { data: roles } = useGetRoles();
+
+  const ROLE_OPTIONS = roles ? ['all users', ...roles] : ['all users'];
 
   const [filterStatus, setFilterStatus] = useState('all users');
 
@@ -110,7 +108,7 @@ export default function ManageUsers() {
             bgcolor: 'background.neutral',
           }}
         >
-          {STATUS_OPTIONS.map((tab) => (
+          {ROLE_OPTIONS.map((tab) => (
             <Tab key={tab} label={tab} value={tab} />
           ))}
         </Tabs>

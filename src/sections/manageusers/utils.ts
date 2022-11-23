@@ -1,4 +1,4 @@
-import { IUserResponse } from 'src/services/users/getUsers';
+import { IUserResponse } from 'src/services/api/users/getUsers';
 // import { IUserAccountGeneral } from './types';
 
 export function applyFilter({

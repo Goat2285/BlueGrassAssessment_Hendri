@@ -1,5 +1,5 @@
 import { useQuery, UseQueryOptions } from '@tanstack/react-query';
-import { getRoles } from 'src/services/roles/getRoles';
+import { getRoles } from 'src/services/api/roles/getRoles';
 
 type UseGetRolesOptions = Omit<
   UseQueryOptions<string[], Error, string[], Array<string>>,

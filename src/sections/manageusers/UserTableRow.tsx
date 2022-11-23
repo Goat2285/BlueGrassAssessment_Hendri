@@ -7,7 +7,7 @@ import { CustomAvatar } from 'src/components/custom-avatar';
 import { format } from 'date-fns';
 import { GREYS } from 'src/theme/palette';
 import { IconButtonAnimate } from 'src/components/animate';
-import { IUserResponse } from 'src/services/users/getUsers';
+import { IUserResponse } from 'src/services/api/users/getUsers';
 
 // ----------------------------------------------------------------------
 

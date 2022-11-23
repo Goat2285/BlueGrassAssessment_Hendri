@@ -24,7 +24,10 @@ import TableUsersData from './TableUsersData';
 import Scrollbar from 'src/components/scrollbar';
 import UserTableRow from './UserTableRow';
 import DashboardWelcome from 'src/components/dashboard-welcome';
+import { useGetUsers } from 'src/hooks/api/users/useGetUsers';
+import { IUserResponse } from 'src/services/users/getUsers';
 
+// Need to copy from add users role service and hook
 const STATUS_OPTIONS = ['all users', 'Doctor', 'Staff'];
 
 const TABLE_HEAD = [
@@ -38,14 +41,17 @@ export default function ManageUsers() {
   const { setPage, onChangePage, onChangeRowsPerPage, page, order, orderBy, rowsPerPage } =
     useTable();
 
-  const [tableData, setTableData] = useState(TableUsersData);
+  // const [tableData, setTableData] = useState(TableUsersData);
+
+  // Need to change schema on BE
+  const { data: users } = useGetUsers();
 
   const [filterStatus, setFilterStatus] = useState('all users');
 
   const [filterName, setFilterName] = useState('');
 
   const dataFiltered = applyFilter({
-    inputData: tableData,
+    inputData: users,
     comparator: getComparator(order, orderBy),
     filterName,
     filterStatus,
@@ -56,7 +62,7 @@ export default function ManageUsers() {
   const isFiltered = filterName !== '' || filterStatus !== 'all users';
 
   const isNotFound =
-    (!dataFiltered.length && !!filterName) || (!dataFiltered.length && !!filterStatus);
+    (!dataFiltered?.length && !!filterName) || (!dataFiltered?.length && !!filterStatus);
 
   const handleFilterStatus = (event: React.SyntheticEvent<Element, Event>, newValue: string) => {
     setPage(0);
@@ -126,20 +132,20 @@ export default function ManageUsers() {
                   order={order}
                   orderBy={orderBy}
                   headLabel={TABLE_HEAD}
-                  rowCount={tableData.length}
+                  rowCount={users?.length}
                   sx={{ borderRadius: 1 }}
                 />
 
                 <TableBody>
                   {dataFiltered
-                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                    .map((row) => (
+                    ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                    .map((row: IUserResponse) => (
                       <UserTableRow key={row.id} row={row} />
                     ))}
 
                   <TableEmptyRows
                     height={denseHeight}
-                    emptyRows={emptyRows(page, rowsPerPage, tableData.length)}
+                    emptyRows={emptyRows(page, rowsPerPage, users ? users.length : 0)}
                   />
 
                   <TableNoData isNotFound={isNotFound} />
@@ -150,7 +156,7 @@ export default function ManageUsers() {
         </TableContainer>
 
         <TablePaginationCustom
-          count={dataFiltered.length}
+          count={dataFiltered ? dataFiltered.length : 0}
           page={page}
           rowsPerPage={rowsPerPage}
           onPageChange={onChangePage}

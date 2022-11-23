@@ -1,8 +1,9 @@
 export type IUserAccountGeneral = {
-  id: string;
+  id: number;
   avatar?: string;
   name: string;
+  userName: string;
   email: string;
-  role: string;
-  date: Date;
+  createDate: string;
+  role: string[];
 };

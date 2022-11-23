@@ -16,16 +16,16 @@ type Props = {
 };
 
 type FormValuesProps = {
-  id: string;
-  practiseName: string;
-  phone: string;
+  id: number;
+  name?: string;
+  telephone?: string;
   email: string;
-  date: Date;
+  createDate: string;
   status: boolean;
 };
 
 export default function PractiseTableRow({ row }: Props) {
-  const { id, practiseName, phone, email, date, status } = row;
+  const { id, name, telephone, email, createDate, status } = row;
 
   const [active, setActive] = useState(status);
 
@@ -33,10 +33,10 @@ export default function PractiseTableRow({ row }: Props) {
 
   const defaultValues = {
     id: id,
-    practiseName: practiseName,
-    phone: phone,
+    name: name,
+    telephone: telephone,
     email: email,
-    date: date,
+    createDate: createDate,
     status: status,
   };
 
@@ -49,7 +49,7 @@ export default function PractiseTableRow({ row }: Props) {
   const onChange = async (data: FormValuesProps) => {
     try {
       await new Promise((resolve) => setTimeout(resolve, 200));
-      enqueueSnackbar('Update success!');
+      enqueueSnackbar('UpcreateDate success!');
       console.log(data);
       setActive(data.status);
     } catch (error) {
@@ -63,26 +63,30 @@ export default function PractiseTableRow({ row }: Props) {
         <TableCell>
           <Stack direction="row" alignItems="center" spacing={2}>
             <Typography variant="body2" noWrap>
-              {practiseName}
+              {name}
             </Typography>
           </Stack>
         </TableCell>
 
         <TableCell align="left">
-          <Typography variant="body2" noWrap>
-            {phone}
-          </Typography>
+          {telephone ? (
+            <Typography variant="body2" noWrap>
+              {telephone}
+            </Typography>
+          ) : null}
+        </TableCell>
+
+        <TableCell align="left">
+          {email ? (
+            <Typography variant="body2" noWrap>
+              {email}
+            </Typography>
+          ) : null}
         </TableCell>
 
         <TableCell align="left">
           <Typography variant="body2" noWrap>
-            {email}
-          </Typography>
-        </TableCell>
-
-        <TableCell align="left">
-          <Typography variant="body2" noWrap>
-            {format(date, 'MM/dd/yyyy')}
+            {format(new Date(createDate), 'MM/dd/yyyy')}
           </Typography>
         </TableCell>
 

@@ -1,5 +1,4 @@
-import { axiosRequest } from "src/services/axiosConfig";
-
+import { axiosRequest } from 'src/services/axiosConfig';
 
 export interface IPracticeResponse {
   name?: string;
@@ -9,11 +8,11 @@ export interface IPracticeResponse {
   registrationNumber?: string;
   status: boolean;
   telephone?: string;
-  id: BigInteger;
+  id: number;
   createDate: string;
 }
 
 export const getPractices = async (): Promise<IPracticeResponse[]> => {
   const { data } = await axiosRequest('GET', '/api/Practice');
   return data;
-}
+};

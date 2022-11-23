@@ -3,7 +3,6 @@ import { Navigate, useRoutes } from 'react-router-dom';
 import AuthGuard from '../auth/AuthGuard';
 import GuestGuard from '../auth/GuestGuard';
 // layouts
-import CompactLayout from '../layouts/compact';
 import DashboardLayout from '../layouts/dashboard';
 import SingleColumnLayout from '../layouts/singleColumn';
 // config

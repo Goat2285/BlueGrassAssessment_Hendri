@@ -1,27 +1,33 @@
-import { RowProps } from './PractisesTable';
+import { IUserAccountGeneral } from "./types";
 
 export function applyFilter({
   inputData,
   comparator,
-  filterPractiseName,
+  filterName,
+  filterStatus
 }: {
-  inputData: RowProps[] | undefined;
+  inputData: IUserAccountGeneral[];
   comparator: (a: any, b: any) => number;
-  filterPractiseName: string;
+  filterName: string;
+  filterStatus: string;
 }) {
-  const stabilizedThis = inputData?.map((el, index) => [el, index] as const);
+  const stabilizedThis = inputData.map((el, index) => [el, index] as const);
 
-  stabilizedThis?.sort((a, b) => {
+  stabilizedThis.sort((a, b) => {
     const order = comparator(a[0], b[0]);
     if (order !== 0) return order;
     return a[1] - b[1];
   });
 
-  inputData = stabilizedThis?.map((el) => el[0]);
+  inputData = stabilizedThis.map((el) => el[0]);
 
-  if (filterPractiseName) {
-    inputData = inputData?.filter(
-      (user) => user.name?.toLowerCase().indexOf(filterPractiseName.toLowerCase()) !== -1
+  if (filterStatus !== 'all users') {
+    inputData = inputData.filter((user) => user.role === filterStatus);
+  }
+
+  if (filterName) {
+    inputData = inputData.filter(
+      (user) => user.name.toLowerCase().indexOf(filterName.toLowerCase()) !== -1
     );
   }
 

@@ -14,8 +14,7 @@ const TABLE_HEAD = [
 ];
 
 export default function ManagePractises() {
-  const { data } = useGetPractices();
-  console.log(data);
+  const { data: practices } = useGetPractices();
 
   const addPractise = () => {
     console.log('Add practise');
@@ -40,7 +39,7 @@ export default function ManagePractises() {
       />
 
       <PractisesTable
-        tableRows={TableData}
+        tableRows={practices}
         searchable={true}
         hasPagination={true}
         hasMore={false}

@@ -1,6 +1,7 @@
 import { Helmet } from 'react-helmet-async';
+import ManageUsers from 'src/sections/manageusers';
 // @mui
-import { Container, Typography } from '@mui/material';
+import { Container } from '@mui/material';
 // components
 import { useSettingsContext } from '../components/settings';
 
@@ -16,9 +17,7 @@ export default function ManageUsersPage() {
       </Helmet>
 
       <Container maxWidth={themeStretch ? false : 'xl'}>
-        <Typography variant="h3" component="h1" paragraph>
-          Manage Users Page
-        </Typography>
+        <ManageUsers />
       </Container>
     </>
   );

@@ -22,6 +22,7 @@ import {
   ManageUsersPage,
   ManagePatientsPage,
   LogsPage,
+  ManagePractisesPage,
 } from './elements';
 
 // ----------------------------------------------------------------------
@@ -50,6 +51,11 @@ export default function Router() {
                 { path: 'updatepassword', element: <UpdatePasswordPage /> },
                 { path: 'register', element: <RegisterPage /> },
               ],
+            },
+            {
+              path: 'admin',
+              element: <DashboardLayout />,
+              children: [{ path: 'practises', element: <ManagePractisesPage /> }],
             },
             {
               path: 'dashboard',

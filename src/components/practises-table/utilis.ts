@@ -1,16 +1,13 @@
-import { IUserResponse } from 'src/services/api/users/getUsers';
-// import { IUserAccountGeneral } from './types';
+import { RowProps } from './PractisesTable';
 
 export function applyFilter({
   inputData,
   comparator,
-  filterName,
-  filterStatus,
+  filterPractiseName,
 }: {
-  inputData: IUserResponse[] | undefined;
+  inputData: RowProps[] | undefined;
   comparator: (a: any, b: any) => number;
-  filterName: string;
-  filterStatus: string;
+  filterPractiseName: string;
 }) {
   const stabilizedThis = inputData?.map((el, index) => [el, index] as const);
 
@@ -22,13 +19,9 @@ export function applyFilter({
 
   inputData = stabilizedThis?.map((el) => el[0]);
 
-  if (filterStatus !== 'all users') {
-    inputData = inputData?.filter((user) => user.roles[0] === filterStatus);
-  }
-
-  if (filterName) {
+  if (filterPractiseName) {
     inputData = inputData?.filter(
-      (user) => user.name.toLowerCase().indexOf(filterName.toLowerCase()) !== -1
+      (user) => user.name?.toLowerCase().indexOf(filterPractiseName.toLowerCase()) !== -1
     );
   }
 

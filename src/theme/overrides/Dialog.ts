@@ -57,6 +57,7 @@ export default function Dialog(theme: Theme) {
       styleOverrides: {
         root: {
           padding: theme.spacing(0, 3),
+          paddingTop: `${theme.spacing(3)} !important`,
         },
         dividers: {
           borderTop: 0,

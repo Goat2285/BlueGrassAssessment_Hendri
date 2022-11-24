@@ -1,4 +1,4 @@
-import { axiosRequest } from '../axiosConfig';
+import { axiosRequest } from 'src/services/axiosConfig';
 
 export interface IDeleteUserRequest {
   id: number;

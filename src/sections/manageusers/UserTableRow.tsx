@@ -2,7 +2,6 @@
 import { Stack, TableRow, TableCell, Typography } from '@mui/material';
 // components
 import Iconify from '../../components/iconify';
-import { IUserAccountGeneral } from './types';
 import { CustomAvatar } from 'src/components/custom-avatar';
 import { format } from 'date-fns';
 import { GREYS } from 'src/theme/palette';
@@ -11,7 +10,7 @@ import ConfirmDialog from 'src/components/confirm-dialog';
 import UserEditForm from './UserEditForm';
 import { useState } from 'react';
 import UserDeleteForm from './UserDeleteForm';
-import { IUserResponse } from 'src/services/users/getUsers';
+import { IUserResponse } from 'src/services/api/users/getUsers';
 
 // ----------------------------------------------------------------------
 

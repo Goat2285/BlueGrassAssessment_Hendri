@@ -20,12 +20,13 @@ import {
 } from '../../components/table';
 import UserTableToolbar from './UserTableToolbar';
 import { applyFilter, getComparator } from './utils';
-import TableUsersData from './TableUsersData';
 import Scrollbar from 'src/components/scrollbar';
 import UserTableRow from './UserTableRow';
 import DashboardWelcome from 'src/components/dashboard-welcome';
-import { useGetRoles } from 'src/hooks/api/roles/useGetRoles';
 import { useGetUsers } from 'src/hooks/api/users/useGetUsers';
+import { useGetRoles } from 'src/hooks/api/roles/useGetRoles';
+import ConfirmDialog from 'src/components/confirm-dialog';
+import UserAddForm from './UserAddForm';
 import { useQueryClient } from '@tanstack/react-query';
 
 const TABLE_HEAD = [
@@ -47,6 +48,8 @@ export default function ManageUsers() {
 
   const ROLE_OPTIONS = roles ? ['all users', ...roles] : ['all users'];
 
+  const [openDialog, setOpenDialog] = useState(false);
+
   const [filterStatus, setFilterStatus] = useState('all users');
 
   const [filterName, setFilterName] = useState('');
@@ -65,6 +68,18 @@ export default function ManageUsers() {
   const isNotFound =
     (!dataFiltered?.length && !!filterName) || (!dataFiltered?.length && !!filterStatus);
 
+  const handleCloseDialog = () => {
+    setOpenDialog(false);
+  };
+
+  const handleOpenDialog = () => {
+    setOpenDialog(true);
+  };
+
+  const refetch = () => {
+    queryClient.refetchQueries(['getUsers']);
+  };
+
   const handleFilterStatus = (event: React.SyntheticEvent<Element, Event>, newValue: string) => {
     setPage(0);
     setFilterStatus(newValue);
@@ -80,96 +95,95 @@ export default function ManageUsers() {
     setFilterStatus('all users');
   };
 
-  const addUser = () => {
-    console.log('Add Users');
-  };
-
-  const handleRefetch = () => {
-    queryClient.refetchQueries(['getUsers']);
-    console.log('refetch');
-  };
-
   return (
-    <Stack>
-      <DashboardWelcome
-        title="Manage Users"
-        subtitle="Add new staff members or manage existing users"
-        action={
-          <Button
-            variant="contained"
-            size="medium"
-            sx={{ lineHeight: 22 / 14, fontWeight: 'fontWeightMedium' }}
-            onClick={addUser}
-          >
-            Add User
-          </Button>
-        }
-        sx={{ mt: 4 }}
-      />
-
-      <Card>
-        <Tabs
-          value={filterStatus}
-          onChange={handleFilterStatus}
-          sx={{
-            px: 2,
-            bgcolor: 'background.neutral',
-          }}
-        >
-          {ROLE_OPTIONS.map((tab) => (
-            <Tab key={tab} label={tab} value={tab} />
-          ))}
-        </Tabs>
-
-        <Divider />
-
-        <UserTableToolbar
-          isFiltered={isFiltered}
-          filterName={filterName}
-          onFilterName={handleFilterName}
-          onResetFilter={handleResetFilter}
+    <>
+      <Stack>
+        <DashboardWelcome
+          title="Manage Users"
+          subtitle="Add new staff members or manage existing users"
+          action={
+            <Button
+              variant="contained"
+              size="medium"
+              sx={{ lineHeight: 22 / 14, fontWeight: 'fontWeightMedium' }}
+              onClick={handleOpenDialog}
+            >
+              Add User
+            </Button>
+          }
+          sx={{ mt: 4 }}
         />
 
-        <TableContainer sx={{ position: 'relative', overflow: 'unset' }}>
-          <Card sx={{ px: 1, borderRadius: 0 }}>
-            <Scrollbar>
-              <Table sx={{ minWidth: 800 }}>
-                <TableHeadCustom
-                  order={order}
-                  orderBy={orderBy}
-                  headLabel={TABLE_HEAD}
-                  rowCount={users?.length}
-                  sx={{ borderRadius: 1 }}
-                />
+        <Card>
+          <Tabs
+            value={filterStatus}
+            onChange={handleFilterStatus}
+            sx={{
+              px: 2,
+              bgcolor: 'background.neutral',
+            }}
+          >
+            {ROLE_OPTIONS.map((tab) => (
+              <Tab key={tab} label={tab} value={tab} />
+            ))}
+          </Tabs>
 
-                <TableBody>
-                  {dataFiltered
-                    ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                    .map((row) => (
-                      <UserTableRow key={row.id} row={row} handleRefetch={handleRefetch} />
-                    ))}
+          <Divider />
 
-                  <TableEmptyRows
-                    height={denseHeight}
-                    emptyRows={emptyRows(page, rowsPerPage, users ? users.length : 0)}
+          <UserTableToolbar
+            isFiltered={isFiltered}
+            filterName={filterName}
+            onFilterName={handleFilterName}
+            onResetFilter={handleResetFilter}
+          />
+
+          <TableContainer sx={{ position: 'relative', overflow: 'unset' }}>
+            <Card sx={{ px: 1, borderRadius: 0 }}>
+              <Scrollbar>
+                <Table sx={{ minWidth: 800 }}>
+                  <TableHeadCustom
+                    order={order}
+                    orderBy={orderBy}
+                    headLabel={TABLE_HEAD}
+                    rowCount={users?.length}
+                    sx={{ borderRadius: 1 }}
                   />
 
-                  <TableNoData isNotFound={isNotFound} />
-                </TableBody>
-              </Table>
-            </Scrollbar>
-          </Card>
-        </TableContainer>
+                  <TableBody>
+                    {dataFiltered
+                      ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                      .map((row) => (
+                        <UserTableRow key={row.id} row={row} handleRefetch={refetch} />
+                      ))}
 
-        <TablePaginationCustom
-          count={dataFiltered ? dataFiltered.length : 0}
-          page={page}
-          rowsPerPage={rowsPerPage}
-          onPageChange={onChangePage}
-          onRowsPerPageChange={onChangeRowsPerPage}
-          sx={{ bgcolor: 'common.white' }}
-        />
-      </Card>
-    </Stack>
+                    <TableEmptyRows
+                      height={denseHeight}
+                      emptyRows={emptyRows(page, rowsPerPage, users ? users.length : 0)}
+                    />
+
+                    <TableNoData isNotFound={isNotFound} />
+                  </TableBody>
+                </Table>
+              </Scrollbar>
+            </Card>
+          </TableContainer>
+
+          <TablePaginationCustom
+            count={dataFiltered ? dataFiltered.length : 0}
+            page={page}
+            rowsPerPage={rowsPerPage}
+            onPageChange={onChangePage}
+            onRowsPerPageChange={onChangeRowsPerPage}
+            sx={{ bgcolor: 'common.white' }}
+          />
+        </Card>
+      </Stack>
+      <ConfirmDialog
+        open={openDialog}
+        onClose={handleCloseDialog}
+        title="Add new user"
+        content={<UserAddForm closeDialog={handleCloseDialog} refetch={refetch} roles={roles} />}
+      />
+    </>
   );
 }

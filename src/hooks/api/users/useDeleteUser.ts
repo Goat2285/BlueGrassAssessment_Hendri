@@ -1,5 +1,5 @@
 import { useMutation, UseMutationOptions } from '@tanstack/react-query';
-import { deleteUser, IDeleteUserRequest } from 'src/services/users/deleteUser';
+import { deleteUser, IDeleteUserRequest } from 'src/services/api/users/deleteUser';
 
 // After we have getUsers we need to swap any for IUserResponse
 

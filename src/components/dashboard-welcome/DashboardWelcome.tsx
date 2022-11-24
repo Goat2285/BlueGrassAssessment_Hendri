@@ -16,7 +16,7 @@ export default function DashboardWelcome({ title, subtitle, action, sx, ...other
           </Typography>
           <Typography variant="body2">{subtitle}</Typography>
         </Box>
-        {action ? <Box sx={{ flexShrink: 0, mt: { xs: 2 } }}>{action}</Box> : null}
+        {action ? <Box sx={{ flexShrink: 0, mt: { xs: 2, sm: 0 } }}>{action}</Box> : null}
       </Stack>
     </Box>
   );

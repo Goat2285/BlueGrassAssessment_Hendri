@@ -72,10 +72,6 @@ export default function ManageUsers() {
     setOpenDialog(false);
   };
 
-  const closeDialog = () => {
-    setOpenDialog(false);
-  };
-
   const handleOpenDialog = () => {
     setOpenDialog(true);
   };
@@ -186,7 +182,7 @@ export default function ManageUsers() {
         open={openDialog}
         onClose={handleCloseDialog}
         title="Add new user"
-        content={<UserAddForm closeDialog={closeDialog} refetch={refetch} roles={roles} />}
+        content={<UserAddForm closeDialog={handleCloseDialog} refetch={refetch} roles={roles} />}
       />
     </>
   );

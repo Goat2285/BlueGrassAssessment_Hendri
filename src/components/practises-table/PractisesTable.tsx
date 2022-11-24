@@ -79,7 +79,7 @@ export default function PractisesTable({
 
   const isFiltered = filterPractiseName !== '';
 
-  const isNotFound = !dataFiltered?.length && !!filterPractiseName;
+  const isNotFound = (!dataFiltered?.length && !!filterPractiseName) || !tableRows;
 
   const handleFilterPractiseName = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPage(0);

@@ -61,7 +61,7 @@ export default function UserAddForm({ closeDialog, refetch, roles }: Props) {
         <Stack spacing={3}>
           <RHFTextField name="fullname" label="Full Name" />
           <RHFTextField name="email" label="Email" />
-          <RHFSelect name="role" label="Role">
+          <RHFSelect name="role" label="Select Role">
             <option />
             {roles?.map((role) => (
               <option key={role} value={role}>

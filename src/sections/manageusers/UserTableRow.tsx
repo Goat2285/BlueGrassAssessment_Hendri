@@ -16,11 +16,12 @@ import { IUserResponse } from 'src/services/api/users/getUsers';
 
 type Props = {
   row: IUserResponse;
+  allRoles?: string[];
   handleRefetch: () => void;
 };
 
-export default function UserTableRow({ row, handleRefetch }: Props) {
-  const { name, avatar, email, roles, createDate, id } = row;
+export default function UserTableRow({ row, allRoles, handleRefetch }: Props) {
+  const { fullname, avatar, email, roles, createDate, id } = row;
 
   const [isOpenEditDialog, setIsOpenEditDialog] = useState(false);
   const [isOpenDeleteDialog, setIsOpenDeleteDialog] = useState(false);
@@ -50,11 +51,11 @@ export default function UserTableRow({ row, handleRefetch }: Props) {
       <TableRow hover>
         <TableCell>
           <Stack direction="row" alignItems="center" spacing={2}>
-            <CustomAvatar alt={name} src={avatar} name={name} />
+            <CustomAvatar alt={fullname} src={avatar} name={fullname} />
 
             <Stack direction="column">
               <Typography variant="subtitle2" noWrap>
-                {name}
+                {fullname}
               </Typography>
               <Typography variant="body2" noWrap color={GREYS.grey6}>
                 {email}
@@ -88,11 +89,12 @@ export default function UserTableRow({ row, handleRefetch }: Props) {
         content={
           <UserEditForm
             id={id}
-            fullname={name}
+            fullname={fullname}
             email={email}
             role={roles[0]}
             closeDialog={closeEditDialog}
             refetch={refetch}
+            roles={allRoles}
           />
         }
       />

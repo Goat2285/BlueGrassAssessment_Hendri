@@ -1,6 +1,7 @@
 import * as Yup from 'yup';
 import { Box, Button, Stack } from '@mui/material';
 import FormProvider, { RHFTextField, RHFSelect } from '../../components/hook-form';
+import { useSnackbar } from '../../components/snackbar';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { usePutUser } from 'src/hooks/api/users/usePutUser';
@@ -15,13 +16,22 @@ export type UserEditFormProps = {
 type Props = {
   closeDialog: () => void;
   refetch: () => void;
+  roles?: string[];
   id: number;
   fullname: string;
   email: string;
   role: string;
 };
 
-export default function UserEditForm({ closeDialog, refetch, id, fullname, email, role }: Props) {
+export default function UserEditForm({
+  closeDialog,
+  refetch,
+  roles,
+  id,
+  fullname,
+  email,
+  role,
+}: Props) {
   const schema = Yup.object().shape({
     id: Yup.number().required(),
     fullname: Yup.string().required('Fullname is required'),
@@ -43,8 +53,16 @@ export default function UserEditForm({ closeDialog, refetch, id, fullname, email
 
   const { handleSubmit } = methods;
 
+  const { enqueueSnackbar } = useSnackbar();
+
   const { mutate: updateSubmit } = usePutUser({
-    onSuccess: refetch,
+    onSuccess: () => {
+      refetch();
+      enqueueSnackbar('User has been updated!');
+    },
+    onError: () => {
+      enqueueSnackbar('Error, user not updated!', { variant: 'error' });
+    },
   });
 
   const onSubmit = (data: UserEditFormProps) => {
@@ -67,8 +85,11 @@ export default function UserEditForm({ closeDialog, refetch, id, fullname, email
           <RHFTextField name="email" label="Email" />
           <RHFSelect name="role" label="Role">
             <option />
-            <option value={'Doctor'}>Doctor</option>
-            <option value={'Staff'}>Staff</option>
+            {roles?.map((role) => (
+              <option key={role} value={role}>
+                {role}
+              </option>
+            ))}
           </RHFSelect>
         </Stack>
 

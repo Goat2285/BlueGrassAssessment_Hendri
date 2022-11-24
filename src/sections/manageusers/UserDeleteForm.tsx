@@ -1,6 +1,7 @@
 import * as Yup from 'yup';
 import { Box, Button, Stack, Typography } from '@mui/material';
 import FormProvider from '../../components/hook-form';
+import { useSnackbar } from '../../components/snackbar';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useDeleteUser } from 'src/hooks/api/users/useDeleteUser';
@@ -31,8 +32,16 @@ export default function UserDeleteForm({ closeDialog, refetch, id }: Props) {
 
   const { handleSubmit } = methods;
 
+  const { enqueueSnackbar } = useSnackbar();
+
   const { mutate: deleteSubmit } = useDeleteUser({
-    onSuccess: refetch,
+    onSuccess: () => {
+      refetch();
+      enqueueSnackbar('User has been deleted!');
+    },
+    onError: () => {
+      enqueueSnackbar('Error, user not deleted!', { variant: 'error' });
+    },
   });
 
   const onSubmit = (data: UserDeleteFormProps) => {

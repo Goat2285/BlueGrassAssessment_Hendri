@@ -1,8 +1,11 @@
 import { Stack, Button } from '@mui/material';
+import { useQueryClient } from '@tanstack/react-query';
+import { useState } from 'react';
+import ConfirmDialog from 'src/components/confirm-dialog';
 import DashboardWelcome from 'src/components/dashboard-welcome';
 import PractisesTable from 'src/components/practises-table';
 import { useGetPractices } from 'src/hooks/api/practices/useGetPractices';
-import TableData from './TableData';
+import PracticeAddForm from './PracticeAddForm';
 
 const TABLE_HEAD = [
   { id: 'practiseName', label: 'Practise Name', align: 'left' },
@@ -14,10 +17,22 @@ const TABLE_HEAD = [
 ];
 
 export default function ManagePractises() {
+  const [openDialog, setOpenDialog] = useState(false);
+
+  const queryClient = useQueryClient();
+
   const { data: practices } = useGetPractices();
 
-  const addPractise = () => {
-    console.log('Add practise');
+  const handleCloseDialog = () => {
+    setOpenDialog(false);
+  };
+
+  const handleOpenDialog = () => {
+    setOpenDialog(true);
+  };
+
+  const refetch = () => {
+    queryClient.refetchQueries(['getPractices']);
   };
 
   return (
@@ -30,9 +45,9 @@ export default function ManagePractises() {
             variant="contained"
             size="medium"
             sx={{ lineHeight: 22 / 14, fontWeight: 'fontWeightMedium' }}
-            onClick={addPractise}
+            onClick={handleOpenDialog}
           >
-            Add Practises
+            Add Practise
           </Button>
         }
         sx={{ mt: 4 }}
@@ -44,6 +59,13 @@ export default function ManagePractises() {
         hasPagination={true}
         hasMore={false}
         tableHeads={TABLE_HEAD}
+      />
+
+      <ConfirmDialog
+        open={openDialog}
+        onClose={handleCloseDialog}
+        title="Add Practice"
+        content={<PracticeAddForm closeDialog={handleCloseDialog} refetch={refetch} />}
       />
     </Stack>
   );

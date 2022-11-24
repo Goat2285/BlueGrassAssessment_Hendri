@@ -1,5 +1,14 @@
 // @mui
-import { Dialog, Button, DialogTitle, DialogActions, DialogContent } from '@mui/material';
+import {
+  Dialog,
+  Button,
+  DialogTitle,
+  DialogActions,
+  DialogContent,
+  IconButton,
+} from '@mui/material';
+import Iconify from '../iconify';
+import { StyledButtonHolder } from './style';
 //
 import { ConfirmDialogProps } from './types';
 
@@ -15,6 +24,11 @@ export default function ConfirmDialog({
 }: ConfirmDialogProps) {
   return (
     <Dialog fullWidth maxWidth="xs" open={open} onClose={onClose} {...other}>
+      <StyledButtonHolder>
+        <IconButton onClick={onClose}>
+          <Iconify icon="eva:close-fill" />
+        </IconButton>
+      </StyledButtonHolder>
       <DialogTitle sx={{ pb: 2 }}>{title}</DialogTitle>
 
       {content && <DialogContent sx={{ typography: 'body2' }}> {content} </DialogContent>}

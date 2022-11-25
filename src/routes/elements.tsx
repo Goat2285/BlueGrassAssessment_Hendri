@@ -32,6 +32,7 @@ export const LogsPage = Loadable(lazy(() => import('../pages/LogsPage')));
 export const SuperAdminDashboardPage = Loadable(
   lazy(() => import('../pages/SuperAdminDashboardPage'))
 );
+export const ManagePractisesPage = Loadable(lazy(() => import('../pages/ManagePractisesPage')));
 
 // Other
 export const Page404 = Loadable(lazy(() => import('../pages/Page404')));

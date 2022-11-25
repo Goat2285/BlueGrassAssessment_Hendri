@@ -23,6 +23,7 @@ import {
   ManagePatientsPage,
   LogsPage,
   SuperAdminDashboardPage,
+  ManagePractisesPage,
 } from './elements';
 
 // ----------------------------------------------------------------------
@@ -55,7 +56,10 @@ export default function Router() {
             {
               path: 'admin',
               element: <DashboardLayout />,
-              children: [{ path: 'dashboard', element: <SuperAdminDashboardPage /> }],
+              children: [
+                { path: 'dashboard', element: <SuperAdminDashboardPage /> },
+                { path: 'practises', element: <ManagePractisesPage /> },
+              ],
             },
             {
               path: 'dashboard',

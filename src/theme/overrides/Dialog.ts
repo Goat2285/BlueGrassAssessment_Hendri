@@ -47,9 +47,6 @@ export default function Dialog(theme: Theme) {
       styleOverrides: {
         root: {
           padding: theme.spacing(3),
-          // '&.MuiDialogTitle-root+.css-dfihuu-MuiDialogContent-root': {
-          //   paddingTop: theme.spacing(3)
-          // },
         },
       },
     },

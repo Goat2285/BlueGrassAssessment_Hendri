@@ -32,17 +32,20 @@ type TableHead = {
 };
 
 export type RowProps = {
-  id: string;
-  practiseName: string;
-  phone: string;
-  email: string;
-  date: Date;
+  name?: string;
+  email?: string;
+  physicalAddress?: string;
+  practiceNumber?: string;
+  registrationNumber?: string;
   status: boolean;
+  telephone?: string;
+  id: number;
+  createDate: string;
 };
 
 interface Props extends CardProps {
   title?: string;
-  tableRows: RowProps[];
+  tableRows: RowProps[] | undefined;
   searchable: boolean;
   hasPagination: boolean;
   hasMore: boolean;
@@ -76,7 +79,7 @@ export default function PractisesTable({
 
   const isFiltered = filterPractiseName !== '';
 
-  const isNotFound = !dataFiltered.length && !!filterPractiseName;
+  const isNotFound = (!dataFiltered?.length && !!filterPractiseName) || !tableRows;
 
   const handleFilterPractiseName = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPage(0);
@@ -107,20 +110,20 @@ export default function PractisesTable({
                 order={order}
                 orderBy={orderBy}
                 headLabel={tableHeads}
-                rowCount={tableRows.length}
+                rowCount={tableRows?.length}
                 sx={{ borderRadius: 1 }}
               />
 
               <TableBody>
                 {dataFiltered
-                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((row) => (
                     <PractiseTableRow key={row.id} row={row} />
                   ))}
 
                 <TableEmptyRows
                   height={denseHeight}
-                  emptyRows={emptyRows(page, rowsPerPage, tableRows.length)}
+                  emptyRows={emptyRows(page, rowsPerPage, tableRows ? tableRows.length : 0)}
                 />
 
                 <TableNoData isNotFound={isNotFound} />
@@ -132,7 +135,7 @@ export default function PractisesTable({
 
       {hasPagination ? (
         <TablePaginationCustom
-          count={dataFiltered.length}
+          count={dataFiltered ? dataFiltered.length : 0}
           page={page}
           rowsPerPage={rowsPerPage}
           onPageChange={onChangePage}

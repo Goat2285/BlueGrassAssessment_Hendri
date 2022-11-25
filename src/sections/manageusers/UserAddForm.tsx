@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { usePostUser } from 'src/hooks/api/users/usePostUser';
 
-export type UserFormProps = {
+type UserFormProps = {
   email: string;
   fullname: string;
   role: string;

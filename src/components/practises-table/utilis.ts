@@ -1,27 +1,27 @@
-import { RowProps } from "./PractisesTable";
+import { RowProps } from './PractisesTable';
 
 export function applyFilter({
   inputData,
   comparator,
   filterPractiseName,
 }: {
-  inputData: RowProps[];
+  inputData: RowProps[] | undefined;
   comparator: (a: any, b: any) => number;
   filterPractiseName: string;
 }) {
-  const stabilizedThis = inputData.map((el, index) => [el, index] as const);
+  const stabilizedThis = inputData?.map((el, index) => [el, index] as const);
 
-  stabilizedThis.sort((a, b) => {
+  stabilizedThis?.sort((a, b) => {
     const order = comparator(a[0], b[0]);
     if (order !== 0) return order;
     return a[1] - b[1];
   });
 
-  inputData = stabilizedThis.map((el) => el[0]);
+  inputData = stabilizedThis?.map((el) => el[0]);
 
   if (filterPractiseName) {
-    inputData = inputData.filter(
-      (user) => user.practiseName.toLowerCase().indexOf(filterPractiseName.toLowerCase()) !== -1
+    inputData = inputData?.filter(
+      (user) => user.name?.toLowerCase().indexOf(filterPractiseName.toLowerCase()) !== -1
     );
   }
 

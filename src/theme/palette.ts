@@ -20,7 +20,6 @@ declare module '@mui/material/styles/createPalette' {
 
 // SETUP COLORS
 
-
 // Will need to replace these at some point, at the moment they are being used in to may components
 const GREY = {
   0: '#FFFFFF',
@@ -41,6 +40,7 @@ export const GREYS = {
   grey3: '#747474',
   grey4: '#BCBCBC',
   grey5: '#FAFAFA',
+  grey6: '#828282',
 };
 
 export const PRIMARY = {
@@ -55,7 +55,7 @@ export const PRIMARY = {
 export const CHART = {
   green: '#54D62C',
   orange: '#FF966B',
-  blue: '#1890FF'
+  blue: '#1890FF',
 };
 
 const SECONDARY = {

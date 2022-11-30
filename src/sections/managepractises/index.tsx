@@ -65,7 +65,7 @@ export default function ManagePractises() {
       <ConfirmDialog
         open={openDialog}
         onClose={handleCloseDialog}
-        title="Add Practice"
+        title="Add Practise"
         content={<PracticeAddForm closeDialog={handleCloseDialog} refetch={refetch} />}
       />
     </Stack>

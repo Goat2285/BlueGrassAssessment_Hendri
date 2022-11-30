@@ -55,7 +55,7 @@ export default function PracticeDeleteForm({ closeDialog, refetch, id }: Props) 
     <Box sx={{ width: '100%' }}>
       <FormProvider methods={methods}>
         <Typography variant="body1" sx={{ textAlign: 'center' }}>
-          Are you sure you want to delete this practice?
+          Are you sure you want to delete this practise?
         </Typography>
 
         <Stack direction={{ sm: 'column', md: 'row' }} spacing={2} sx={{ mt: 4 }}>

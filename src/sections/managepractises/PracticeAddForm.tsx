@@ -80,7 +80,7 @@ export default function PracticeAddForm({ closeDialog, refetch }: Props) {
     <Box sx={{ width: '100%' }}>
       <FormProvider methods={methods}>
         <Typography variant="h6" sx={{ textAlign: 'left !important' }}>
-          Practice Details
+          Practise Details
         </Typography>
         <Stack spacing={3} sx={{ pt: 2, mb: 3 }}>
           <RHFTextField name="name" label="Practise Name" />

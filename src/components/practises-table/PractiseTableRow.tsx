@@ -136,7 +136,7 @@ export default function PractiseTableRow({ row, refetch }: Props) {
       <ConfirmDialog
         open={isOpenEditDialog}
         onClose={handleCloseEditDialog}
-        title="Edit Practice"
+        title="Edit Practise"
         content={
           <PracticeEditForm
             closeDialog={handleCloseEditDialog}

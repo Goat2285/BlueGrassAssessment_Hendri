@@ -1,4 +1,5 @@
 import { axiosRequest } from 'src/services/axiosConfig';
+import { IUserResponse } from './getUsers';
 
 export interface IPutUserRequest {
   fullname: string;
@@ -11,9 +12,7 @@ export interface IPutUserWithId {
   putData: IPutUserRequest;
 }
 
-// After we have getUsers we need to swap any for IUserResponse
-
-export const putUser = async (updateData: IPutUserWithId): Promise<any> => {
+export const putUser = async (updateData: IPutUserWithId): Promise<IUserResponse> => {
   const { data } = await axiosRequest('PUT', `/api/Clinic/User/Update/${updateData.id}`, {
     data: updateData.putData,
   });

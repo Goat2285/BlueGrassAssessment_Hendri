@@ -1,12 +1,11 @@
 import { axiosRequest } from 'src/services/axiosConfig';
+import { IUserResponse } from './getUsers';
 
 export interface IDeleteUserRequest {
   id: number;
 }
 
-// When we have a getUsers that swap any with IUserResponse
-
-export const deleteUser = async (deleteData: IDeleteUserRequest): Promise<any> => {
+export const deleteUser = async (deleteData: IDeleteUserRequest): Promise<IUserResponse> => {
   const { data } = await axiosRequest('DELETE', `/api/Clinic/User/Delete/${deleteData.id}`, {
     data: deleteData.id,
   });

@@ -1,10 +1,9 @@
 import { useMutation, UseMutationOptions } from '@tanstack/react-query';
+import { IUserResponse } from 'src/services/api/users/getUsers';
 import { IPutUserWithId, putUser } from 'src/services/api/users/putUser';
 
-// After we have getUsers we need to swap any for IUserResponse
-
 type UsePutUserOptions = Omit<
-  UseMutationOptions<any, Error, IPutUserWithId, Array<string>>,
+  UseMutationOptions<IUserResponse, Error, IPutUserWithId, Array<string>>,
   'queryKey' | 'queryFn'
 >;
 

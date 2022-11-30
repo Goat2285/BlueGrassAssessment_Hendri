@@ -46,6 +46,7 @@ export default function Main({ children, sx, ...other }: BoxProps) {
       sx={{
         flexGrow: 1,
         py: `${HEADER.H_MOBILE + SPACING}px`,
+        minHeight: '100vh',
         ...(isDesktop && {
           px: 2,
           py: `${HEADER.H_DASHBOARD_DESKTOP + SPACING}px`,

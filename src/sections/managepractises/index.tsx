@@ -32,10 +32,7 @@ export default function ManagePractises() {
   };
 
   const refetch = () => {
-    console.log('refetch');
-
     queryClient.refetchQueries(['getPractices']);
-    console.log(practices);
   };
 
   return (

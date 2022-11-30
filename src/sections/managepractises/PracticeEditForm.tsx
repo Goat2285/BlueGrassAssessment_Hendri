@@ -4,9 +4,10 @@ import FormProvider, { RHFTextField } from '../../components/hook-form';
 import { useSnackbar } from '../../components/snackbar';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { usePostPractice } from 'src/hooks/api/practices/usePostPractice';
+import { usePutPractice } from 'src/hooks/api/practices/usePutPractice';
 
 type PracticeFormProps = {
+  id: number;
   name: string;
   practiceNumber?: string;
   registrationNumber?: string;
@@ -14,16 +15,33 @@ type PracticeFormProps = {
   email: string;
   telephone: string;
   status: boolean;
-  adminFullname: string;
-  adminEmail: string;
 };
 
 type Props = {
+  id: number;
+  name?: string;
+  practiceNumber?: string;
+  registrationNumber?: string;
+  physicalAddress?: string;
+  email?: string;
+  telephone?: string;
+  status: boolean;
   closeDialog: () => void;
   refetch: () => void;
 };
 
-export default function PracticeAddForm({ closeDialog, refetch }: Props) {
+export default function PracticeEditForm({
+  closeDialog,
+  refetch,
+  id,
+  name,
+  practiceNumber,
+  registrationNumber,
+  physicalAddress,
+  email,
+  telephone,
+  status,
+}: Props) {
   const phoneRegex = /^\+[1-9]{1}[0-9 | \s]{3,14}$/;
 
   const schema = Yup.object().shape({
@@ -34,34 +52,29 @@ export default function PracticeAddForm({ closeDialog, refetch }: Props) {
       .trim()
       .matches(phoneRegex, 'Please use the following format: +27 72 000 0000')
       .required('Contact number is required'),
-    adminFullname: Yup.string().required('Admin name is required'),
-    adminEmail: Yup.string()
-      .email('Email must be a valid email address')
-      .required('Admin email is required'),
   });
 
   const { enqueueSnackbar } = useSnackbar();
 
-  const { mutate: postSubmit } = usePostPractice({
+  const { mutate: updateSubmit } = usePutPractice({
     onSuccess: () => {
       refetch();
-      enqueueSnackbar('Practise has been added!');
+      enqueueSnackbar('Practise has been updated!');
     },
     onError: () => {
-      enqueueSnackbar('Error, practise not added!', { variant: 'error' });
+      enqueueSnackbar('Error, practise not updated!', { variant: 'error' });
     },
   });
 
   const defaultValues = {
-    name: '',
-    practiceNumber: '',
-    registrationNumber: '',
-    physicalAddress: '',
-    email: '',
-    telephone: '',
-    status: false,
-    adminFullname: '',
-    adminEmail: '',
+    id: id,
+    name: name,
+    practiceNumber: practiceNumber || '',
+    registrationNumber: registrationNumber || '',
+    physicalAddress: physicalAddress,
+    email: email,
+    telephone: telephone,
+    status: status,
   };
 
   const methods = useForm<PracticeFormProps>({
@@ -72,7 +85,18 @@ export default function PracticeAddForm({ closeDialog, refetch }: Props) {
   const { handleSubmit } = methods;
 
   const onSubmit = (data: PracticeFormProps) => {
-    postSubmit(data);
+    updateSubmit({
+      id: data.id,
+      putData: {
+        name: data.name,
+        practiceNumber: data.practiceNumber || '',
+        registrationNumber: data.registrationNumber || '',
+        physicalAddress: data.physicalAddress,
+        email: data.email,
+        telephone: data.telephone,
+        status: data.status,
+      },
+    });
     closeDialog();
   };
 
@@ -90,13 +114,6 @@ export default function PracticeAddForm({ closeDialog, refetch }: Props) {
           <RHFTextField name="email" label="Email" />
           <RHFTextField name="telephone" label="Contact Number" />
         </Stack>
-        <Typography variant="h6" sx={{ textAlign: 'left !important' }}>
-          Admin User
-        </Typography>
-        <Stack spacing={3} sx={{ pt: 2, mb: 4 }}>
-          <RHFTextField name="adminFullname" label="Name" />
-          <RHFTextField name="adminEmail" label="Email" />
-        </Stack>
         <Stack direction={{ sm: 'column', md: 'row' }} spacing={2}>
           <Button variant="outlined" onClick={closeDialog} size={'large'} sx={{ flex: 1 }}>
             Cancel
@@ -107,7 +124,7 @@ export default function PracticeAddForm({ closeDialog, refetch }: Props) {
             size={'large'}
             sx={{ flex: 1, mt: { xs: 2 } }}
           >
-            Add Practise
+            Edit Practise
           </Button>
         </Stack>
       </FormProvider>

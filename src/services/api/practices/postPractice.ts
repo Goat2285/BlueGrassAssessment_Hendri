@@ -9,7 +9,7 @@ export interface IPostPracticeRequest {
   email: string;
   telephone: string;
   status: boolean;
-  adminUserName: string;
+  adminFullname: string;
   adminEmail: string;
 }
 

@@ -32,7 +32,10 @@ export default function ManagePractises() {
   };
 
   const refetch = () => {
+    console.log('refetch');
+
     queryClient.refetchQueries(['getPractices']);
+    console.log(practices);
   };
 
   return (
@@ -59,6 +62,7 @@ export default function ManagePractises() {
         hasPagination={true}
         hasMore={false}
         tableHeads={TABLE_HEAD}
+        refetch={refetch}
       />
 
       <ConfirmDialog

@@ -3,7 +3,6 @@ import { Helmet } from 'react-helmet-async';
 import { Container, Typography } from '@mui/material';
 // components
 import { useSettingsContext } from '../components/settings';
-import PatientProfile from 'src/sections/patientprofile';
 
 // ----------------------------------------------------------------------
 
@@ -17,10 +16,9 @@ export default function LogsPage() {
       </Helmet>
 
       <Container maxWidth={themeStretch ? false : 'xl'}>
-        {/* <Typography variant="h3" component="h1" paragraph>
+        <Typography variant="h3" component="h1" paragraph>
           Logs Page
-        </Typography> */}
-        <PatientProfile />
+        </Typography>
       </Container>
     </>
   );

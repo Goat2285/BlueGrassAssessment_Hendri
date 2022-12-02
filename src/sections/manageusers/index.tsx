@@ -153,7 +153,12 @@ export default function ManageUsers() {
                     {dataFiltered
                       ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                       .map((row) => (
-                        <UserTableRow key={row.id} row={row} />
+                        <UserTableRow
+                          key={row.id}
+                          row={row}
+                          handleRefetch={refetch}
+                          allRoles={roles}
+                        />
                       ))}
 
                     <TableEmptyRows

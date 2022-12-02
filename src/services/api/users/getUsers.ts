@@ -1,9 +1,11 @@
-import { axiosRequest } from '../../axiosConfig';
+import { axiosRequest } from 'src/services/axiosConfig';
+
+// We need id, avatar in schema so we can update and delete user - waitnig on Enkosi to implement that
 
 export interface IUserResponse {
   id: number;
   avatar?: string;
-  name: string;
+  fullname: string;
   userName: string;
   email: string;
   createDate: string;

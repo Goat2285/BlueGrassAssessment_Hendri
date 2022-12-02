@@ -76,14 +76,7 @@ export default function PractiseTableRow({ row, refetch }: Props) {
   const { handleSubmit } = methods;
 
   const onChange = async (data: FormValuesProps) => {
-    try {
-      await new Promise((resolve) => setTimeout(resolve, 200));
-      enqueueSnackbar('Update success!');
-      console.log(data);
-      setActive(data.status);
-    } catch (error) {
-      console.error(error);
-    }
+    postSubmit(data);
   };
 
   return (

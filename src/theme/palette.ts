@@ -43,13 +43,19 @@ export const GREYS = {
   grey6: '#828282',
 };
 
-const PRIMARY = {
-  lighter: '#E4F7F9',
-  light: '#7CD1DD',
+export const PRIMARY = {
+  lighter: '#dfeaec',
+  light: '#9FC0C6',
   main: '#67ADB9',
   dark: '#5F97A0',
-  darker: '#578388',
-  contrastText: '#ffffff',
+  darker: '#005249',
+  contrastText: '#fff',
+};
+
+export const CHART = {
+  green: '#54D62C',
+  orange: '#FF966B',
+  blue: '#1890FF',
 };
 
 const SECONDARY = {

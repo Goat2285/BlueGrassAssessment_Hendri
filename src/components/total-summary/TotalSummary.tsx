@@ -1,12 +1,10 @@
 import { alpha, Box, Card, CardProps, Stack, Typography } from '@mui/material';
 import React from 'react';
-import {
-  BabyCarriageIllustration,
-  BulbIllustration,
-  ConsentsIllustration,
-  StethoscopeIllustration,
-  TreatmentsIllustration,
-} from 'src/assets/illustrations';
+import BabyCarriageIllustration from 'src/assets/illustrations/BabyCarriageIllustration';
+import BulbIllustration from 'src/assets/illustrations/BulbIllustration';
+import ConsentsIllustration from 'src/assets/illustrations/ConsentsIllustration';
+import StethoscopeIllustration from 'src/assets/illustrations/StethoscopeIllustration';
+import TreatmentsIllustration from 'src/assets/illustrations/TreatmentsIllustration';
 import Iconify from 'src/components/iconify';
 import { fNumber, fPercent } from 'src/utils/formatNumber';
 

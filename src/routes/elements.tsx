@@ -29,6 +29,9 @@ export const MyProfilePage = Loadable(lazy(() => import('../pages/MyProfilePage'
 export const ManageUsersPage = Loadable(lazy(() => import('../pages/ManageUsersPage')));
 export const ManagePatientsPage = Loadable(lazy(() => import('../pages/ManagePatientsPage')));
 export const LogsPage = Loadable(lazy(() => import('../pages/LogsPage')));
+export const SuperAdminDashboardPage = Loadable(
+  lazy(() => import('../pages/SuperAdminDashboardPage'))
+);
 export const ManagePractisesPage = Loadable(lazy(() => import('../pages/ManagePractisesPage')));
 
 // Other

@@ -10,9 +10,14 @@ import { IconButtonAnimate } from 'src/components/animate';
 import FormProvider, { RHFSwitch } from '../hook-form';
 import { useSnackbar } from '../snackbar';
 import { useState } from 'react';
+import ConfirmDialog from '../confirm-dialog';
+import PracticeDeleteForm from 'src/sections/managepractises/PracticeDeleteForm';
+import { usePostStatus } from 'src/hooks/api/practices/usePostStatus';
+import PracticeEditForm from 'src/sections/managepractises/PracticeEditForm';
 
 type Props = {
   row: RowProps;
+  refetch: () => void;
 };
 
 type FormValuesProps = {
@@ -24,24 +29,48 @@ type FormValuesProps = {
   status: boolean;
 };
 
-export default function PractiseTableRow({ row }: Props) {
+export default function PractiseTableRow({ row, refetch }: Props) {
   const { id, name, telephone, email, createDate, status } = row;
 
-  const [active, setActive] = useState(status);
+  const [isOpenEditDialog, setIsOpenEditDialog] = useState(false);
+
+  const [isOpenDeleteDialog, setIsOpenDeleteDialog] = useState(false);
+
+  const handleOpenEditDialog = () => {
+    setIsOpenEditDialog(true);
+  };
+
+  const handleOpenDeleteDialog = () => {
+    setIsOpenDeleteDialog(true);
+  };
+
+  const handleCloseEditDialog = () => {
+    setIsOpenEditDialog(false);
+  };
+
+  const handleCloseDeleteDialog = () => {
+    setIsOpenDeleteDialog(false);
+  };
 
   const { enqueueSnackbar } = useSnackbar();
 
   const defaultValues = {
     id: id,
-    name: name,
-    telephone: telephone,
-    email: email,
-    createDate: createDate,
     status: status,
   };
 
   const methods = useForm<FormValuesProps>({
     defaultValues,
+  });
+
+  const { mutate: postSubmit } = usePostStatus({
+    onSuccess: () => {
+      refetch();
+      enqueueSnackbar('Status has been changed!');
+    },
+    onError: () => {
+      enqueueSnackbar('Error, status not changed!', { variant: 'error' });
+    },
   });
 
   const { handleSubmit } = methods;
@@ -92,21 +121,58 @@ export default function PractiseTableRow({ row }: Props) {
 
         <TableCell align="left">
           <FormProvider methods={methods} onChange={handleSubmit(onChange)}>
-            <RHFSwitch name="status" labelPlacement="end" label={active ? 'Active' : 'Disabled'} />
+            <RHFSwitch name="status" labelPlacement="end" label={status ? 'Active' : 'Disabled'} />
           </FormProvider>
         </TableCell>
 
         <TableCell align="right">
           <Typography component="div" noWrap>
-            <IconButtonAnimate sx={{ color: 'primary.main' }}>
+            <IconButtonAnimate sx={{ color: 'primary.main' }} onClick={handleOpenEditDialog}>
               <Iconify icon="ri:edit-line" />
             </IconButtonAnimate>
-            <IconButtonAnimate sx={{ color: 'primary.main', ml: 0.5 }}>
+            <IconButtonAnimate
+              sx={{ color: 'primary.main', ml: 0.5 }}
+              onClick={handleOpenDeleteDialog}
+            >
               <Iconify icon="eva:trash-2-outline" />
             </IconButtonAnimate>
           </Typography>
         </TableCell>
       </TableRow>
+
+      <ConfirmDialog
+        open={isOpenEditDialog}
+        onClose={handleCloseEditDialog}
+        title="Edit Practise"
+        content={
+          <PracticeEditForm
+            closeDialog={handleCloseEditDialog}
+            refetch={refetch}
+            id={row.id}
+            name={row.name}
+            email={row.email}
+            practiceNumber={row.practiceNumber}
+            registrationNumber={row.registrationNumber}
+            physicalAddress={row.physicalAddress}
+            telephone={row.telephone}
+            status={row.status}
+          />
+        }
+      />
+
+      <ConfirmDialog
+        open={isOpenDeleteDialog}
+        onClose={handleCloseDeleteDialog}
+        sx={{
+          '& .MuiDialogContent-root': {
+            paddingTop: '8px !important',
+          },
+        }}
+        title="Confirm Delete?"
+        content={
+          <PracticeDeleteForm id={id} closeDialog={handleCloseDeleteDialog} refetch={refetch} />
+        }
+      />
     </>
   );
 }

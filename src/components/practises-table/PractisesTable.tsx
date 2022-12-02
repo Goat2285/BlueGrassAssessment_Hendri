@@ -50,6 +50,7 @@ interface Props extends CardProps {
   hasPagination: boolean;
   hasMore: boolean;
   tableHeads: TableHead[];
+  refetch: () => void;
 }
 
 export default function PractisesTable({
@@ -59,6 +60,7 @@ export default function PractisesTable({
   hasPagination,
   hasMore,
   tableHeads,
+  refetch,
   sx,
   ...other
 }: Props) {
@@ -118,7 +120,7 @@ export default function PractisesTable({
                 {dataFiltered
                   ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((row) => (
-                    <PractiseTableRow key={row.id} row={row} />
+                    <PractiseTableRow key={row.id} row={row} refetch={refetch} />
                   ))}
 
                 <TableEmptyRows

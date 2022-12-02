@@ -27,6 +27,7 @@ const CustomAvatar = forwardRef<HTMLDivElement, CustomAvatarProps>(
             color: theme.palette[colr]?.contrastText,
             backgroundColor: theme.palette[colr]?.main,
             fontWeight: theme.typography.fontWeightMedium,
+            fontSize: 14,
             ...sx,
           }}
           {...other}
@@ -56,6 +57,8 @@ export default CustomAvatar;
 
 function getColorByName(name: string) {
   const character = (name: string) => name && name.charAt(0).toUpperCase();
+  const initials = (name: string) =>
+    `${name && name.charAt(0).toUpperCase()}${name && name.split(' ')[1].charAt(0).toUpperCase()}`;
 
   const colorByName = (name: string) => {
     if (['A', 'N', 'H', 'L', 'Q'].includes(character(name))) return 'primary';
@@ -67,7 +70,7 @@ function getColorByName(name: string) {
   };
 
   return {
-    name: character(name),
+    name: initials(name),
     color: colorByName(name),
   } as const;
 }

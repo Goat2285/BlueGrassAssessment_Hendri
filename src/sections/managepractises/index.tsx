@@ -59,12 +59,13 @@ export default function ManagePractises() {
         hasPagination={true}
         hasMore={false}
         tableHeads={TABLE_HEAD}
+        refetch={refetch}
       />
 
       <ConfirmDialog
         open={openDialog}
         onClose={handleCloseDialog}
-        title="Add Practice"
+        title="Add Practise"
         content={<PracticeAddForm closeDialog={handleCloseDialog} refetch={refetch} />}
       />
     </Stack>

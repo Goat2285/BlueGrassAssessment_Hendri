@@ -92,7 +92,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
   
     await axios.get('/api/Account/LoggedInStatus')
     .then(res => {
-      console.log(res)
+      console.log('s',res)
       const isLoggedIn = res?.data?.isLoggedIn
       if (isLoggedIn) {
         dispatch({

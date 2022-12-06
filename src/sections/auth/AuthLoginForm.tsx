@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import * as Yup from 'yup';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Link, Stack, Alert, IconButton, InputAdornment, Button } from '@mui/material';
+import { Link, Stack, Alert, IconButton, InputAdornment } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 import Iconify from '../../components/iconify';
 import FormProvider, { RHFTextField, RHFCheckbox } from '../../components/hook-form';
@@ -52,8 +52,8 @@ export default function AuthLoginForm() {
   const { isError, isSuccess, data, error, refetch, isFetching } = useLogin(values);
 
   useEffect(() => {
-    if(isError) {
-      const { errors }  = parseAxiosError(error);
+    if(isError && error) {
+      const  errors  = parseAxiosError(error);
       if (errors?.length > 0) {
         if (errors[0]?.toString() === 'Member is locked out') {
           reset();
@@ -69,13 +69,17 @@ export default function AuthLoginForm() {
           });
         }
        }
-    }  
+     } else if(isError) {
+        setError('afterSubmit', {
+          message: "An error has occured while submitting please try again",
+        });
+    }
   }, [isError])
 
   useEffect(() => {
-    console.log(data)
+    console.log('login success user data', data?.data)
     if (isSuccess) {
-      login({ user: data });
+      login({ user: data?.data });
       navigate('/dashboard');
     }
   },[isSuccess])

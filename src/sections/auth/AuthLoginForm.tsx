@@ -1,61 +1,87 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import * as Yup from 'yup';
-// form
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-// @mui
 import { Link, Stack, Alert, IconButton, InputAdornment, Button } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
-// auth
-import { useAuthContext } from '../../auth/useAuthContext';
-// components
 import Iconify from '../../components/iconify';
 import FormProvider, { RHFTextField, RHFCheckbox } from '../../components/hook-form';
 
-// ----------------------------------------------------------------------
+import { useAuthContext } from '../../auth/useAuthContext';
+import { useLogin } from '../../hooks/api/auth/useLogin';
 
 import { useNavigate } from 'react-router-dom';
+import { parseAxiosError } from 'src/utils/parseAxiosError';
 
 type FormValuesProps = {
   email: string;
   password: string;
-  rememberMe?: boolean;
-  redirectUrl?: string;
+  rememberMe: boolean;
   afterSubmit?: string;
 };
 
 export default function AuthLoginForm() {
-  const { login } = useAuthContext();
   const navigate = useNavigate();
-
   const [showPassword, setShowPassword] = useState(false);
+  const { login } = useAuthContext();
+
+  const defaultValues = {
+    rememberMe: false,
+  };
 
   const LoginSchema = Yup.object().shape({
-    email: Yup.string().email('Email must be a valid email address').required('Email is required'),
+    username: Yup.string().email('Email must be a valid email address').required('Email is required'),
     password: Yup.string().required('Password is required'),
   });
 
   const methods = useForm<FormValuesProps>({
-    resolver: yupResolver(LoginSchema)
+    resolver: yupResolver(LoginSchema),
+    defaultValues
   });
 
   const {
     reset,
     setError,
     handleSubmit,
-    formState: { errors, isSubmitting, isSubmitSuccessful },
+    watch,
+    formState: { errors },
   } = methods;
 
-  const onSubmit = async (data: FormValuesProps) => {
-    try {
-      // await login(data.email, data.password, data.rememberMe = false, data.redirectUrl = './');
-    } catch (error) {
-      reset();
-      setError('afterSubmit', {
-        ...error,
-        message: error.message,
-      });
+  const values = watch();
+
+  const { isError, isSuccess, data, error, refetch, isFetching } = useLogin(values);
+
+  useEffect(() => {
+    if(isError) {
+      const { errors }  = parseAxiosError(error);
+      if (errors?.length > 0) {
+        if (errors[0]?.toString() === 'Member is locked out') {
+          reset();
+          navigate('/auth/disabled');
+        }
+        setError('afterSubmit', {
+          message: errors.join(' '),
+        });
+      } else {
+        if(isError) {
+          setError('afterSubmit', {
+            message: "An error has occured while submitting please try again",
+          });
+        }
+       }
+    }  
+  }, [isError])
+
+  useEffect(() => {
+    console.log(data)
+    if (isSuccess) {
+      login({ user: data });
+      navigate('/dashboard');
     }
+  },[isSuccess])
+
+  const onSubmit = async (data: FormValuesProps) => {
+    refetch();
   };
 
   return (
@@ -63,7 +89,7 @@ export default function AuthLoginForm() {
       <Stack spacing={3}>
         {!!errors.afterSubmit && <Alert severity="error">{errors.afterSubmit.message}</Alert>}
 
-        <RHFTextField name="email" label="Email address" />
+        <RHFTextField name="username" label="Email address" />
 
         <RHFTextField
           name="password"
@@ -94,7 +120,7 @@ export default function AuthLoginForm() {
         size="large"
         type="submit"
         variant="contained"
-        loading={isSubmitSuccessful || isSubmitting}
+        loading={isFetching}
         sx={{
           bgcolor: 'primary.main',
           color: (theme) => (theme.palette.mode === 'light' ? 'common.white' : 'grey.800'),
@@ -106,14 +132,6 @@ export default function AuthLoginForm() {
       >
         Sign in
       </LoadingButton>
-
-
-      <Button variant="text" onClick={()=>{
-        navigate('/auth/disabled');
-      }}>Go to Disabled screen</Button>
-      <Button variant="text" onClick={()=>{
-        navigate('/auth/updatepassword');
-      }}>Go to updatepassword screen</Button>
     </FormProvider>
   );
 }

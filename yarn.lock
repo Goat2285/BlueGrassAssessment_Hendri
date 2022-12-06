@@ -2617,17 +2617,33 @@
     "@svgr/plugin-jsx" "^6.4.0"
     "@svgr/plugin-svgo" "^6.3.1"
 
-"@tanstack/query-core@4.14.1":
-  "integrity" "sha512-mUejKoFDe4NZB8jQJR1uuAl6IwvkUpOD2m8NcuTVPOu0pcxeeFPdrnHaljwOEFPtlqXoiiIIQGYy6whjCMN+iQ=="
-  "resolved" "https://registry.npmjs.org/@tanstack/query-core/-/query-core-4.14.1.tgz"
-  "version" "4.14.1"
-
-"@tanstack/react-query@^4.14.1":
-  "integrity" "sha512-cRgNzigw4GSPwGlTEkXi8hi/xgUnSEt9jCkiC8oAT3PEIdsQ50onZcpXd+JNJcZk2RTh8KM1fGyWz6xYLiY8bg=="
-  "resolved" "https://registry.npmjs.org/@tanstack/react-query/-/react-query-4.14.1.tgz"
-  "version" "4.14.1"
+"@tanstack/match-sorter-utils@^8.7.0":
+  "integrity" "sha512-OgfIPMHTfuw9JGcXCCoEHWFP/eSP2eyhCYwkrFnWBM3NbUPAgOlFP11DbM7cozDRVB0XbPr1tD4pLAtWKlVUVg=="
+  "resolved" "https://registry.npmjs.org/@tanstack/match-sorter-utils/-/match-sorter-utils-8.7.0.tgz"
+  "version" "8.7.0"
   dependencies:
-    "@tanstack/query-core" "4.14.1"
+    "remove-accents" "0.4.2"
+
+"@tanstack/query-core@4.19.1":
+  "integrity" "sha512-Zp0aIose5C8skBzqbVFGk9HJsPtUhRVDVNWIqVzFbGQQgYSeLZMd3Sdb4+EnA5wl1J7X+bre2PJGnQg9x/zHOA=="
+  "resolved" "https://registry.npmjs.org/@tanstack/query-core/-/query-core-4.19.1.tgz"
+  "version" "4.19.1"
+
+"@tanstack/react-query-devtools@^4.19.1":
+  "integrity" "sha512-U63A+ly9JLPJj7ryR9omdXT3n+gS7jlExrHty4klsd/6xdUhC38CKZyZ0Gi3vctaVYRGTU8/vI+uKzBYdFqLaA=="
+  "resolved" "https://registry.npmjs.org/@tanstack/react-query-devtools/-/react-query-devtools-4.19.1.tgz"
+  "version" "4.19.1"
+  dependencies:
+    "@tanstack/match-sorter-utils" "^8.7.0"
+    "superjson" "^1.10.0"
+    "use-sync-external-store" "^1.2.0"
+
+"@tanstack/react-query@^4.14.1", "@tanstack/react-query@4.19.1":
+  "integrity" "sha512-5dvHvmc0vrWI03AJugzvKfirxCyCLe+qawrWFCXdu8t7dklIhJ7D5ZhgTypv7mMtIpdHPcECtCiT/+V74wCn2A=="
+  "resolved" "https://registry.npmjs.org/@tanstack/react-query/-/react-query-4.19.1.tgz"
+  "version" "4.19.1"
+  dependencies:
+    "@tanstack/query-core" "4.19.1"
     "use-sync-external-store" "^1.2.0"
 
 "@tootallnate/once@1":
@@ -2790,6 +2806,11 @@
   "version" "3.0.1"
   dependencies:
     "@types/istanbul-lib-report" "*"
+
+"@types/js-cookie@^3.0.2":
+  "integrity" "sha512-6+0ekgfusHftJNYpihfkMu8BWdeHs9EOJuGcSofErjstGPfPGEu9yTu4t460lTzzAMl2cM5zngQJqPMHbbnvYA=="
+  "resolved" "https://registry.npmjs.org/@types/js-cookie/-/js-cookie-3.0.2.tgz"
+  "version" "3.0.2"
 
 "@types/json-schema@*", "@types/json-schema@^7.0.4", "@types/json-schema@^7.0.5", "@types/json-schema@^7.0.8", "@types/json-schema@^7.0.9":
   "integrity" "sha512-qcUXuemtEu+E5wZSJHNxUXeCZhAfXKQ41D+duX+VYPde7xyEVZci+/oXKJL13tnRs9lR2pr4fod59GT6/X1/yQ=="
@@ -4249,6 +4270,13 @@
   "integrity" "sha512-aSWTXFzaKWkvHO1Ny/s+ePFpvKsPnjc551iI41v3ny/ow6tBG5Vd+FuqGNhh1LxOmVzOlGUriIlOaokOvhaStA=="
   "resolved" "https://registry.npmjs.org/cookie/-/cookie-0.4.2.tgz"
   "version" "0.4.2"
+
+"copy-anything@^3.0.2":
+  "integrity" "sha512-fpW2W/BqEzqPp29QS+MwwfisHCQZtiduTe/m8idFo0xbti9fIZ2WVhAsCv4ggFVH3AgCkVdpoOCtQC6gBrdhjw=="
+  "resolved" "https://registry.npmjs.org/copy-anything/-/copy-anything-3.0.3.tgz"
+  "version" "3.0.3"
+  dependencies:
+    "is-what" "^4.1.8"
 
 "core-js-compat@^3.20.2", "core-js-compat@^3.21.0", "core-js-compat@^3.25.1":
   "integrity" "sha512-ovcyhs2DEBUIE0MGEKHP4olCUW/XYte3Vroyxuh38rD1wAO4dHohsovUC4eAOuzFxE6b+RXvBU3UZ9o0YhUTkA=="
@@ -6354,6 +6382,11 @@
   dependencies:
     "call-bind" "^1.0.2"
 
+"is-what@^4.1.8":
+  "integrity" "sha512-yq8gMao5upkPoGEU9LsB2P+K3Kt8Q3fQFCGyNCWOAnJAMzEXVV9drYb0TXr42TTliLLhKIBvulgAXgtLLnwzGA=="
+  "resolved" "https://registry.npmjs.org/is-what/-/is-what-4.1.8.tgz"
+  "version" "4.1.8"
+
 "is-wsl@^2.2.0":
   "integrity" "sha512-fKzAra0rGJUUBwGBgNkHZuToZcn+TtXHpeCgmkMJMMYx1sQDYaCSyjJBSCa2nH1DGm7s3n1oBnohoVTBaN7Lww=="
   "resolved" "https://registry.npmjs.org/is-wsl/-/is-wsl-2.2.0.tgz"
@@ -6849,6 +6882,11 @@
     "@jest/core" "^27.5.1"
     "import-local" "^3.0.2"
     "jest-cli" "^27.5.1"
+
+"js-cookie@^3.0.1":
+  "integrity" "sha512-+0rgsUXZu4ncpPxRL+lNEptWMOWl9etvPHc/koSRp6MPwpRYAhmk0dUG00J4bxVV3r9uUzfo24wW0knS07SKSw=="
+  "resolved" "https://registry.npmjs.org/js-cookie/-/js-cookie-3.0.1.tgz"
+  "version" "3.0.1"
 
 "js-sdsl@^4.1.4":
   "integrity" "sha512-08bOAKweV2NUC1wqTtf3qZlnpOX/R2DU9ikpjOHs0H+ibQv3zpncVQg6um4uYtRtrwIX8M4Nh3ytK4HGlYAq7Q=="
@@ -8832,6 +8870,11 @@
   "resolved" "https://registry.npmjs.org/remove-accents/-/remove-accents-0.4.3.tgz"
   "version" "0.4.3"
 
+"remove-accents@0.4.2":
+  "integrity" "sha512-7pXIJqJOq5tFgG1A2Zxti3Ht8jJF337m4sowbuHsW30ZnkQFnDzy9qBNhgzX8ZLW4+UBcXiiR7SwR6pokHsxiA=="
+  "resolved" "https://registry.npmjs.org/remove-accents/-/remove-accents-0.4.2.tgz"
+  "version" "0.4.2"
+
 "renderkid@^3.0.0":
   "integrity" "sha512-q/7VIQA8lmM1hF+jn+sFSPWGlMkSAeNYcPLmDQx2zzuiDfaLrOmumR8iaUKlenFgh0XRPIUeSPlH3A+AW3Z5pg=="
   "resolved" "https://registry.npmjs.org/renderkid/-/renderkid-3.0.0.tgz"
@@ -9552,6 +9595,13 @@
   "integrity" "sha512-xGPXiFVl4YED9Jh7Euv2V220mriG9u4B2TA6Ybjc1catrstKD2PpIdU3U0RKpkVBC2EhmL/F0sPCr9vrFTNRag=="
   "resolved" "https://registry.npmjs.org/stylis/-/stylis-4.0.13.tgz"
   "version" "4.0.13"
+
+"superjson@^1.10.0":
+  "integrity" "sha512-6PfAg1FKhqkwWvPb2uXhH4MkMttdc17eJ91+Aoz4s1XUEDZFmLfFx/xVA3wgkPxAGy5dpozgGdK6V/n20Wj9yg=="
+  "resolved" "https://registry.npmjs.org/superjson/-/superjson-1.11.0.tgz"
+  "version" "1.11.0"
+  dependencies:
+    "copy-anything" "^3.0.2"
 
 "supports-color@^5.3.0":
   "integrity" "sha512-QjVjwdXIt408MIiAqCX4oUKsgU2EqAGzs2Ppkm4aQYbjm+ZEWEcW4SfFNTr4uMNZma0ey4f5lgLrkB0aX0QMow=="

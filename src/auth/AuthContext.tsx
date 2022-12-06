@@ -1,17 +1,16 @@
 import { createContext, useEffect, useReducer, useCallback } from 'react';
-// utils
 import axios from '../utils/axios';
-//
 import { isValidToken, setSession } from './utils';
-import { ActionMapType, AuthStateType, AuthUserType, JWTContextType } from './types';
+import { ActionMapType, AuthStateType, AuthUserType, ILoginReponse, ILoginRequest, JWTContextType } from './types';
+import { axiosRequest } from 'src/services/axiosConfig';
+import { useQuery, UseQueryResult } from "@tanstack/react-query";
 
-// ----------------------------------------------------------------------
+const UMBRACO_COOKIE_NAME = '.AspNetCore.Identity.Application';
 
-// NOTE:
-// We only build demo at basic level.
-// Customer will need to do some extra handling yourself if you want to extend the logic and other features...
+// Auth Login
+const login = (data: any) => axiosRequest('POST', '/api/Account/SignIn', { data });
 
-// ----------------------------------------------------------------------
+export const useLogin = () => useQuery(['loginUser'], login, { enabled: false, retry: false, cacheTime: 0 })
 
 enum Types {
   INITIAL = 'INITIAL',
@@ -90,21 +89,17 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const initialize = useCallback(async () => {
-    try {
-      const accessToken = typeof window !== 'undefined' ? localStorage.getItem('accessToken') : '';
-
-      if (accessToken && isValidToken(accessToken)) {
-        setSession(accessToken);
-
-        const response = await axios.get('/api/account/my-account');
-
-        const { user } = response.data;
-
+  
+    await axios.get('/api/Account/LoggedInStatus')
+    .then(res => {
+      console.log(res)
+      const isLoggedIn = res?.data?.isLoggedIn
+      if (isLoggedIn) {
         dispatch({
           type: Types.INITIAL,
           payload: {
             isAuthenticated: true,
-            user,
+            user: null,
           },
         });
       } else {
@@ -116,8 +111,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
           },
         });
       }
-    } catch (error) {
-      console.error(error);
+    }).catch(err => {
+      console.warn(err)
       dispatch({
         type: Types.INITIAL,
         payload: {
@@ -125,7 +120,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
           user: null,
         },
       });
-    }
+    });
   }, []);
 
   useEffect(() => {
@@ -133,16 +128,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
   }, [initialize]);
 
   // LOGIN
-  const login = async (email: string, password: string, rememberMe: boolean, redirectUrl: string) => {
-    const response = await axios.post('/SignIn', {
-      email,
-      password,
-      rememberMe
-    });
-    const { accessToken, user } = response.data;
-
-    setSession(accessToken);
-
+  const login = async (user: any) => {
     dispatch({
       type: Types.LOGIN,
       payload: {
@@ -173,7 +159,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   // LOGOUT
   const logout = async () => {
-    setSession(null);
+    axios.post('/api/Account/SignOut')
     dispatch({
       type: Types.LOGOUT,
     });
@@ -185,9 +171,6 @@ export function AuthProvider({ children }: AuthProviderProps) {
         ...state,
         method: 'jwt',
         login,
-        loginWithGoogle: () => {},
-        loginWithGithub: () => {},
-        loginWithTwitter: () => {},
         logout,
         register,
       }}

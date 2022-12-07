@@ -1,10 +1,14 @@
 import { Typography, Button, Box } from "@mui/material";
 import Image from '../../components/image';
 import { useNavigate } from 'react-router-dom';
-import { ForgotpasswordFormProps } from './forgotpasswordform';
+import { ForgotpasswordFormProps } from "./forgotpasswordform";
+import { useSnackbar } from "src/components/snackbar";
 
-export default function ForgotPassWordStep2({ handleSubmit, onSubmit, methods, errors, isSubmitting, isSubmitSuccessful }: ForgotpasswordFormProps){
+
+export default function ForgotPassWordStep2({ onSubmit }: ForgotpasswordFormProps){
   const navigate = useNavigate();
+  const { enqueueSnackbar } = useSnackbar();
+  
   return (
     <>
       <Image
@@ -35,7 +39,9 @@ export default function ForgotPassWordStep2({ handleSubmit, onSubmit, methods, e
         <Button 
           variant="text" 
           color="inherit"         
-          sx={{ cursor: "pointer", color: 'primary.dark', fontWeight: 'bold' }}>
+          sx={{ cursor: "pointer", color: 'primary.dark', fontWeight: 'bold' }}
+          onClick={()=>{onSubmit(); enqueueSnackbar('Email sent!');}}
+          >
             Resend Email
         </Button>
       </Typography>

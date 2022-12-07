@@ -10,7 +10,6 @@ import { useUpdatePasswordWithToken } from '../../hooks/api/auth/useUpdatePasswo
 import { parseAxiosError } from 'src/utils/parseAxiosError';
 
 const PASSWORDREGEX = /(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*])(?=.*[0-9])\w+/g
-const PASSWORDREGEXTEMP = /(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])\w+/g
 
 export default function UpdatePassword() {
 
@@ -42,7 +41,7 @@ export default function UpdatePassword() {
 
   const  UpdatePasswordSchema = Yup.object().shape({
     password: Yup.string().required('Password is required').matches(
-      PASSWORDREGEXTEMP,
+      PASSWORDREGEX,
       "Password must contain atleast one lowercase, one uppercase, one number and a special character"
     ).min(8, 'Please enter a password that is atleast 8 characters long'),
     confirmpassword: Yup.string().required('Password confirm is required').oneOf([Yup.ref('password'), null], 'Passwords must match').min(8, "Please use a password that is longer than 8 characters"),

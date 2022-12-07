@@ -15,8 +15,8 @@ export default function UpdatePassword() {
 
   const getURLValues = () => {
     const params = new URLSearchParams(window.location.search);
-    const token = params.get('t');
-    const member = params.get('m');
+    const token = params.get('t')?.replace(/ /g, '+');
+    const member = params.get('m')?.replace(/ /g, '+');
 
     if (!token || !member) {
       return {    

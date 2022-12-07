@@ -139,6 +139,10 @@ export default function AuthLoginForm() {
       <Button onClick={()=>{navigate('/auth/updatepassword');}}>
         Navigate to Update Password screen
       </Button>
+      
+      <Button onClick={()=>{navigate('/welcome');}}>
+        Navigate to Welcome screen
+      </Button>
     </FormProvider>
   );
 }

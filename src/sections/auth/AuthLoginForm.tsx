@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import * as Yup from 'yup';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Link, Stack, Alert, IconButton, InputAdornment } from '@mui/material';
+import { Link, Stack, Alert, IconButton, InputAdornment, Button } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 import Iconify from '../../components/iconify';
 import FormProvider, { RHFTextField, RHFCheckbox } from '../../components/hook-form';
@@ -135,6 +135,10 @@ export default function AuthLoginForm() {
       >
         Sign in
       </LoadingButton>
+
+      <Button onClick={()=>{navigate('/auth/updatepassword');}}>
+        Navigate to Update Password screen
+      </Button>
     </FormProvider>
   );
 }

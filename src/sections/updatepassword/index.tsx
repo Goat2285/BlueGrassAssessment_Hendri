@@ -6,13 +6,15 @@ import { Stack } from "@mui/material";
 import { useState } from "react";
 import Step1 from './step1';
 import Step2 from './step2';
+import { useUpdatePasswordWithToken } from '../../hooks/api/auth/useUpdatePasswordWithToken';
+import { parseAxiosError } from 'src/utils/parseAxiosError';
 
 export default function UpdatePassword() {
   const [passwordIsUpdated, setPasswordIsUpdated] = useState<boolean>(false)
 
   type FormValuesProps = {
-    email: string;
-    confirmemail: string;
+    password: string;
+    confirmPassword: string;
     afterSubmit?: string;
   };
 
@@ -27,23 +29,36 @@ export default function UpdatePassword() {
 
   const {
     reset,
+    watch,
     setError,
     handleSubmit,
-    formState: { errors, isSubmitting, isSubmitSuccessful },
+    formState: { errors },
   } = methods;
 
-  const onSubmit = async (data: FormValuesProps) => {
-    try {
-      console.log(data)
-      // Leaving this here for now until API is set up
-      setPasswordIsUpdated(true)
-    } catch (error) {
-      reset();
-      setError('afterSubmit', {
-        ...error,
-        message: error.message,
-      });
-    }
+  const values = watch();
+  // redirectUrl needs to be removed
+  const { isError, isSuccess, data, error, refetch, isFetching } = useUpdatePasswordWithToken({ ...values, userId: '123', token: "string" });
+
+  const onSubmit = async () => {
+    setPasswordIsUpdated(true)
+    //try {
+    //   refetch();
+    //   if (isError) {
+    //     const  errors  = parseAxiosError(error);
+    //     console.log('a', errors)
+    //     if (errors?.length > 0) {
+    //       console.log(errors)
+    //       setError('afterSubmit', {
+    //         message: errors.join(' '),
+    //       });
+    //     }
+    //   }
+    // } catch (error) {
+    //   reset();
+    //   setError('afterSubmit', {
+    //       message: "An error has occured while submitting please try again",
+    //     });
+    //}
   };
 
   return (
@@ -61,8 +76,7 @@ export default function UpdatePassword() {
           onSubmit={onSubmit} 
           handleSubmit={handleSubmit} 
           errors={errors} 
-          isSubmitting={isSubmitting} 
-          isSubmitSuccessful={isSubmitSuccessful} 
+          isSubmitting={isFetching} 
           methods={methods}
         /> 
       }

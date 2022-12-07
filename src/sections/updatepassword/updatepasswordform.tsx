@@ -11,10 +11,9 @@ export type UpdatepasswordformProps = {
   methods: any;
   errors: any;
   isSubmitting: boolean;
-  isSubmitSuccessful: boolean;
 };
 
-export default function ForgotpasswordForm({ handleSubmit, onSubmit, methods, errors, isSubmitting, isSubmitSuccessful }: UpdatepasswordformProps) {
+export default function ForgotpasswordForm({ handleSubmit, onSubmit, methods, errors, isSubmitting }: UpdatepasswordformProps) {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
@@ -63,7 +62,7 @@ export default function ForgotpasswordForm({ handleSubmit, onSubmit, methods, er
             size="large"
             type="submit"
             variant="contained"
-            loading={isSubmitSuccessful || isSubmitting}
+            loading={isSubmitting}
             sx={{
               bgcolor: 'primary.main',
               color: (theme) => (theme.palette.mode === 'light' ? 'common.white' : 'grey.800'),

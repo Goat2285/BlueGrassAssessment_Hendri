@@ -37,8 +37,6 @@ export default function ForgotPassword() {
   // redirectUrl needs to be removed
   const { isError, isSuccess, data, error, refetch, isFetching } = useForgotPassword({...values, resetUrl: "string" });
 
-  console.log(isSuccess)
-
   const onSubmit = async () => {
     try {
       refetch();

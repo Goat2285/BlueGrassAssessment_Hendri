@@ -3,14 +3,36 @@ import * as Yup from 'yup';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Stack } from "@mui/material";
-import { useState } from "react";
+import { useMemo } from "react";
 import Step1 from './step1';
 import Step2 from './step2';
 import { useUpdatePasswordWithToken } from '../../hooks/api/auth/useUpdatePasswordWithToken';
 import { parseAxiosError } from 'src/utils/parseAxiosError';
 
+const PASSWORDREGEX = /(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*])(?=.*[0-9])\w+/g
+const PASSWORDREGEXTEMP = /(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])\w+/g
+
 export default function UpdatePassword() {
-  const [passwordIsUpdated, setPasswordIsUpdated] = useState<boolean>(false)
+
+  const getURLValues = () => {
+    const params = new URLSearchParams(window.location.search);
+    const token = params.get('t');
+    const member = params.get('m');
+
+    if (!token || !member) {
+      return {    
+        userId: "Unknown",
+        token: 'Unknown'
+      }
+    }
+
+    return {    
+      userId: member,
+      token: token
+    }
+  }
+
+  const userDetails = useMemo(() => getURLValues(),[]);
 
   type FormValuesProps = {
     password: string;
@@ -19,7 +41,10 @@ export default function UpdatePassword() {
   };
 
   const  UpdatePasswordSchema = Yup.object().shape({
-    password: Yup.string().required('Password is required').min(5, "Please use a password that is longer than 5 characters"),
+    password: Yup.string().required('Password is required').matches(
+      PASSWORDREGEXTEMP,
+      "Password must contain atleast one lowercase, one uppercase, one number and a special character"
+    ).min(8, 'Please enter a password that is atleast 8 characters long'),
     confirmpassword: Yup.string().required('Password confirm is required').oneOf([Yup.ref('password'), null], 'Passwords must match').min(5, "Please use a password that is longer than 5 characters"),
   });
 
@@ -36,29 +61,27 @@ export default function UpdatePassword() {
   } = methods;
 
   const values = watch();
-  // redirectUrl needs to be removed
-  const { isError, isSuccess, data, error, refetch, isFetching } = useUpdatePasswordWithToken({ ...values, userId: '123', token: "string" });
+  const { isError, isSuccess, data, error, refetch, isFetching } = useUpdatePasswordWithToken({ ...values, userIs: userDetails.userId, token: userDetails.token });
 
   const onSubmit = async () => {
-    setPasswordIsUpdated(true)
-    //try {
-    //   refetch();
-    //   if (isError) {
-    //     const  errors  = parseAxiosError(error);
-    //     console.log('a', errors)
-    //     if (errors?.length > 0) {
-    //       console.log(errors)
-    //       setError('afterSubmit', {
-    //         message: errors.join(' '),
-    //       });
-    //     }
-    //   }
-    // } catch (error) {
-    //   reset();
-    //   setError('afterSubmit', {
-    //       message: "An error has occured while submitting please try again",
-    //     });
-    //}
+    try {
+      refetch();
+      if (isError) {
+        const  errors  = parseAxiosError(error);
+        console.log('a', errors)
+        if (errors?.length > 0) {
+          console.log(errors)
+          setError('afterSubmit', {
+            message: errors.join(' '),
+          });
+        }
+      }
+    } catch (error) {
+      reset();
+      setError('afterSubmit', {
+          message: "An error has occured while submitting please try again",
+        });
+    }
   };
 
   return (
@@ -69,7 +92,7 @@ export default function UpdatePassword() {
       justifyContent: 'center',
       maxWidth: 480 
     }}>
-      { passwordIsUpdated ? 
+      { isSuccess ? 
         <Step2 />
       : 
         <Step1 

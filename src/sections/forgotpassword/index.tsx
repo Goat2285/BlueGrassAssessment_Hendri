@@ -3,14 +3,12 @@ import * as Yup from 'yup';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Stack } from "@mui/material";
-import { useState } from "react";
 import Step1 from './step1';
 import Step2 from './step2';
 import { useForgotPassword } from '../../hooks/api/auth/useForgotPassword';
 import { parseAxiosError } from 'src/utils/parseAxiosError';
 
 export default function ForgotPassword() {
-  const [formErrors, setFormErrors] = useState<boolean>(false)
 
   type FormValuesProps = {
     email: string;
@@ -35,7 +33,7 @@ export default function ForgotPassword() {
 
   const values = watch();
   // redirectUrl needs to be removed
-  const { isError, isSuccess, data, error, refetch, isFetching } = useForgotPassword({...values, resetUrl: "string" });
+  const { isError, isSuccess, data, error, refetch, isFetching } = useForgotPassword({ ...values, resetUrl: `${process.env.REACT_APP_HOST_API_KEY}auth/updatepassword` });
 
   const onSubmit = async () => {
     try {

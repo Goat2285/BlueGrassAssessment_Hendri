@@ -8,6 +8,8 @@ export const HOST_API_KEY = process.env.REACT_APP_HOST_API_KEY || '';
 
 // ROOT PATH AFTER LOGIN SUCCESSFUL
 export const PATH_AFTER_LOGIN = PATH_DASHBOARD.app;
+export const PATH_AFTER_LOGIN_SUPER_ADMIN = PATH_DASHBOARD.superAdmin.app;
+export const PATH_AFTER_LOGIN_PATIENT = PATH_DASHBOARD.patient.app;
 
 // LAYOUT
 // ----------------------------------------------------------------------

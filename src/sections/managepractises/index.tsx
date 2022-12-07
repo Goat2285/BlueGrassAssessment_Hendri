@@ -23,6 +23,8 @@ export default function ManagePractises() {
 
   const { data: practices } = useGetPractices();
 
+  console.log(practices);
+
   const handleCloseDialog = () => {
     setOpenDialog(false);
   };

@@ -120,7 +120,11 @@ export default function PractisesTable({
                 {dataFiltered
                   ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((row) => (
-                    <PractiseTableRow key={row.id} row={row} refetch={refetch ? refetch : () => {}} />
+                    <PractiseTableRow
+                      key={row.id}
+                      row={row}
+                      refetch={refetch ? refetch : () => {}}
+                    />
                   ))}
 
                 <TableEmptyRows
@@ -162,7 +166,7 @@ export default function PractisesTable({
               size="small"
               endIcon={<Iconify icon="eva:arrow-ios-forward-fill" />}
               onClick={() => {
-                navigate('/admin/logs');
+                navigate('/superadmin/dashboard/logs');
               }}
             >
               See All

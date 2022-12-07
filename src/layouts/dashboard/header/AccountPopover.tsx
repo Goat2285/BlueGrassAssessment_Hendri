@@ -8,19 +8,8 @@ import { PATH_AUTH } from '../../../routes/paths';
 // auth
 import { useAuthContext } from '../../../auth/useAuthContext';
 // components
-import { CustomAvatar } from '../../../components/custom-avatar';
 import { useSnackbar } from '../../../components/snackbar';
 import MenuPopover from '../../../components/menu-popover';
-import { IconButtonAnimate } from '../../../components/animate';
-
-// ----------------------------------------------------------------------
-
-const OPTIONS = [
-  {
-    label: 'Profile',
-    linkTo: '/dashboard/profile',
-  },
-];
 
 // ----------------------------------------------------------------------
 
@@ -28,6 +17,18 @@ export default function AccountPopover() {
   const navigate = useNavigate();
 
   const { user, logout } = useAuthContext();
+
+  const OPTIONS = [
+    {
+      label: 'Profile',
+      linkTo:
+        user?.user.roles[0] === 'SuperAdmin'
+          ? '/superadmin/dashboard/profile'
+          : user?.user.roles[0] === 'Patient'
+          ? '/patient/dashboard/profile'
+          : '/dashboard/profile',
+    },
+  ];
 
   const { enqueueSnackbar } = useSnackbar();
 
@@ -59,34 +60,40 @@ export default function AccountPopover() {
 
   return (
     <>
-      <Typography variant="subtitle2" noWrap
+      <Typography
+        variant="subtitle2"
+        noWrap
         onClick={handleOpenPopover}
         sx={{
           color: (theme) => alpha(theme.palette.grey[800], 1),
           cursor: 'pointer',
           '&::after': {
-            content: "url(/assets/images/icons/ic_arrow-down.svg)",
+            content: 'url(/assets/images/icons/ic_arrow-down.svg)',
             pl: 1.9,
             position: 'relative',
             bottom: '2px',
           },
         }}
       >
-        Adrian Stefan
+        {user?.user.fullname}
       </Typography>
 
-      <MenuPopover open={openPopover} onClose={handleClosePopover} sx={{ width: 200, p: 0, mt: 4.3 }}>
+      <MenuPopover
+        open={openPopover}
+        onClose={handleClosePopover}
+        sx={{ width: 200, p: 0, mt: 4.3 }}
+      >
         <Box sx={{ my: 1.5, px: 2.5 }}>
           <Typography variant="subtitle1" noWrap>
-            {user?.displayName}
-            {/* To be removed later */}
-            Adrian Stefan
+            {user?.user.fullname}
           </Typography>
 
-          <Typography variant="body2" sx={{ color: (theme) => alpha(theme.palette.grey[600], 1), }} noWrap>
-            {/* To be removed */}
-            adrian@mrfertility.co.za
-            {user?.email}
+          <Typography
+            variant="body2"
+            sx={{ color: (theme) => alpha(theme.palette.grey[600], 1) }}
+            noWrap
+          >
+            {user?.user.email}
           </Typography>
         </Box>
 

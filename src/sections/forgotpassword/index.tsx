@@ -6,10 +6,11 @@ import { Stack } from "@mui/material";
 import { useState } from "react";
 import Step1 from './step1';
 import Step2 from './step2';
-
+import { useForgotPassword } from '../../hooks/api/auth/useForgotPassword';
+import { parseAxiosError } from 'src/utils/parseAxiosError';
 
 export default function ForgotPassword() {
-  const [emailIsSent, setEmailIsSent] = useState<boolean>(false)
+  const [formErrors, setFormErrors] = useState<boolean>(false)
 
   type FormValuesProps = {
     email: string;
@@ -26,22 +27,34 @@ export default function ForgotPassword() {
 
   const {
     reset,
+    watch,
     setError,
     handleSubmit,
-    formState: { errors, isSubmitting, isSubmitSuccessful },
+    formState: { errors },
   } = methods;
 
-  const onSubmit = async (data: FormValuesProps) => {
+  const values = watch();
+  // redirectUrl needs to be removed
+  const { isError, isSuccess, data, error, refetch, isFetching } = useForgotPassword({...values, resetUrl: "string" });
+
+  console.log(isSuccess)
+
+  const onSubmit = async () => {
     try {
-      console.log(data)
-      // Leaving this here for now until API is set up
-      setEmailIsSent(true)
+      refetch();
+      if (isError) {
+        const  errors  = parseAxiosError(error);
+        if (errors?.length > 0) {
+          setError('afterSubmit', {
+            message: errors.join(' '),
+          });
+        }
+      }
     } catch (error) {
       reset();
       setError('afterSubmit', {
-        ...error,
-        message: error.message,
-      });
+          message: "An error has occured while submitting please try again",
+        });
     }
   };
 
@@ -53,22 +66,16 @@ export default function ForgotPassword() {
       justifyContent: 'center',
       maxWidth: 480 
     }}>
-      { emailIsSent ? 
+      { isSuccess ? 
         <Step2 
           onSubmit={onSubmit} 
-          handleSubmit={handleSubmit} 
-          errors={errors} 
-          isSubmitting={isSubmitting} 
-          isSubmitSuccessful={isSubmitSuccessful} 
-          methods={methods}
         />
       : 
         <Step1 
           onSubmit={onSubmit} 
           handleSubmit={handleSubmit} 
           errors={errors} 
-          isSubmitting={isSubmitting} 
-          isSubmitSuccessful={isSubmitSuccessful} 
+          isSubmitting={isFetching} 
           methods={methods}
         /> 
       }

@@ -92,7 +92,6 @@ export function AuthProvider({ children }: AuthProviderProps) {
   
     await axios.get('/api/Account/LoggedInStatus')
     .then(res => {
-      console.log('s',res)
       const isLoggedIn = res?.data?.isLoggedIn
       if (isLoggedIn) {
         dispatch({
@@ -139,22 +138,22 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   // REGISTER
   const register = async (email: string, password: string, firstName: string, lastName: string) => {
-    const response = await axios.post('/SignUp', {
-      email,
-      password,
-      firstName,
-      lastName,
-    });
-    const { accessToken, user } = response.data;
+    // const response = await axios.post('/SignUp', {
+    //   email,
+    //   password,
+    //   firstName,
+    //   lastName,
+    // });
+    // const { accessToken, user } = response.data;
 
-    localStorage.setItem('accessToken', accessToken);
+    // localStorage.setItem('accessToken', accessToken);
 
-    dispatch({
-      type: Types.REGISTER,
-      payload: {
-        user,
-      },
-    });
+    // dispatch({
+    //   type: Types.REGISTER,
+    //   payload: {
+    //     user,
+    //   },
+    // });
   };
 
   // LOGOUT

@@ -77,7 +77,6 @@ export default function AuthLoginForm() {
   }, [isError])
 
   useEffect(() => {
-    console.log('login success user data', data?.data)
     if (isSuccess) {
       login({ user: data?.data });
       navigate('/dashboard');

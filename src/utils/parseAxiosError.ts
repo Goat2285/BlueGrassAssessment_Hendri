@@ -13,6 +13,12 @@ export const parseAxiosError = (error: errorObjectType) => {
     if (status === 500) {
       return ['An error has occured while submitting please try again']
     }
+    if(response?.data?.errors) {
+      return response?.data?.errors
+    }
+    if (typeof(response?.data)) {
+
+    }
     return response?.data
   }   
   return ['An error has occured while submitting please try again']

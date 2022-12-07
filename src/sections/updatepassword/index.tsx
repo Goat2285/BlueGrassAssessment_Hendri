@@ -45,7 +45,7 @@ export default function UpdatePassword() {
       PASSWORDREGEXTEMP,
       "Password must contain atleast one lowercase, one uppercase, one number and a special character"
     ).min(8, 'Please enter a password that is atleast 8 characters long'),
-    confirmpassword: Yup.string().required('Password confirm is required').oneOf([Yup.ref('password'), null], 'Passwords must match').min(5, "Please use a password that is longer than 5 characters"),
+    confirmpassword: Yup.string().required('Password confirm is required').oneOf([Yup.ref('password'), null], 'Passwords must match').min(8, "Please use a password that is longer than 8 characters"),
   });
 
   const methods = useForm<FormValuesProps>({
@@ -61,7 +61,9 @@ export default function UpdatePassword() {
   } = methods;
 
   const values = watch();
-  const { isError, isSuccess, data, error, refetch, isFetching } = useUpdatePasswordWithToken({ ...values, userIs: userDetails.userId, token: userDetails.token });
+  const { isError, isSuccess, data, error, refetch, isFetching } = useUpdatePasswordWithToken({ ...values, userId: userDetails.userId, token: userDetails.token });
+
+  console.log(error)
 
   const onSubmit = async () => {
     try {

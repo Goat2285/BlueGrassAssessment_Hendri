@@ -76,12 +76,11 @@ export default function AuthLoginForm() {
         message: 'An error has occured while submitting please try again',
       });
     }
-  }, [isError]);
+  }, [isError, error, navigate, reset, setError]);
 
   useEffect(() => {
     if (isSuccess) {
       login({ user: data.data });
-      console.log(data);
 
       if (data.data.roles[0] === 'SuperAdmin') {
         navigate('/superadmin/dashboard');
@@ -95,7 +94,7 @@ export default function AuthLoginForm() {
         navigate('/patient/dashboard');
       }
     }
-  }, [isSuccess]);
+  }, [isSuccess, data?.data, login, navigate]);
 
   const onSubmit = async (data: FormValuesProps) => {
     refetch();

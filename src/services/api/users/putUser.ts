@@ -2,7 +2,8 @@ import { axiosRequest } from 'src/services/axiosConfig';
 import { IUserResponse } from './getUsers';
 
 export interface IPutUserRequest {
-  fullname: string;
+  firstName: string;
+  lastName: string;
   email: string;
   role: string;
 }

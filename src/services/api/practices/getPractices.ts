@@ -10,7 +10,8 @@ export interface IPracticeResponse {
   telephone?: string;
   id: number;
   createDate: string;
-  adminFullname: string;
+  adminFirstname: string;
+  adminLastname: string;
   adminEmail: string;
 }
 

@@ -14,7 +14,8 @@ type PracticeFormProps = {
   email: string;
   telephone: string;
   status: boolean;
-  adminFullname: string;
+  adminFirstname: string;
+  adminLastname: string;
   adminEmail: string;
 };
 
@@ -34,7 +35,8 @@ export default function PracticeAddForm({ closeDialog, refetch }: Props) {
       .trim()
       .matches(phoneRegex, 'Please use the following format: +27 72 000 0000')
       .required('Contact number is required'),
-    adminFullname: Yup.string().required('Admin name is required'),
+    adminFirstname: Yup.string().required('Admin first name is required'),
+    adminLastname: Yup.string().required('Admin last name is required'),
     adminEmail: Yup.string()
       .email('Email must be a valid email address')
       .required('Admin email is required'),
@@ -60,7 +62,8 @@ export default function PracticeAddForm({ closeDialog, refetch }: Props) {
     email: '',
     telephone: '',
     status: false,
-    adminFullname: '',
+    adminFirstname: '',
+    adminLastname: '',
     adminEmail: '',
   };
 
@@ -94,7 +97,8 @@ export default function PracticeAddForm({ closeDialog, refetch }: Props) {
           Admin User
         </Typography>
         <Stack spacing={3} sx={{ pt: 2, mb: 4 }}>
-          <RHFTextField name="adminFullname" label="Name" />
+          <RHFTextField name="adminFirstname" label="First Name" />
+          <RHFTextField name="adminLastname" label="Last Name" />
           <RHFTextField name="adminEmail" label="Email" />
         </Stack>
         <Stack direction={{ sm: 'column', md: 'row' }} spacing={2}>

@@ -5,8 +5,8 @@ import { Button, Box, Stack } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import FormProvider, { RHFTextField, RHFSelect, RHFDatePicker } from '../../components/hook-form';
 import { Step1Props } from './types';
-import { usePostPersonalDetails } from 'src/hooks/api/auth/usePostPersonalDetails';
 import { useSnackbar } from '../../components/snackbar';
+import { usePostPersonalDetails } from 'src/hooks/api/auth/usePostPersonalDetails';
 const southAfricanIdInfo = require('south-african-id-info');
 
 type FormValuesProps = {
@@ -90,7 +90,7 @@ export default function RegisterStep1({
     nationality,
     idOrPassport,
     address,
-    dateOfBirth,
+    dateOfBirth: idOrPassport ? dateOfBirth : '',
   };
 
   const methods = useForm<FormValuesProps>({

@@ -38,7 +38,7 @@ export default function Register() {
   const {
     data: patientInfo,
     isLoading,
-    isFetching,
+    isRefetching,
   } = useGetPatientInfo({
     memberKey: userDetails.userId,
     token: userDetails.token,
@@ -48,7 +48,7 @@ export default function Register() {
     queryClient.refetchQueries(['getPatientInfo']);
   };
 
-  if (isLoading || isFetching) return <LoadingScreen />;
+  if (isLoading || isRefetching) return <LoadingScreen />;
 
   return (
     <Stack

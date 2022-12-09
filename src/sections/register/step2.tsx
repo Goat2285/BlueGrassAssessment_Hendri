@@ -117,14 +117,14 @@ export default function RegisterStep2({
   });
 
   const defaultValues = {
-    firstName,
+    firstName: firstName,
     lastName,
     email,
     contactNumber,
     nationality,
     idOrPassport,
     address,
-    dateOfBirth,
+    dateOfBirth: idOrPassport ? dateOfBirth : '',
   };
 
   const methods = useForm<FormValuesProps>({
@@ -146,12 +146,18 @@ export default function RegisterStep2({
       memberKey,
       token,
     });
+    console.log(postData);
+
     postSubmit(postData);
   };
 
   const prevStepHandler = () => {
     setCurrentStep(0);
     refetch();
+  };
+
+  const skipPartnerDetails = () => {
+    setCurrentStep(2);
   };
 
   return (
@@ -240,7 +246,11 @@ export default function RegisterStep2({
           Back
         </Button>
         <Box m={1} />
-        <Button variant="contained" onClick={handleSubmit(onSubmit)} size={'large'}>
+        <Button
+          variant="contained"
+          onClick={!hasPartnerWatcher ? handleSubmit(onSubmit) : skipPartnerDetails}
+          size={'large'}
+        >
           Next
         </Button>
       </Stack>

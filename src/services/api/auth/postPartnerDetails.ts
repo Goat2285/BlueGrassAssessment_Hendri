@@ -3,14 +3,14 @@ import { axiosRequest } from 'src/services/axiosConfig';
 export interface IPostPartnerDetailsRequest {
   memberKey: string;
   token: string;
-  firstName: string;
-  lastName: string;
-  contactNumber: string;
-  email: string;
-  nationality: string;
-  idOrPassport: string;
-  address: string;
-  dateOfBirth: string;
+  firstName?: string;
+  lastName?: string;
+  contactNumber?: string;
+  email?: string;
+  nationality?: string;
+  idOrPassport?: string;
+  address?: string;
+  dateOfBirth?: string;
 }
 
 export const postPartnerDetails = async (

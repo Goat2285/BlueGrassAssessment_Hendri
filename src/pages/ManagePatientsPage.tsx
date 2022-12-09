@@ -3,7 +3,6 @@ import { Helmet } from 'react-helmet-async';
 import { Container, Typography } from '@mui/material';
 // components
 import { useSettingsContext } from '../components/settings';
-import ManagePractises from 'src/sections/managepractises';
 
 // ----------------------------------------------------------------------
 
@@ -17,10 +16,9 @@ export default function ManagePatientsPage() {
       </Helmet>
 
       <Container maxWidth={themeStretch ? false : 'xl'}>
-        {/* <Typography variant="h3" component="h1" paragraph>
+        <Typography variant="h3" component="h1" paragraph>
           Manage Patients Page
-        </Typography> */}
-        <ManagePractises />
+        </Typography>
       </Container>
     </>
   );

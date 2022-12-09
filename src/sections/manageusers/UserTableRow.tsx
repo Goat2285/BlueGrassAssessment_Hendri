@@ -21,7 +21,9 @@ type Props = {
 };
 
 export default function UserTableRow({ row, allRoles, handleRefetch }: Props) {
-  const { fullname, avatar, email, roles, createDate, id } = row;
+  const { firstname, lastname, avatar, email, roles, createDate, id } = row;
+
+  // const fullname = `${firstname} ${lastname}`;
 
   const [isOpenEditDialog, setIsOpenEditDialog] = useState(false);
   const [isOpenDeleteDialog, setIsOpenDeleteDialog] = useState(false);
@@ -48,14 +50,18 @@ export default function UserTableRow({ row, allRoles, handleRefetch }: Props) {
 
   return (
     <>
-      <TableRow hover>
+      <TableRow sx={{ height: '72px' }} hover>
         <TableCell>
           <Stack direction="row" alignItems="center" spacing={2}>
-            <CustomAvatar alt={fullname} src={avatar} name={fullname} />
+            <CustomAvatar
+              alt={`${firstname} ${lastname}`}
+              src={avatar}
+              name={`${firstname} ${lastname}`}
+            />
 
             <Stack direction="column">
               <Typography variant="subtitle2" noWrap>
-                {fullname}
+                {`${firstname} ${lastname}`}
               </Typography>
               <Typography variant="body2" noWrap color={GREYS.grey6}>
                 {email}
@@ -89,7 +95,8 @@ export default function UserTableRow({ row, allRoles, handleRefetch }: Props) {
         content={
           <UserEditForm
             id={id}
-            fullname={fullname}
+            firstName={firstname}
+            lastName={lastname}
             email={email}
             role={roles[0]}
             closeDialog={closeEditDialog}

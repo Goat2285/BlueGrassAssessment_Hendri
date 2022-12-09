@@ -5,7 +5,8 @@ import { axiosRequest } from 'src/services/axiosConfig';
 export interface IUserResponse {
   id: number;
   avatar?: string;
-  fullname: string;
+  firstname: string;
+  lastname: string;
   userName: string;
   email: string;
   createDate: string;

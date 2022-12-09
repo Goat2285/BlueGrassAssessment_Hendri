@@ -3,7 +3,8 @@ import { IUserResponse } from './getUsers';
 
 export interface IPostUserRequest {
   email: string;
-  fullname: string;
+  firstName: string;
+  lastName: string;
   role: string;
 }
 

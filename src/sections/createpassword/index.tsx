@@ -4,14 +4,15 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Stack } from '@mui/material';
 import { useMemo } from 'react';
-import Step1 from './step1';
-import Step2 from './step2';
-import { useUpdatePasswordWithToken } from '../../hooks/api/auth/useUpdatePasswordWithToken';
-import { parseAxiosError } from 'src/utils/parseAxiosError';
+import CreatePassWordStep2 from './Step2';
+import CreatePassWordStep1 from './Step1';
+import { useSnackbar } from '../../components/snackbar';
+import { useNavigate } from 'react-router';
+import { usePostCreatePassword } from 'src/hooks/api/auth/usePostCreatePassword';
 
 const PASSWORDREGEX = /(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*])(?=.*[0-9])\w+/g;
 
-export default function UpdatePassword() {
+export default function CreatePassword() {
   const getURLValues = () => {
     const params = new URLSearchParams(window.location.search);
     const token = params.get('t')?.replace(/ /g, '+');
@@ -34,7 +35,9 @@ export default function UpdatePassword() {
 
   type FormValuesProps = {
     password: string;
-    confirmPassword: string;
+    confirmpassword: string;
+    memberKey: string;
+    token: string;
     afterSubmit?: string;
   };
 
@@ -57,41 +60,31 @@ export default function UpdatePassword() {
   });
 
   const {
-    reset,
-    watch,
-    setError,
     handleSubmit,
     formState: { errors },
   } = methods;
 
-  const values = watch();
-  const { isError, isSuccess, data, error, refetch, isFetching } = useUpdatePasswordWithToken({
-    ...values,
-    userId: userDetails.userId,
-    token: userDetails.token,
+  const { enqueueSnackbar } = useSnackbar();
+
+  const {
+    mutate: postSubmit,
+    isSuccess,
+    isLoading,
+  } = usePostCreatePassword({
+    onSuccess: () => {
+      enqueueSnackbar('Password has been created!');
+    },
+    onError: () => {
+      enqueueSnackbar('Error, password not created!', { variant: 'error' });
+    },
   });
 
-  console.log(error);
-
-  const onSubmit = async () => {
-    try {
-      refetch();
-      if (isError) {
-        const errors = parseAxiosError(error);
-        console.log('a', errors);
-        if (errors?.length > 0) {
-          console.log(errors);
-          setError('afterSubmit', {
-            message: errors.join(' '),
-          });
-        }
-      }
-    } catch (error) {
-      reset();
-      setError('afterSubmit', {
-        message: 'An error has occured while submitting please try again',
-      });
-    }
+  const onSubmit = (data: FormValuesProps) => {
+    const postData = Object.assign(data, {
+      memberKey: userDetails.userId,
+      token: userDetails.token,
+    });
+    postSubmit(postData);
   };
 
   return (
@@ -105,13 +98,13 @@ export default function UpdatePassword() {
       }}
     >
       {isSuccess ? (
-        <Step2 />
+        <CreatePassWordStep2 />
       ) : (
-        <Step1
+        <CreatePassWordStep1
           onSubmit={onSubmit}
           handleSubmit={handleSubmit}
           errors={errors}
-          isSubmitting={isFetching}
+          isSubmitting={isLoading}
           methods={methods}
         />
       )}

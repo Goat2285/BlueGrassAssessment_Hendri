@@ -14,6 +14,7 @@ import { NavSectionVertical } from '../../../components/nav-section';
 //
 import navConfig from './config';
 import NavAccount from './NavAccount';
+import { useAuthContext } from 'src/auth/useAuthContext';
 
 // ----------------------------------------------------------------------
 
@@ -25,6 +26,8 @@ type Props = {
 export default function NavVertical({ openNav, onCloseNav }: Props) {
   const { pathname } = useLocation();
   const theme = useTheme();
+
+  const { user } = useAuthContext();
 
   const isDesktop = useResponsive('up', 'lg');
 
@@ -56,18 +59,20 @@ export default function NavVertical({ openNav, onCloseNav }: Props) {
         }}
       >
         <Logo
-        logoStyle={3}
-        sx={{
-          mb: 1.895,
-        }}/>
+          logoStyle={3}
+          sx={{
+            mb: 1.895,
+          }}
+        />
 
-        <NavAccount />
+        {user?.user.practiceName && user?.user.roles.includes('Admin', 'Doctor', 'Staff') ? (
+          <NavAccount practiceName={user?.user.practiceName} />
+        ) : null}
       </Stack>
 
       <NavSectionVertical data={navConfig} />
 
       <Box sx={{ flexGrow: 1 }} />
-
     </Scrollbar>
   );
 

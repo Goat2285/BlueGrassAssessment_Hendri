@@ -120,7 +120,11 @@ export default function PractisesTable({
                 {dataFiltered
                   ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((row) => (
-                    <PractiseTableRow key={row.id} row={row} refetch={refetch ? refetch : () => {}} />
+                    <PractiseTableRow
+                      key={row.id}
+                      row={row}
+                      refetch={refetch ? refetch : () => {}}
+                    />
                   ))}
 
                 <TableEmptyRows

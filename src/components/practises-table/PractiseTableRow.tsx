@@ -81,7 +81,7 @@ export default function PractiseTableRow({ row, refetch }: Props) {
 
   return (
     <>
-      <TableRow hover>
+      <TableRow sx={{ height: '72px' }} hover>
         <TableCell>
           <Stack direction="row" alignItems="center" spacing={2}>
             <Typography variant="body2" noWrap>

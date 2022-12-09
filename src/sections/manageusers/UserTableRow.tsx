@@ -48,7 +48,7 @@ export default function UserTableRow({ row, allRoles, handleRefetch }: Props) {
 
   return (
     <>
-      <TableRow hover>
+      <TableRow sx={{ height: '72px' }} hover>
         <TableCell>
           <Stack direction="row" alignItems="center" spacing={2}>
             <CustomAvatar alt={fullname} src={avatar} name={fullname} />

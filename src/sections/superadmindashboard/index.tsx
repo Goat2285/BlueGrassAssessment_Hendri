@@ -17,7 +17,7 @@ const TABLE_HEAD = [
 export default function SuperAdminDashboard() {
   const { user } = useAuthContext();
 
-  const welcome = `Welcome ${user?.user.fullname}!`;
+  const welcome = `Welcome ${user?.user.firstname} ${user?.user.lastname}!`;
 
   const totalSummary = [
     {

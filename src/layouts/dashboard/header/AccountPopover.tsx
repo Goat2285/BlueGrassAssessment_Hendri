@@ -75,7 +75,7 @@ export default function AccountPopover() {
           },
         }}
       >
-        {user?.user.fullname}
+        {`${user?.user.firstname} ${user?.user.lastname}`}
       </Typography>
 
       <MenuPopover
@@ -85,7 +85,7 @@ export default function AccountPopover() {
       >
         <Box sx={{ my: 1.5, px: 2.5 }}>
           <Typography variant="subtitle1" noWrap>
-            {user?.user.fullname}
+            {`${user?.user.firstname} ${user?.user.lastname}`}
           </Typography>
 
           <Typography

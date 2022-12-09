@@ -12,7 +12,7 @@ import TableData from './TableData';
 export default function Landing() {
   const { user } = useAuthContext();
 
-  const welcome = `Welcome ${user?.user.fullname}!`;
+  const welcome = `Welcome ${user?.user.firstname} ${user?.user.lastname}!`;
 
   const totalSummary = [
     {

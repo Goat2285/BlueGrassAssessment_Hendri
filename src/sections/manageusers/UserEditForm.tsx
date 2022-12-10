@@ -9,7 +9,8 @@ import { usePutUser } from 'src/hooks/api/users/usePutUser';
 export type UserEditFormProps = {
   id: number;
   email: string;
-  fullname: string;
+  firstName: string;
+  lastName: string;
   role: string;
 };
 
@@ -18,7 +19,8 @@ type Props = {
   refetch: () => void;
   roles?: string[];
   id: number;
-  fullname: string;
+  firstName: string;
+  lastName: string;
   email: string;
   role: string;
 };
@@ -28,22 +30,25 @@ export default function UserEditForm({
   refetch,
   roles,
   id,
-  fullname,
+  firstName,
+  lastName,
   email,
   role,
 }: Props) {
   const schema = Yup.object().shape({
     id: Yup.number().required(),
-    fullname: Yup.string().required('Fullname is required'),
+    firstName: Yup.string().required('First Name is required'),
+    lastName: Yup.string().required('Last Name is required'),
     email: Yup.string().email('Email must be a valid email address').required('Email is required'),
     role: Yup.string().required('Role is required'),
   });
 
   const defaultValues = {
-    id: id,
-    fullname: fullname,
-    email: email,
-    role: role,
+    id,
+    firstName,
+    lastName,
+    email,
+    role,
   };
 
   const methods = useForm<UserEditFormProps>({
@@ -69,7 +74,8 @@ export default function UserEditForm({
     updateSubmit({
       id: data.id,
       putData: {
-        fullname: data.fullname,
+        firstName: data.firstName,
+        lastName: data.lastName,
         email: data.email,
         role: data.role,
       },
@@ -81,7 +87,8 @@ export default function UserEditForm({
     <Box sx={{ width: '100%' }}>
       <FormProvider methods={methods}>
         <Stack spacing={3}>
-          <RHFTextField name="fullname" label="Full Name" />
+          <RHFTextField name="firstName" label="First Name" />
+          <RHFTextField name="lastName" label="Last Name" />
           <RHFTextField name="email" label="Email" />
           <RHFSelect name="role" label="Role">
             <option />

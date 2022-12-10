@@ -14,7 +14,7 @@ import { useNavigate } from 'react-router-dom';
 import { parseAxiosError } from 'src/utils/parseAxiosError';
 
 type FormValuesProps = {
-  email: string;
+  username: string;
   password: string;
   rememberMe: boolean;
   afterSubmit?: string;
@@ -25,16 +25,18 @@ export default function AuthLoginForm() {
   const [showPassword, setShowPassword] = useState(false);
   const { login } = useAuthContext();
 
-  const defaultValues = {
-    rememberMe: false,
-  };
-
   const LoginSchema = Yup.object().shape({
     username: Yup.string()
       .email('Email must be a valid email address')
       .required('Email is required'),
     password: Yup.string().required('Password is required'),
   });
+
+  const defaultValues = {
+    username: '',
+    password: '',
+    rememberMe: false,
+  };
 
   const methods = useForm<FormValuesProps>({
     resolver: yupResolver(LoginSchema),

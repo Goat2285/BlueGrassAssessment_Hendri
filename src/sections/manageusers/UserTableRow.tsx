@@ -18,12 +18,16 @@ type Props = {
   row: IUserResponse;
   allRoles?: string[];
   handleRefetch: () => void;
+  checkPageAfterDelete: () => void;
 };
 
-export default function UserTableRow({ row, allRoles, handleRefetch }: Props) {
+export default function UserTableRow({
+  row,
+  allRoles,
+  handleRefetch,
+  checkPageAfterDelete,
+}: Props) {
   const { firstname, lastname, avatar, email, roles, createDate, id } = row;
-
-  // const fullname = `${firstname} ${lastname}`;
 
   const [isOpenEditDialog, setIsOpenEditDialog] = useState(false);
   const [isOpenDeleteDialog, setIsOpenDeleteDialog] = useState(false);
@@ -109,12 +113,19 @@ export default function UserTableRow({ row, allRoles, handleRefetch }: Props) {
         open={isOpenDeleteDialog}
         onClose={closeDeleteDialog}
         sx={{
-          '& .MuiDialogTitle-root+.css-dfihuu-MuiDialogContent-root': {
-            paddingTop: 1,
+          '& .MuiDialogContent-root': {
+            paddingTop: '8px !important',
           },
         }}
         title="Confirm Delete?"
-        content={<UserDeleteForm id={id} closeDialog={closeDeleteDialog} refetch={refetch} />}
+        content={
+          <UserDeleteForm
+            id={id}
+            closeDialog={closeDeleteDialog}
+            refetch={refetch}
+            checkPageAfterDelete={checkPageAfterDelete}
+          />
+        }
       />
     </>
   );

@@ -18,6 +18,7 @@ import PracticeEditForm from 'src/sections/managepractises/PracticeEditForm';
 type Props = {
   row: RowProps;
   refetch: () => void;
+  checkPageAfterDelete: () => void;
 };
 
 type FormValuesProps = {
@@ -29,7 +30,7 @@ type FormValuesProps = {
   status: boolean;
 };
 
-export default function PractiseTableRow({ row, refetch }: Props) {
+export default function PractiseTableRow({ row, refetch, checkPageAfterDelete }: Props) {
   const { id, name, telephone, email, createDate, status } = row;
 
   const [isOpenEditDialog, setIsOpenEditDialog] = useState(false);
@@ -163,7 +164,12 @@ export default function PractiseTableRow({ row, refetch }: Props) {
         }}
         title="Confirm Delete?"
         content={
-          <PracticeDeleteForm id={id} closeDialog={handleCloseDeleteDialog} refetch={refetch} />
+          <PracticeDeleteForm
+            id={id}
+            closeDialog={handleCloseDeleteDialog}
+            refetch={refetch}
+            checkPageAfterDelete={checkPageAfterDelete}
+          />
         }
       />
     </>

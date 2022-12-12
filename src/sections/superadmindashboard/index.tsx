@@ -4,7 +4,6 @@ import DashboardWelcome from 'src/components/dashboard-welcome';
 import PractisesTable from 'src/components/practises-table';
 import TotalSummary from 'src/components/total-summary';
 import { useGetLatestPractices } from 'src/hooks/api/practices/useGetLatestPractices';
-import TableData from './TableData';
 
 const TABLE_HEAD = [
   { id: 'practiseName', label: 'Practise Name', align: 'left' },

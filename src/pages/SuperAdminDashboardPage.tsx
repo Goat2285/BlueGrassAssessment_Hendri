@@ -7,7 +7,7 @@ export default function SuperAdminDashboardPage() {
   return (
     <>
       <Helmet>
-        <title>Admin Dashboard</title>
+        <title>Dashboard</title>
       </Helmet>
 
       <SuperAdminDashboard />

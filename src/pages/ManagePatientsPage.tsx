@@ -13,7 +13,7 @@ export default function ManagePatientsPage() {
   return (
     <>
       <Helmet>
-        <title> Manage Patients</title>
+        <title>Manage Patients</title>
       </Helmet>
 
       <Container maxWidth={themeStretch ? false : 'xl'}>

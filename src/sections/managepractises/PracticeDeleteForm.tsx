@@ -13,10 +13,16 @@ export type UserDeleteFormProps = {
 type Props = {
   closeDialog: () => void;
   refetch: () => void;
+  checkPageAfterDelete: () => void;
   id: number;
 };
 
-export default function PracticeDeleteForm({ closeDialog, refetch, id }: Props) {
+export default function PracticeDeleteForm({
+  closeDialog,
+  refetch,
+  checkPageAfterDelete,
+  id,
+}: Props) {
   const schema = Yup.object().shape({
     id: Yup.number().required(),
   });
@@ -49,6 +55,7 @@ export default function PracticeDeleteForm({ closeDialog, refetch, id }: Props) 
       id: data.id,
     });
     closeDialog();
+    checkPageAfterDelete();
   };
 
   return (

@@ -6,18 +6,18 @@ import { useSettingsContext } from '../components/settings';
 
 // ----------------------------------------------------------------------
 
-export default function LogsPage() {
+export default function FertilityContentPage() {
   const { themeStretch } = useSettingsContext();
 
   return (
     <>
       <Helmet>
-        <title>Logs</title>
+        <title>Fertility Content</title>
       </Helmet>
 
       <Container maxWidth={themeStretch ? false : 'xl'}>
         <Typography variant="h3" component="h1" paragraph>
-          Logs Page
+          Fertility Content Page
         </Typography>
       </Container>
     </>

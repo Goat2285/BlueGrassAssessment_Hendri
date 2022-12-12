@@ -92,6 +92,14 @@ export default function PractisesTable({
     setFilterPractiseName('');
   };
 
+  const handleCheckPageAfterDelete = () => {
+    if (page > 0) {
+      if (dataFiltered?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).length === 1) {
+        setPage(page - 1);
+      }
+    }
+  };
+
   return (
     <Card sx={sx} {...other}>
       {title ? <CardHeader title={title} sx={{ mb: 3 }} /> : null}
@@ -124,6 +132,7 @@ export default function PractisesTable({
                       key={row.id}
                       row={row}
                       refetch={refetch ? refetch : () => {}}
+                      checkPageAfterDelete={handleCheckPageAfterDelete}
                     />
                   ))}
 

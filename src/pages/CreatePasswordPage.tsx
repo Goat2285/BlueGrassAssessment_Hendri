@@ -7,7 +7,7 @@ export default function CreatePasswordPage() {
   return (
     <>
       <Helmet>
-        <title>Update password</title>
+        <title>Create password</title>
       </Helmet>
       <CreatePassword />
     </>

@@ -4,6 +4,7 @@ import { Container } from '@mui/material';
 // components
 import { useSettingsContext } from '../components/settings';
 import Landing from 'src/sections/landing';
+import SuperAdminDashboard from 'src/sections/superadmindashboard';
 
 // ----------------------------------------------------------------------
 
@@ -17,7 +18,8 @@ export default function DashboardPage() {
       </Helmet>
 
       <Container maxWidth={themeStretch ? false : 'xl'}>
-        <Landing />
+        {/* <Landing /> */}
+        <SuperAdminDashboard />
       </Container>
     </>
   );

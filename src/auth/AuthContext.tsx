@@ -1,16 +1,24 @@
 import { createContext, useEffect, useReducer, useCallback } from 'react';
 import axios from '../utils/axios';
 import { isValidToken, setSession } from './utils';
-import { ActionMapType, AuthStateType, AuthUserType, ILoginReponse, ILoginRequest, JWTContextType } from './types';
+import {
+  ActionMapType,
+  AuthStateType,
+  AuthUserType,
+  ILoginReponse,
+  ILoginRequest,
+  JWTContextType,
+} from './types';
 import { axiosRequest } from 'src/services/axiosConfig';
-import { useQuery, UseQueryResult } from "@tanstack/react-query";
+import { useQuery, UseQueryResult } from '@tanstack/react-query';
 
 const UMBRACO_COOKIE_NAME = '.AspNetCore.Identity.Application';
 
 // Auth Login
 const login = (data: any) => axiosRequest('POST', '/api/Account/SignIn', { data });
 
-export const useLogin = () => useQuery(['loginUser'], login, { enabled: false, retry: false, cacheTime: 0 })
+export const useLogin = () =>
+  useQuery(['loginUser'], login, { enabled: false, retry: false, cacheTime: 0 });
 
 enum Types {
   INITIAL = 'INITIAL',
@@ -89,19 +97,31 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const initialize = useCallback(async () => {
-  
-    await axios.get('/api/Account/LoggedInStatus')
-    .then(res => {
-      const isLoggedIn = res?.data?.isLoggedIn
-      if (isLoggedIn) {
-        dispatch({
-          type: Types.INITIAL,
-          payload: {
-            isAuthenticated: true,
-            user: null,
-          },
-        });
-      } else {
+    await axios
+      .get('/api/Account/LoggedInStatus')
+      .then((res) => {
+        const isLoggedIn = res?.data?.isLoggedIn;
+
+        if (isLoggedIn) {
+          dispatch({
+            type: Types.INITIAL,
+            payload: {
+              isAuthenticated: true,
+              user: null,
+            },
+          });
+        } else {
+          dispatch({
+            type: Types.INITIAL,
+            payload: {
+              isAuthenticated: false,
+              user: null,
+            },
+          });
+        }
+      })
+      .catch((err) => {
+        console.warn(err);
         dispatch({
           type: Types.INITIAL,
           payload: {
@@ -109,17 +129,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
             user: null,
           },
         });
-      }
-    }).catch(err => {
-      console.warn(err)
-      dispatch({
-        type: Types.INITIAL,
-        payload: {
-          isAuthenticated: false,
-          user: null,
-        },
       });
-    });
   }, []);
 
   useEffect(() => {
@@ -145,9 +155,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     //   lastName,
     // });
     // const { accessToken, user } = response.data;
-
     // localStorage.setItem('accessToken', accessToken);
-
     // dispatch({
     //   type: Types.REGISTER,
     //   payload: {
@@ -158,7 +166,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   // LOGOUT
   const logout = async () => {
-    axios.post('/api/Account/SignOut')
+    axios.post('/api/Account/SignOut');
     dispatch({
       type: Types.LOGOUT,
     });

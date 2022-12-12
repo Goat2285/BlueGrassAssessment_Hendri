@@ -17,14 +17,14 @@ const southAfricanIdInfo = require('south-african-id-info');
 type FormValuesProps = {
   memberKey: string;
   token: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-  contactNumber: string;
-  nationality: string;
-  idOrPassport: string;
-  address: string;
-  dateOfBirth: string;
+  firstName?: string;
+  lastName?: string;
+  email?: string;
+  contactNumber?: string;
+  nationality?: string;
+  idOrPassport?: string;
+  address?: string;
+  dateOfBirth?: string;
   afterSubmit?: string;
   hasnopartner?: boolean;
 };
@@ -94,9 +94,9 @@ export default function RegisterStep2({
       is: true,
       otherwise: Yup.string().required('Address is required'),
     }),
-    dateOfBirth: Yup.date().when('hasnopartner', {
+    dateOfBirth: Yup.mixed().when('hasnopartner', {
       is: true,
-      then: Yup.date().nullable(true),
+      then: Yup.string().nullable(true),
       otherwise: Yup.date()
         .required('Date of birth is required')
         .max(maxDate, 'Date of birth needs to be in the past')
@@ -117,14 +117,14 @@ export default function RegisterStep2({
   });
 
   const defaultValues = {
-    firstName: firstName,
-    lastName,
-    email,
-    contactNumber,
-    nationality,
-    idOrPassport,
-    address,
-    dateOfBirth: idOrPassport ? dateOfBirth : '2022-12-12T10:16:42.882Z',
+    firstName: firstName || '',
+    lastName: lastName || '',
+    email: email || '',
+    contactNumber: contactNumber || '',
+    nationality: nationality || '',
+    idOrPassport: idOrPassport || '',
+    address: address || '',
+    dateOfBirth: idOrPassport ? dateOfBirth : '',
     hasnopartner: false,
   };
 
@@ -159,10 +159,6 @@ export default function RegisterStep2({
     setCurrentStep(0);
     refetch();
   };
-
-  // const skipPartnerDetails = () => {
-  //   setCurrentStep(2);
-  // };
 
   return (
     <Stack direction={'column'} alignItems="stetch" sx={{ width: '100%', maxWidth: 944 }}>

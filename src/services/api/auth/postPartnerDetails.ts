@@ -4,14 +4,14 @@ export interface IPostPartnerDetailsRequest {
   memberKey: string;
   token: string;
   hasPartner: boolean;
-  firstName: string;
-  lastName: string;
-  contactNumber: string;
-  email: string;
-  nationality: string;
-  idOrPassport: string;
-  address: string;
-  dateOfBirth: string;
+  firstName?: string;
+  lastName?: string;
+  contactNumber?: string;
+  email?: string;
+  nationality?: string;
+  idOrPassport?: string;
+  address?: string;
+  dateOfBirth?: string;
 }
 
 export const postPartnerDetails = async (

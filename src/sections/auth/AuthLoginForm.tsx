@@ -14,7 +14,7 @@ import { useNavigate } from 'react-router-dom';
 import { parseAxiosError } from 'src/utils/parseAxiosError';
 
 type FormValuesProps = {
-  email: string;
+  username: string;
   password: string;
   rememberMe: boolean;
   afterSubmit?: string;
@@ -25,18 +25,22 @@ export default function AuthLoginForm() {
   const [showPassword, setShowPassword] = useState(false);
   const { login } = useAuthContext();
 
-  const defaultValues = {
-    rememberMe: false,
-  };
-
   const LoginSchema = Yup.object().shape({
-    username: Yup.string().email('Email must be a valid email address').required('Email is required'),
+    username: Yup.string()
+      .email('Email must be a valid email address')
+      .required('Email is required'),
     password: Yup.string().required('Password is required'),
   });
 
+  const defaultValues = {
+    username: '',
+    password: '',
+    rememberMe: false,
+  };
+
   const methods = useForm<FormValuesProps>({
     resolver: yupResolver(LoginSchema),
-    defaultValues
+    defaultValues,
   });
 
   const {
@@ -52,8 +56,8 @@ export default function AuthLoginForm() {
   const { isError, isSuccess, data, error, refetch, isFetching } = useLogin(values);
 
   useEffect(() => {
-    if(isError && error) {
-      const  errors  = parseAxiosError(error);
+    if (isError && error) {
+      const errors = parseAxiosError(error);
       if (errors?.length > 0) {
         if (errors[0]?.toString() === 'Member is locked out') {
           reset();
@@ -63,25 +67,36 @@ export default function AuthLoginForm() {
           message: errors.join(' '),
         });
       } else {
-        if(isError) {
+        if (isError) {
           setError('afterSubmit', {
-            message: "An error has occured while submitting please try again",
+            message: 'An error has occured while submitting please try again',
           });
         }
-       }
-     } else if(isError) {
-        setError('afterSubmit', {
-          message: "An error has occured while submitting please try again",
-        });
+      }
+    } else if (isError) {
+      setError('afterSubmit', {
+        message: 'An error has occured while submitting please try again',
+      });
     }
-  }, [isError])
+  }, [isError, error, navigate, reset, setError]);
 
   useEffect(() => {
     if (isSuccess) {
-      login({ user: data?.data });
-      navigate('/dashboard');
+      login({ user: data.data });
+
+      if (data.data.roles[0] === 'SuperAdmin') {
+        navigate('/superadmin/dashboard');
+      } else if (
+        data.data.roles[0] === 'Admin' ||
+        data.data.roles[0] === 'Doctor' ||
+        data.data.roles[0] === 'Staff'
+      ) {
+        navigate('/dashboard');
+      } else if (data.data.roles[0] === 'Patient') {
+        navigate('/patient/dashboard');
+      }
     }
-  },[isSuccess])
+  }, [isSuccess, data?.data, login, navigate]);
 
   const onSubmit = async (data: FormValuesProps) => {
     refetch();
@@ -102,7 +117,11 @@ export default function AuthLoginForm() {
             endAdornment: (
               <InputAdornment position="end">
                 <IconButton onClick={() => setShowPassword(!showPassword)} edge="end">
-                  <Iconify icon={showPassword ? 'eva:eye-fill' : 'eva:eye-off-fill'} color={'text.disabled'} width={25} />
+                  <Iconify
+                    icon={showPassword ? 'eva:eye-fill' : 'eva:eye-off-fill'}
+                    color={'text.disabled'}
+                    width={25}
+                  />
                 </IconButton>
               </InputAdornment>
             ),
@@ -110,9 +129,15 @@ export default function AuthLoginForm() {
         />
       </Stack>
 
-      <Stack justifyContent="space-between" sx={{ my: 2 }} direction='row' alignItems='center'>
-        <RHFCheckbox name={'rememberMe'} label={'Remember me'} sx={{paddingLeft: '10px'}} />
-        <Link variant="body2" color="inherit" underline='hover'  sx={{ cursor: "pointer", color: 'primary.dark', fontWeight: 'bold' }} href={'/auth/forgotpassword'}>
+      <Stack justifyContent="space-between" sx={{ my: 2 }} direction="row" alignItems="center">
+        <RHFCheckbox name={'rememberMe'} label={'Remember me'} sx={{ paddingLeft: '10px' }} />
+        <Link
+          variant="body2"
+          color="inherit"
+          underline="hover"
+          sx={{ cursor: 'pointer', color: 'primary.dark', fontWeight: 'bold' }}
+          href={'/auth/forgotpassword'}
+        >
           Forgot password?
         </Link>
       </Stack>
@@ -136,11 +161,19 @@ export default function AuthLoginForm() {
         Sign in
       </LoadingButton>
 
-      <Button onClick={()=>{navigate('/auth/updatepassword');}}>
+      <Button
+        onClick={() => {
+          navigate('/auth/updatepassword');
+        }}
+      >
         Navigate to Update Password screen
       </Button>
-      
-      <Button onClick={()=>{navigate('/welcome');}}>
+
+      <Button
+        onClick={() => {
+          navigate('/welcome');
+        }}
+      >
         Navigate to Welcome screen
       </Button>
     </FormProvider>

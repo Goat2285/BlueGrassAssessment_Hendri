@@ -15,6 +15,8 @@ import { useSettingsContext } from '../../../components/settings';
 //
 import NotificationsPopover from './NotificationsPopover';
 import AccountPopover from './AccountPopover';
+import { useAuthContext } from 'src/auth/useAuthContext';
+import { CustomAvatar } from 'src/components/custom-avatar';
 
 // ----------------------------------------------------------------------
 
@@ -24,6 +26,8 @@ type Props = {
 
 export default function Header({ onOpenNav }: Props) {
   const theme = useTheme();
+
+  const { user } = useAuthContext();
 
   const { themeLayout } = useSettingsContext();
 
@@ -52,19 +56,12 @@ export default function Header({ onOpenNav }: Props) {
         justifyContent="flex-end"
         spacing={{ xs: 0.5, sm: 1.5 }}
       >
-
         <NotificationsPopover />
-
-        <Typography variant="subtitle2" noWrap
-          sx={{
-            p: 2,
-            color: theme.palette.primary.darker,
-            borderRadius: '100%',
-            backgroundColor: alpha(theme.palette.primary.main, 0.08)
-          }}>
-          {/* To be replaced later */}
-          AS
-        </Typography>
+        <CustomAvatar
+          alt={`${user?.user.firstname} ${user?.user.lastname}`}
+          name={`${user?.user.firstname} ${user?.user.lastname}`}
+          src={user?.user.avatar}
+        />
         <AccountPopover />
       </Stack>
     </>
@@ -87,7 +84,7 @@ export default function Header({ onOpenNav }: Props) {
           width: `calc(100% - ${NAV.W_DASHBOARD + 1}px)`,
           height: HEADER.H_DASHBOARD_DESKTOP,
           ...(isOffset && {
-            height: HEADER.H_DASHBOARD_DESKTOP_OFFSET,
+            height: HEADER.H_DASHBOARD_DESKTOP,
           }),
           ...(isNavHorizontal && {
             width: 1,

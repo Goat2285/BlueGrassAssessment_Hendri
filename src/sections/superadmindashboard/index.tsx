@@ -17,7 +17,7 @@ const TABLE_HEAD = [
 export default function SuperAdminDashboard() {
   const { user } = useAuthContext();
 
-  const welcome = `Welcome ${user?.displayName || 'Andrew'}!`;
+  const welcome = `Welcome ${user?.user.firstname} ${user?.user.lastname}!`;
 
   const { data: latestPractices } = useGetLatestPractices({ count: 3 });
 
@@ -89,7 +89,7 @@ export default function SuperAdminDashboard() {
         hasPagination={false}
         hasMore={true}
         tableHeads={TABLE_HEAD}
-        sx={{ mt: 4 }}
+        sx={{ mt: 5 }}
       />
     </Stack>
   );

@@ -166,7 +166,7 @@ export default function PractisesTable({
               size="small"
               endIcon={<Iconify icon="eva:arrow-ios-forward-fill" />}
               onClick={() => {
-                navigate('/admin/logs');
+                navigate('/superadmin/dashboard/logs');
               }}
             >
               See All

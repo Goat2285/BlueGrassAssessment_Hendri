@@ -19,17 +19,20 @@ export default function ConfirmDialog({
   content,
   action,
   open,
+  hideCloseBtn,
   onClose,
   ...other
 }: ConfirmDialogProps) {
   return (
     <Dialog fullWidth maxWidth="xs" open={open} onClose={onClose} {...other}>
-      <StyledButtonHolder>
-        <IconButton onClick={onClose}>
-          <Iconify icon="eva:close-fill" />
-        </IconButton>
-      </StyledButtonHolder>
-      <DialogTitle sx={{ pb: 2 }}>{title}</DialogTitle>
+      {!hideCloseBtn ? (
+        <StyledButtonHolder>
+          <IconButton onClick={onClose}>
+            <Iconify icon="eva:close-fill" />
+          </IconButton>
+        </StyledButtonHolder>
+      ) : null}
+      {title ? <DialogTitle sx={{ pb: 2 }}>{title}</DialogTitle> : null}
 
       {content && <DialogContent sx={{ typography: 'body2' }}> {content} </DialogContent>}
 

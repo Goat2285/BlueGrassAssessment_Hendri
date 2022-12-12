@@ -27,6 +27,7 @@ import {
   LogsPage,
   SuperAdminDashboardPage,
   ManagePractisesPage,
+  CreatePasswordPage,
 } from './elements';
 
 // ----------------------------------------------------------------------
@@ -88,6 +89,7 @@ export default function Router() {
             { path: 'disabled', element: <AccountDisabledPage /> },
             { path: 'forgotpassword', element: <ForgotPasswordPage /> },
             { path: 'updatepassword', element: <UpdatePasswordPage /> },
+            { path: 'createpassword', element: <CreatePasswordPage /> },
             { path: 'register', element: <RegisterPage /> },
           ],
         },

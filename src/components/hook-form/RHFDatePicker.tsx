@@ -20,8 +20,8 @@ export default function RHFDatePicker({ name, disabled, ...other }: Props) {
       defaultValue={null}
       render={({ field, fieldState: { error } }) => (
         <DatePicker
-          value={field.value}          
-          views={['day']}
+          value={field.value}
+          views={['day', 'year']}
           onChange={field.onChange}
           disabled={disabled}
           renderInput={(field) => (
@@ -32,9 +32,9 @@ export default function RHFDatePicker({ name, disabled, ...other }: Props) {
               error={!!error}
               helperText={error?.message}
               sx={{
-                "& .MuiInputLabel-root": { color: "text.disabled" },
-                "& .MuiOutlinedInput-root": {
-                  "& > fieldset": { borderColor: "text.disabled" },
+                '& .MuiInputLabel-root': { color: 'text.disabled' },
+                '& .MuiOutlinedInput-root': {
+                  '& > fieldset': { borderColor: 'text.disabled' },
                 },
               }}
               {...other}

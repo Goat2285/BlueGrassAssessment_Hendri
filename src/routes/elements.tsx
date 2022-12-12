@@ -19,6 +19,7 @@ export const ResetPasswordPage = Loadable(lazy(() => import('../pages/UpdatePass
 export const AccountDisabledPage = Loadable(lazy(() => import('../pages/AccountDisabledPage')));
 export const ForgotPasswordPage = Loadable(lazy(() => import('../pages/ForgotPasswordPage')));
 export const UpdatePasswordPage = Loadable(lazy(() => import('../pages/UpdatePasswordPage')));
+export const CreatePasswordPage = Loadable(lazy(() => import('../pages/CreatePasswordPage')));
 
 // Register
 export const RegisterPage = Loadable(lazy(() => import('../pages/RegisterPage')));

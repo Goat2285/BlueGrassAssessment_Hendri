@@ -3,7 +3,7 @@ import { useAuthContext } from 'src/auth/useAuthContext';
 import DashboardWelcome from 'src/components/dashboard-welcome';
 import PractisesTable from 'src/components/practises-table';
 import TotalSummary from 'src/components/total-summary';
-import TableData from './TableData';
+import { useGetLatestPractices } from 'src/hooks/api/practices/useGetLatestPractices';
 
 const TABLE_HEAD = [
   { id: 'practiseName', label: 'Practise Name', align: 'left' },
@@ -17,7 +17,9 @@ const TABLE_HEAD = [
 export default function SuperAdminDashboard() {
   const { user } = useAuthContext();
 
-  const welcome = `Welcome ${user?.displayName || 'Andrew'}!`;
+  const welcome = `Welcome ${user?.user.firstname} ${user?.user.lastname}!`;
+
+  const { data: latestPractices } = useGetLatestPractices({ count: 3 });
 
   const totalSummary = [
     {
@@ -82,12 +84,12 @@ export default function SuperAdminDashboard() {
 
       <PractisesTable
         title="Newest Practises"
-        tableRows={TableData}
+        tableRows={latestPractices}
         searchable={false}
         hasPagination={false}
         hasMore={true}
         tableHeads={TABLE_HEAD}
-        sx={{ mt: 4 }}
+        sx={{ mt: 5 }}
       />
     </Stack>
   );

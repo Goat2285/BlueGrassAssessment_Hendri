@@ -5,7 +5,11 @@ import AuthGuard from '../auth/AuthGuard';
 import DashboardLayout from '../layouts/dashboard';
 import SingleColumnLayout from '../layouts/singleColumn';
 // config
-import { PATH_AFTER_LOGIN } from '../config';
+import {
+  PATH_AFTER_LOGIN,
+  PATH_AFTER_LOGIN_PATIENT,
+  PATH_AFTER_LOGIN_SUPER_ADMIN,
+} from '../config';
 
 //
 import {
@@ -45,10 +49,38 @@ export default function Router() {
             { path: 'users', element: <ManageUsersPage /> },
             { path: 'patients', element: <ManagePatientsPage /> },
             { path: 'logs', element: <LogsPage /> },
-            { path: 'dashboard', element: <SuperAdminDashboardPage /> },
-            { path: 'practises', element: <ManagePractisesPage /> },
           ],
-        },   
+        },
+        {
+          path: '/superadmin/dashboard',
+          element: (
+            <AuthGuard>
+              <DashboardLayout />
+            </AuthGuard>
+          ),
+          children: [
+            { element: <Navigate to={PATH_AFTER_LOGIN_SUPER_ADMIN} replace />, index: true },
+            { path: 'app', element: <SuperAdminDashboardPage /> },
+            { path: 'profile', element: <MyProfilePage /> },
+            { path: 'practises', element: <ManagePractisesPage /> },
+            { path: 'logs', element: <LogsPage /> },
+          ],
+        },
+        {
+          path: '/patient/dashboard',
+          element: (
+            <AuthGuard>
+              <DashboardLayout />
+            </AuthGuard>
+          ),
+          children: [
+            { element: <Navigate to={PATH_AFTER_LOGIN_PATIENT} replace />, index: true },
+            { path: 'app', element: <SuperAdminDashboardPage /> },
+            { path: 'profile', element: <MyProfilePage /> },
+            { path: 'fertility-content', element: <ManagePractisesPage /> },
+            { path: 'my-consents', element: <LogsPage /> },
+          ],
+        },
         {
           path: 'auth',
           element: <SingleColumnLayout />,

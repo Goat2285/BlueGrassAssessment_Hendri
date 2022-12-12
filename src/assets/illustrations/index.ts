@@ -5,3 +5,4 @@ export { default as TreatmentsIllustration } from './TreatmentsIllustration';
 export { default as BabyCarriageIllustration } from './BabyCarriageIllustration';
 export { default as BulbIllustration } from './BulbIllustration';
 export { default as PageNotFoundIllustration } from './PageNotFoundIllustration';
+export { default as ForbiddenIllustration } from './ForbiddenIllustration';

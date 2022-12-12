@@ -43,7 +43,7 @@ export default function InviteNewPatient({ closeDialog, doctors }: Props) {
     email: '',
     contactNumber: '',
     doctorId: undefined,
-    redirectUrl: 'http://localhost:3000/auth/register', // for testing, after change to ENV path
+    redirectUrl: `${process.env.REACT_APP_HOST_API_KEY}/auth/register`,
   };
 
   const methods = useForm<UserFormProps>({

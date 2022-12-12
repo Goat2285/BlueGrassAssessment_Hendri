@@ -26,7 +26,7 @@ type FormValuesProps = {
   address: string;
   dateOfBirth: string;
   afterSubmit?: string;
-  hasnopartner: boolean;
+  hasnopartner?: boolean;
 };
 
 export default function RegisterStep2({
@@ -124,7 +124,8 @@ export default function RegisterStep2({
     nationality,
     idOrPassport,
     address,
-    dateOfBirth: idOrPassport ? dateOfBirth : '',
+    dateOfBirth: idOrPassport ? dateOfBirth : '2022-12-12T10:16:42.882Z',
+    hasnopartner: false,
   };
 
   const methods = useForm<FormValuesProps>({
@@ -134,35 +135,24 @@ export default function RegisterStep2({
 
   const { handleSubmit, clearErrors, watch, resetField } = methods;
 
-  const hasPartnerWatcher = watch('hasnopartner', false);
+  const hasNoPartnerWatcher = watch('hasnopartner', false);
   useEffect(() => {
-    if (hasPartnerWatcher) {
+    if (hasNoPartnerWatcher) {
       clearErrors();
     }
-  }, [clearErrors, hasPartnerWatcher, resetField]);
+  }, [clearErrors, hasNoPartnerWatcher, resetField]);
 
   const onSubmit = (data: FormValuesProps) => {
-    if (!hasPartnerWatcher) {
-      const postData = Object.assign(data, {
-        memberKey,
-        token,
-      });
-      postSubmit(postData);
-    } else {
-      const postData = {
-        memberKey: memberKey,
-        token: token,
-        firstName: '',
-        lastName: '',
-        contactNumber: '',
-        email: '',
-        nationality: '',
-        idOrPassport: '',
-        address: '',
-        dateOfBirth: '1/1/0001 12:00:00 AM',
-      };
-      postSubmit(postData);
-    }
+    delete data.hasnopartner;
+    const postData = Object.assign(data, {
+      memberKey,
+      token,
+      hasPartner: !hasNoPartnerWatcher,
+    });
+
+    console.log(postData);
+
+    postSubmit(postData);
   };
 
   const prevStepHandler = () => {
@@ -182,13 +172,13 @@ export default function RegisterStep2({
             name="firstName"
             label="First Name"
             sx={{ maxWidth: 448, margin: '12px !important' }}
-            disabled={hasPartnerWatcher}
+            disabled={hasNoPartnerWatcher}
           />
           <RHFTextField
             name="lastName"
             label="Last Name"
             sx={{ maxWidth: 448, margin: '12px !important' }}
-            disabled={hasPartnerWatcher}
+            disabled={hasNoPartnerWatcher}
           />
         </Stack>
         <Stack spacing={3} direction={'row'} flexWrap={'wrap'} justifyContent="center">
@@ -196,13 +186,13 @@ export default function RegisterStep2({
             name="email"
             label="Email"
             sx={{ maxWidth: 448, margin: '12px !important' }}
-            disabled={hasPartnerWatcher}
+            disabled={hasNoPartnerWatcher}
           />
           <RHFTextField
             name="contactNumber"
             label="Contact Number"
             sx={{ maxWidth: 448, margin: '12px !important' }}
-            disabled={hasPartnerWatcher}
+            disabled={hasNoPartnerWatcher}
           />
         </Stack>
         <Stack spacing={3} direction={'row'} flexWrap={'wrap'} justifyContent="center">
@@ -211,7 +201,7 @@ export default function RegisterStep2({
             label="Nationality"
             sx={{ maxWidth: 448, margin: '12px !important' }}
             variant={'outlined'}
-            disabled={hasPartnerWatcher}
+            disabled={hasNoPartnerWatcher}
           >
             <option />
             <option value={'South African'}>South African</option>
@@ -221,7 +211,7 @@ export default function RegisterStep2({
             name="idOrPassport"
             label="ID / Passport Number"
             sx={{ maxWidth: 448, margin: '12px !important' }}
-            disabled={hasPartnerWatcher}
+            disabled={hasNoPartnerWatcher}
           />
         </Stack>
         <Stack spacing={3} direction={'row'} flexWrap={'wrap'} justifyContent="center">
@@ -229,13 +219,13 @@ export default function RegisterStep2({
             name="address"
             label="Address"
             sx={{ maxWidth: 448, margin: '12px !important' }}
-            disabled={hasPartnerWatcher}
+            disabled={hasNoPartnerWatcher}
           />
           <RHFDatePicker
             name="dateOfBirth"
             label="Date of Birth"
             sx={{ maxWidth: 448, margin: '12px !important' }}
-            disabled={hasPartnerWatcher}
+            disabled={hasNoPartnerWatcher}
           />
         </Stack>
         <Stack spacing={3} direction={'row'} flexWrap={'wrap'} justifyContent="center">

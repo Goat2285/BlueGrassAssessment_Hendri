@@ -6,7 +6,7 @@ import { useSettingsContext } from '../components/settings';
 
 // ----------------------------------------------------------------------
 
-export default function LogsPage() {
+export default function SuperAdminLogsPage() {
   const { themeStretch } = useSettingsContext();
 
   return (
@@ -17,7 +17,7 @@ export default function LogsPage() {
 
       <Container maxWidth={themeStretch ? false : 'xl'}>
         <Typography variant="h3" component="h1" paragraph>
-          Logs Page
+          Superadmin Logs Page
         </Typography>
       </Container>
     </>

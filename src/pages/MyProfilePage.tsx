@@ -12,7 +12,7 @@ export default function ProfilePage() {
   return (
     <>
       <Helmet>
-        <title> My Profile</title>
+        <title>My Profile</title>
       </Helmet>
 
       <Container maxWidth={themeStretch ? false : 'xl'}>

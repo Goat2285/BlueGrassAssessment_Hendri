@@ -24,16 +24,28 @@ export const CreatePasswordPage = Loadable(lazy(() => import('../pages/CreatePas
 // Register
 export const RegisterPage = Loadable(lazy(() => import('../pages/RegisterPage')));
 
-// Dashboard
+// Admin, Doctor, Staff
 export const DashboardPage = Loadable(lazy(() => import('../pages/DashboardPage')));
 export const MyProfilePage = Loadable(lazy(() => import('../pages/MyProfilePage')));
 export const ManageUsersPage = Loadable(lazy(() => import('../pages/ManageUsersPage')));
 export const ManagePatientsPage = Loadable(lazy(() => import('../pages/ManagePatientsPage')));
 export const LogsPage = Loadable(lazy(() => import('../pages/LogsPage')));
+
+// Superadmin
 export const SuperAdminDashboardPage = Loadable(
   lazy(() => import('../pages/SuperAdminDashboardPage'))
 );
+export const SuperAdminMyProfilePage = Loadable(
+  lazy(() => import('../pages/SuperAdminMyProfilePage'))
+);
 export const ManagePractisesPage = Loadable(lazy(() => import('../pages/ManagePractisesPage')));
+export const SuperAdminLogsPage = Loadable(lazy(() => import('../pages/SuperAdminLogsPage')));
+
+// Patient
+export const PatientDashboardPage = Loadable(lazy(() => import('../pages/PatientDashboardPage')));
+export const PatientMyProfilePage = Loadable(lazy(() => import('../pages/PatientMyProfilePage')));
+export const FertilityContentPage = Loadable(lazy(() => import('../pages/FertilityContentPage')));
+export const MyConsentsPage = Loadable(lazy(() => import('../pages/MyConsentsPage')));
 
 // Other
 export const Page404 = Loadable(lazy(() => import('../pages/Page404')));

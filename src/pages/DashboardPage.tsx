@@ -13,7 +13,7 @@ export default function DashboardPage() {
   return (
     <>
       <Helmet>
-        <title> Dashboard</title>
+        <title>Dashboard</title>
       </Helmet>
 
       <Container maxWidth={themeStretch ? false : 'xl'}>

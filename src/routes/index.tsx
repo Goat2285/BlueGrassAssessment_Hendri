@@ -28,6 +28,12 @@ import {
   SuperAdminDashboardPage,
   ManagePractisesPage,
   CreatePasswordPage,
+  PatientDashboardPage,
+  FertilityContentPage,
+  MyConsentsPage,
+  SuperAdminMyProfilePage,
+  SuperAdminLogsPage,
+  PatientMyProfilePage,
 } from './elements';
 
 // ----------------------------------------------------------------------
@@ -62,9 +68,9 @@ export default function Router() {
           children: [
             { element: <Navigate to={PATH_AFTER_LOGIN_SUPER_ADMIN} replace />, index: true },
             { path: 'app', element: <SuperAdminDashboardPage /> },
-            { path: 'profile', element: <MyProfilePage /> },
+            { path: 'profile', element: <SuperAdminMyProfilePage /> },
             { path: 'practises', element: <ManagePractisesPage /> },
-            { path: 'logs', element: <LogsPage /> },
+            { path: 'logs', element: <SuperAdminLogsPage /> },
           ],
         },
         {
@@ -76,10 +82,10 @@ export default function Router() {
           ),
           children: [
             { element: <Navigate to={PATH_AFTER_LOGIN_PATIENT} replace />, index: true },
-            { path: 'app', element: <SuperAdminDashboardPage /> },
-            { path: 'profile', element: <MyProfilePage /> },
-            { path: 'fertility-content', element: <ManagePractisesPage /> },
-            { path: 'my-consents', element: <LogsPage /> },
+            { path: 'app', element: <PatientDashboardPage /> },
+            { path: 'profile', element: <PatientMyProfilePage /> },
+            { path: 'fertility-content', element: <FertilityContentPage /> },
+            { path: 'my-consents', element: <MyConsentsPage /> },
           ],
         },
         {

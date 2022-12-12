@@ -13,7 +13,7 @@ export default function ManagePractisesPage() {
   return (
     <>
       <Helmet>
-        <title> Manage Practises</title>
+        <title>Manage Practises</title>
       </Helmet>
 
       <Container maxWidth={themeStretch ? false : 'xl'}>

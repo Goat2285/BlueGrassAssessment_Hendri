@@ -142,13 +142,27 @@ export default function RegisterStep2({
   }, [clearErrors, hasPartnerWatcher, resetField]);
 
   const onSubmit = (data: FormValuesProps) => {
-    const postData = Object.assign(data, {
-      memberKey,
-      token,
-    });
-    console.log(postData);
-
-    postSubmit(postData);
+    if (!hasPartnerWatcher) {
+      const postData = Object.assign(data, {
+        memberKey,
+        token,
+      });
+      postSubmit(postData);
+    } else {
+      const postData = {
+        memberKey: memberKey,
+        token: token,
+        firstName: '',
+        lastName: '',
+        contactNumber: '',
+        email: '',
+        nationality: '',
+        idOrPassport: '',
+        address: '',
+        dateOfBirth: '1/1/0001 12:00:00 AM',
+      };
+      postSubmit(postData);
+    }
   };
 
   const prevStepHandler = () => {
@@ -156,9 +170,9 @@ export default function RegisterStep2({
     refetch();
   };
 
-  const skipPartnerDetails = () => {
-    setCurrentStep(2);
-  };
+  // const skipPartnerDetails = () => {
+  //   setCurrentStep(2);
+  // };
 
   return (
     <Stack direction={'column'} alignItems="stetch" sx={{ width: '100%', maxWidth: 944 }}>
@@ -246,11 +260,7 @@ export default function RegisterStep2({
           Back
         </Button>
         <Box m={1} />
-        <Button
-          variant="contained"
-          onClick={!hasPartnerWatcher ? handleSubmit(onSubmit) : skipPartnerDetails}
-          size={'large'}
-        >
+        <Button variant="contained" onClick={handleSubmit(onSubmit)} size={'large'}>
           Next
         </Button>
       </Stack>

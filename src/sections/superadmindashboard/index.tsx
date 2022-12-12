@@ -1,4 +1,5 @@
 import { Grid, Stack } from '@mui/material';
+import { useQueryClient } from '@tanstack/react-query';
 import { useAuthContext } from 'src/auth/useAuthContext';
 import DashboardWelcome from 'src/components/dashboard-welcome';
 import PractisesTable from 'src/components/practises-table';
@@ -18,6 +19,8 @@ export default function SuperAdminDashboard() {
   const { user } = useAuthContext();
 
   const welcome = `Welcome ${user?.user.firstname} ${user?.user.lastname}!`;
+
+  const queryClient = useQueryClient();
 
   const { data: latestPractices } = useGetLatestPractices({ count: 3 });
 
@@ -66,6 +69,10 @@ export default function SuperAdminDashboard() {
     },
   ];
 
+  const refetch = () => {
+    queryClient.refetchQueries(['getLatestPractices']);
+  };
+
   return (
     <Stack>
       <DashboardWelcome
@@ -89,6 +96,7 @@ export default function SuperAdminDashboard() {
         hasPagination={false}
         hasMore={true}
         tableHeads={TABLE_HEAD}
+        refetch={refetch}
         sx={{ mt: 5 }}
       />
     </Stack>

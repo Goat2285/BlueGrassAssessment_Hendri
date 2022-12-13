@@ -107,7 +107,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
             type: Types.INITIAL,
             payload: {
               isAuthenticated: true,
-              user: null,
+              user: {
+                user: res?.data?.user,
+              },
             },
           });
         } else {

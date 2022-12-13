@@ -1,6 +1,6 @@
 // ----------------------------------------------------------------------
 
-import { AxiosPromise } from "axios";
+import { AxiosPromise } from 'axios';
 
 export type ActionMapType<M extends { [index: string]: any }> = {
   [Key in keyof M]: M[Key] extends undefined
@@ -23,19 +23,17 @@ export type AuthStateType = {
 
 // ----------------------------------------------------------------------
 
-
 export interface ILoginRequest {
-  username: string,
-  password: string,
-  rememberMe: boolean
+  username: string;
+  password: string;
+  rememberMe: boolean;
 }
 
 export interface ILoginReponse {
-  isSuccess: boolean,
-  title: string,
-  errors: string[]
+  isSuccess: boolean;
+  title: string;
+  errors: string[];
 }
-
 
 export type JWTContextType = {
   method: 'jwt';

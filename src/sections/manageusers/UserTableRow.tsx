@@ -27,7 +27,7 @@ export default function UserTableRow({
   handleRefetch,
   checkPageAfterDelete,
 }: Props) {
-  const { firstname, lastname, avatar, email, roles, createDate, id } = row;
+  const { firstname, lastname, profilePictureUrl, email, roles, createDate, id } = row;
 
   const [isOpenEditDialog, setIsOpenEditDialog] = useState(false);
   const [isOpenDeleteDialog, setIsOpenDeleteDialog] = useState(false);
@@ -59,7 +59,7 @@ export default function UserTableRow({
           <Stack direction="row" alignItems="center" spacing={2}>
             <CustomAvatar
               alt={`${firstname} ${lastname}`}
-              src={avatar}
+              src={profilePictureUrl}
               name={`${firstname} ${lastname}`}
             />
 

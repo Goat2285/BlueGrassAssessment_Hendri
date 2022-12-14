@@ -1,5 +1,4 @@
 import * as Yup from 'yup';
-import { useAuthContext } from 'src/auth/useAuthContext';
 import FormProvider, { RHFSelect, RHFTextField } from 'src/components/hook-form';
 import { CustomFile } from 'src/components/upload';
 import { useForm } from 'react-hook-form';
@@ -11,34 +10,60 @@ import { RHFUploadAvatar } from 'src/components/hook-form/RHFUpload';
 import { fData } from 'src/utils/formatNumber';
 import { useGetRoles } from 'src/hooks/api/roles/useGetRoles';
 import { LoadingButton } from '@mui/lab';
+import LoadingScreen from 'src/components/loading-screen';
+import { usePutProfile } from 'src/hooks/api/account/usePutProfile';
 
 type FormValuesProps = {
-  fullname: string;
-  email: string;
-  role: string;
-  avatar?: CustomFile | string | null;
+  firstname: string;
+  lastname: string;
+  profilePictureUrl?: CustomFile | string | null;
 };
 
-export default function MyDetails() {
+type Props = {
+  firstname?: string;
+  lastname?: string;
+  email?: string;
+  role?: string;
+  profilePictureUrl?: CustomFile | string | null;
+  roles?: string[];
+  refetch: () => void;
+};
+
+export default function MyDetails({
+  firstname,
+  lastname,
+  email,
+  role,
+  profilePictureUrl,
+  roles,
+  refetch,
+}: Props) {
   const { enqueueSnackbar } = useSnackbar();
 
-  const { user } = useAuthContext();
-
-  const { data: roles } = useGetRoles();
-
-  const schema = Yup.object().shape({
-    fullname: Yup.string().required('Name is required'),
-    email: Yup.string().email('Email must be a valid email address').required('Email is required'),
-    role: Yup.string().required('Role is required'),
+  const { mutate: updateSubmit } = usePutProfile({
+    onSuccess: () => {
+      refetch();
+      enqueueSnackbar('Profile details has been updated!');
+    },
+    onError: () => {
+      enqueueSnackbar('Error, profile details not updated!', { variant: 'error' });
+    },
   });
 
-  // Need to be changed
+  const schema = Yup.object().shape({
+    firstname: Yup.string().required('First name is required'),
+    lastname: Yup.string().required('Last name is required'),
+    // email: Yup.string().email('Email must be a valid email address').required('Email is required'),
+    // role: Yup.string().required('Role is required'),
+    profilePictureUrl: Yup.string().nullable(),
+  });
 
   const defaultValues = {
-    fullname: user?.fullname || 'Adrian Stefan',
-    email: user?.email || 'adrian@fertility.com',
-    role: user?.role || 'Doctor',
-    avatar: user?.avatar || '',
+    firstname,
+    lastname,
+    email,
+    role,
+    profilePictureUrl: profilePictureUrl || null,
   };
 
   const methods = useForm<FormValuesProps>({
@@ -61,31 +86,26 @@ export default function MyDetails() {
       });
 
       if (file) {
-        setValue('avatar', newFile);
+        setValue('profilePictureUrl', newFile);
       }
     },
     [setValue]
   );
 
   const onSubmit = async (data: FormValuesProps) => {
-    try {
-      await new Promise((resolve) => setTimeout(resolve, 500));
-      enqueueSnackbar('Update success!');
-    } catch (error) {
-      console.error(error);
-    }
+    updateSubmit(data);
   };
 
   return (
     <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
       <Grid container spacing={3}>
         <Grid item xs={12} md={4}>
-          <Card sx={{ py: 10, px: 3, textAlign: 'center' }}>
+          <Card sx={{ py: 10, px: 3, textAlign: 'center', height: '100%' }}>
             <Typography variant="h6" sx={{ mb: 3 }}>
-              {user?.fullname || 'Adrian Stefan'}
+              {`${firstname} ${lastname}`}
             </Typography>
             <RHFUploadAvatar
-              name="avatar"
+              name="profilePictureUrl"
               maxSize={3145728}
               onDrop={handleDrop}
               helperText={
@@ -111,9 +131,10 @@ export default function MyDetails() {
           <Card sx={{ p: 3, pt: 6 }}>
             <Typography variant="h6">My Details</Typography>
             <Stack spacing={3} sx={{ pt: 4, mb: '20px' }}>
-              <RHFTextField name="fullname" label="Fullname" />
-              <RHFTextField name="email" label="Email" />
-              <RHFSelect name="role" label="Role">
+              <RHFTextField name="firstname" label="First name" />
+              <RHFTextField name="lastname" label="Last name" />
+              <RHFTextField name="email" label="Email" disabled />
+              <RHFSelect name="role" label="Role" disabled>
                 <option />
                 {roles?.map((role) => (
                   <option key={role} value={role}>

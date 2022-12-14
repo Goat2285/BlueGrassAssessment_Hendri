@@ -1,7 +1,11 @@
 import { Box, Stack, Tab, Tabs } from '@mui/material';
+import { useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 import DashboardWelcome from 'src/components/dashboard-welcome';
 import Iconify from 'src/components/iconify';
+import LoadingScreen from 'src/components/loading-screen';
+import { useGetProfile } from 'src/hooks/api/account/useGetProfile';
+import { useGetRoles } from 'src/hooks/api/roles/useGetRoles';
 import { GREYS } from 'src/theme/palette';
 import MyDetails from './MyDetails';
 import Security from './Security';
@@ -9,12 +13,32 @@ import Security from './Security';
 export default function ClinicProfile() {
   const [currentTab, setCurrentTab] = useState('my-details');
 
+  const queryClient = useQueryClient();
+
+  const { data: profile, isLoading } = useGetProfile();
+
+  const { data: roles } = useGetRoles();
+
+  const refetch = () => {
+    queryClient.refetchQueries(['getProfile']);
+  };
+
   const TABS = [
     {
       value: 'my-details',
       label: 'My Details',
       icon: <Iconify icon="uil:user" />,
-      component: <MyDetails />,
+      component: (
+        <MyDetails
+          firstname={profile?.firstname}
+          lastname={profile?.lastname}
+          email={profile?.email}
+          role={profile?.roles[0]}
+          profilePictureUrl={profile?.profilePictureUrl}
+          roles={roles}
+          refetch={refetch}
+        />
+      ),
     },
     {
       value: 'security',
@@ -23,6 +47,8 @@ export default function ClinicProfile() {
       component: <Security />,
     },
   ];
+
+  if (isLoading) return <LoadingScreen />;
 
   return (
     <Stack>

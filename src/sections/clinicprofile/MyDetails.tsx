@@ -3,15 +3,14 @@ import FormProvider, { RHFSelect, RHFTextField } from 'src/components/hook-form'
 import { CustomFile } from 'src/components/upload';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useCallback } from 'react';
+import { useCallback, useReducer } from 'react';
 import { useSnackbar } from 'src/components/snackbar';
 import { Box, Card, Grid, Stack, Typography } from '@mui/material';
 import { RHFUploadAvatar } from 'src/components/hook-form/RHFUpload';
 import { fData } from 'src/utils/formatNumber';
-import { useGetRoles } from 'src/hooks/api/roles/useGetRoles';
 import { LoadingButton } from '@mui/lab';
-import LoadingScreen from 'src/components/loading-screen';
 import { usePutProfile } from 'src/hooks/api/account/usePutProfile';
+import { useAuthContext } from 'src/auth/useAuthContext';
 
 type FormValuesProps = {
   firstname: string;
@@ -40,9 +39,12 @@ export default function MyDetails({
 }: Props) {
   const { enqueueSnackbar } = useSnackbar();
 
+  const { initialize } = useAuthContext();
+
   const { mutate: updateSubmit } = usePutProfile({
     onSuccess: () => {
       refetch();
+      initialize();
       enqueueSnackbar('Profile details has been updated!');
     },
     onError: () => {
@@ -97,8 +99,6 @@ export default function MyDetails({
       lastname: data.lastname,
       profilePicture: data.profilePictureUrl,
     });
-    console.log('Data: ', data);
-    console.log('Put request: ', data.profilePictureUrl);
   };
 
   return (

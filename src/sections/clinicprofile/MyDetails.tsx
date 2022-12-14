@@ -55,7 +55,6 @@ export default function MyDetails({
     lastname: Yup.string().required('Last name is required'),
     // email: Yup.string().email('Email must be a valid email address').required('Email is required'),
     // role: Yup.string().required('Role is required'),
-    profilePictureUrl: Yup.string().nullable(),
   });
 
   const defaultValues = {
@@ -93,7 +92,13 @@ export default function MyDetails({
   );
 
   const onSubmit = async (data: FormValuesProps) => {
-    updateSubmit(data);
+    updateSubmit({
+      firstname: data.firstname,
+      lastname: data.lastname,
+      profilePicture: data.profilePictureUrl,
+    });
+    console.log('Data: ', data);
+    console.log('Put request: ', data.profilePictureUrl);
   };
 
   return (

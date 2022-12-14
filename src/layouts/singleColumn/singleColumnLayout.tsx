@@ -14,20 +14,20 @@ export default function SingleColumnLayout() {
         flexDirection: 'column',
         minHeight: '100vh',
         width: ' 100%',
-      }}   
+      }}
     >
       <Header />
-      <Container 
-        component="main"    
+      <Container
+        component="main"
         sx={{
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'center',
           alignItems: 'center',
-          flex: 1
+          flex: 1,
         }}
-      >       
-        <Outlet />     
+      >
+        <Outlet />
       </Container>
     </Box>
   );

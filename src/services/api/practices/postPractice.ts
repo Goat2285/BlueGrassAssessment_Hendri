@@ -9,7 +9,8 @@ export interface IPostPracticeRequest {
   email: string;
   telephone: string;
   status: boolean;
-  adminUserName: string;
+  adminFirstname: string;
+  adminLastname: string;
   adminEmail: string;
 }
 

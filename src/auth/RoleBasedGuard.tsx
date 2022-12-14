@@ -6,6 +6,7 @@ import { MotionContainer, varBounce } from '../components/animate';
 // assets
 
 import { useAuthContext } from './useAuthContext';
+import { ForbiddenIllustration } from 'src/assets/illustrations';
 
 // ----------------------------------------------------------------------
 
@@ -20,7 +21,7 @@ export default function RoleBasedGuard({ hasContent, roles, children }: RoleBase
   const { user } = useAuthContext();
 
   // const currentRole = 'user';
-  const currentRole = user?.role; // admin;
+  const currentRole = user?.user.roles[0]; // admin;
 
   if (typeof roles !== 'undefined' && !roles.includes(currentRole)) {
     return hasContent ? (
@@ -37,9 +38,9 @@ export default function RoleBasedGuard({ hasContent, roles, children }: RoleBase
           </Typography>
         </m.div>
 
-        {/* <m.div variants={varBounce().in}>
-        
-        </m.div> */}
+        <m.div variants={varBounce().in}>
+          <ForbiddenIllustration sx={{ height: 260, my: { xs: 5, sm: 10 } }} />
+        </m.div>
       </Container>
     ) : null;
   }

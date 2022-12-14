@@ -50,6 +50,7 @@ interface Props extends CardProps {
   hasPagination: boolean;
   hasMore: boolean;
   tableHeads: TableHead[];
+  refetch?: () => void;
 }
 
 export default function PractisesTable({
@@ -59,6 +60,7 @@ export default function PractisesTable({
   hasPagination,
   hasMore,
   tableHeads,
+  refetch,
   sx,
   ...other
 }: Props) {
@@ -90,6 +92,14 @@ export default function PractisesTable({
     setFilterPractiseName('');
   };
 
+  const handleCheckPageAfterDelete = () => {
+    if (page > 0) {
+      if (dataFiltered?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).length === 1) {
+        setPage(page - 1);
+      }
+    }
+  };
+
   return (
     <Card sx={sx} {...other}>
       {title ? <CardHeader title={title} sx={{ mb: 3 }} /> : null}
@@ -118,7 +128,12 @@ export default function PractisesTable({
                 {dataFiltered
                   ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((row) => (
-                    <PractiseTableRow key={row.id} row={row} />
+                    <PractiseTableRow
+                      key={row.id}
+                      row={row}
+                      refetch={refetch ? refetch : () => {}}
+                      checkPageAfterDelete={handleCheckPageAfterDelete}
+                    />
                   ))}
 
                 <TableEmptyRows
@@ -160,7 +175,7 @@ export default function PractisesTable({
               size="small"
               endIcon={<Iconify icon="eva:arrow-ios-forward-fill" />}
               onClick={() => {
-                navigate('/admin/logs');
+                navigate('/superadmin/dashboard/logs');
               }}
             >
               See All

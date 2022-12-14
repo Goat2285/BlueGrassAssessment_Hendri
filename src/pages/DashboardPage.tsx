@@ -1,8 +1,9 @@
 import { Helmet } from 'react-helmet-async';
 // @mui
-import { Container, Typography } from '@mui/material';
+import { Container } from '@mui/material';
 // components
 import { useSettingsContext } from '../components/settings';
+import Landing from 'src/sections/landing';
 
 // ----------------------------------------------------------------------
 
@@ -12,13 +13,11 @@ export default function DashboardPage() {
   return (
     <>
       <Helmet>
-        <title> Dashboard</title>
+        <title>Dashboard</title>
       </Helmet>
 
       <Container maxWidth={themeStretch ? false : 'xl'}>
-        <Typography variant="h3" component="h1" paragraph>
-          Dashboard Page
-        </Typography>
+        <Landing />
       </Container>
     </>
   );

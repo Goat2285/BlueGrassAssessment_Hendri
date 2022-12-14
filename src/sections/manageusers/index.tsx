@@ -95,6 +95,14 @@ export default function ManageUsers() {
     setFilterStatus('all users');
   };
 
+  const handleCheckPageAfterDelete = () => {
+    if (page > 0) {
+      if (dataFiltered?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).length === 1) {
+        setPage(page - 1);
+      }
+    }
+  };
+
   return (
     <>
       <Stack>
@@ -153,7 +161,13 @@ export default function ManageUsers() {
                     {dataFiltered
                       ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                       .map((row) => (
-                        <UserTableRow key={row.id} row={row} />
+                        <UserTableRow
+                          key={row.id}
+                          row={row}
+                          handleRefetch={refetch}
+                          checkPageAfterDelete={handleCheckPageAfterDelete}
+                          allRoles={roles}
+                        />
                       ))}
 
                     <TableEmptyRows

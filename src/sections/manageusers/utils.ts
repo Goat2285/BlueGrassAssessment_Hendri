@@ -27,9 +27,11 @@ export function applyFilter({
   }
 
   if (filterName) {
-    inputData = inputData?.filter(
-      (user) => user.name.toLowerCase().indexOf(filterName.toLowerCase()) !== -1
-    );
+    inputData = inputData?.filter((user) => {
+      const fullname = `${user.firstname} ${user.lastname}`;
+
+      return fullname.toLowerCase().indexOf(filterName.toLowerCase()) !== -1;
+    });
   }
 
   return inputData;

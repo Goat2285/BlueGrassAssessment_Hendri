@@ -47,8 +47,9 @@ export default function Main({ children, sx, ...other }: BoxProps) {
         flexGrow: 1,
         py: `${HEADER.H_MOBILE + SPACING}px`,
         minHeight: '100vh',
+        px: 3,
         ...(isDesktop && {
-          px: 2,
+          px: 5,
           py: `${HEADER.H_DASHBOARD_DESKTOP + SPACING}px`,
           width: `calc(100% - ${NAV.W_DASHBOARD}px)`,
           ...(isNavMini && {

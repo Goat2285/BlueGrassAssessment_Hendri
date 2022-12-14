@@ -1,4 +1,5 @@
 import { Theme } from '@mui/material/styles';
+import { GREYS } from '../palette';
 
 // ----------------------------------------------------------------------
 
@@ -8,6 +9,9 @@ export default function Table(theme: Theme) {
       styleOverrides: {
         root: {
           position: 'relative',
+          '& .MuiTableCell-head': {
+            padding: '17px 8px 17px 16px',
+          },
         },
       },
     },
@@ -27,6 +31,8 @@ export default function Table(theme: Theme) {
       styleOverrides: {
         root: {
           borderBottom: 'none',
+          padding: '5px 8px 5px 20px',
+          color: GREYS.grey1,
         },
         head: {
           color: theme.palette.text.secondary,

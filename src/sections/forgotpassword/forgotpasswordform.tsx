@@ -4,15 +4,14 @@ import { LoadingButton } from '@mui/lab';
 import FormProvider, { RHFTextField } from '../../components/hook-form';
 
 export type ForgotpasswordFormProps = {
-  handleSubmit: any;
-  onSubmit: any;
-  methods: any;
-  errors: any;
-  isSubmitting: boolean;
-  isSubmitSuccessful: boolean;
+  handleSubmit?: any;
+  onSubmit?: any;
+  methods?: any;
+  errors?: any;
+  isSubmitting?: boolean;
 };
 
-export default function ForgotpasswordForm({ handleSubmit, onSubmit, methods, errors, isSubmitting, isSubmitSuccessful }: ForgotpasswordFormProps) {
+export default function ForgotpasswordForm({ handleSubmit, onSubmit, methods, errors, isSubmitting }: ForgotpasswordFormProps) {
 
   return (
     <Box sx={{ width: '100%' }}>
@@ -28,7 +27,7 @@ export default function ForgotpasswordForm({ handleSubmit, onSubmit, methods, er
             size="large"
             type="submit"
             variant="contained"
-            loading={isSubmitSuccessful || isSubmitting}
+            loading={isSubmitting}
             sx={{
               bgcolor: 'primary.main',
               color: (theme) => (theme.palette.mode === 'light' ? 'common.white' : 'grey.800'),

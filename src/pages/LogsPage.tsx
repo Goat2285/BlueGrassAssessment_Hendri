@@ -12,7 +12,7 @@ export default function LogsPage() {
   return (
     <>
       <Helmet>
-        <title> Logs</title>
+        <title>Logs</title>
       </Helmet>
 
       <Container maxWidth={themeStretch ? false : 'xl'}>

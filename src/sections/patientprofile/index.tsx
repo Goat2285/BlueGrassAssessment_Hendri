@@ -44,7 +44,19 @@ export default function PatientProfile() {
       value: 'partner-2',
       label: 'Partner 2',
       icon: <Iconify icon="uil:users-alt" />,
-      component: <PartnerInfo />,
+      component: (
+        <PartnerInfo
+          firstName={profile?.partner.firstName}
+          lastName={profile?.partner.lastName}
+          email={profile?.partner.email}
+          contactNumber={profile?.partner.contactNumber}
+          nationality={profile?.partner.nationality}
+          idOrPassport={profile?.partner.idOrPassport}
+          address={profile?.partner.address}
+          dateOfBirth={profile?.partner.dateOfBirth}
+          refetch={refetch}
+        />
+      ),
     },
     {
       value: 'security',

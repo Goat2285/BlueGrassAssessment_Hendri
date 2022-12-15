@@ -3,40 +3,60 @@ import { Box, Card, Grid, Stack, Typography } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useSnackbar } from 'src/components/snackbar';
-import { useAuthContext } from 'src/auth/useAuthContext';
 import FormProvider, { RHFDatePicker, RHFSelect, RHFTextField } from 'src/components/hook-form';
 import { LoadingButton } from '@mui/lab';
+import { usePutPatientPartnerDetails } from 'src/hooks/api/patients/usePuPatientPartnerDetails';
 const southAfricanIdInfo = require('south-african-id-info');
 
 type FormValuesProps = {
-  firstname: string;
-  lastname: string;
+  firstName: string;
+  lastName: string;
   email: string;
-  contactnumber: string;
+  contactNumber: string;
   nationality: string;
-  idnumber: number;
+  idOrPassport: string;
   address: string;
-  dateofbirth: string;
+  dateOfBirth: string;
 };
 
-export default function PartnerInfo() {
+type Props = {
+  firstName?: string;
+  lastName?: string;
+  email?: string;
+  contactNumber?: string;
+  nationality?: string;
+  idOrPassport?: string;
+  address?: string;
+  dateOfBirth?: string;
+  refetch: () => void;
+};
+
+export default function PartnerInfo({
+  firstName,
+  lastName,
+  email,
+  contactNumber,
+  nationality,
+  idOrPassport,
+  address,
+  dateOfBirth,
+  refetch,
+}: Props) {
   const phoneRegex = /^\+[1-9]{1}[0-9 | \s]{3,14}$/;
   const maxDate = new Date();
 
   const { enqueueSnackbar } = useSnackbar();
 
-  const { user } = useAuthContext();
-
   const schema = Yup.object().shape({
-    firstname: Yup.string().required('First name is required'),
-    lastname: Yup.string().required('Last name is required'),
+    firstName: Yup.string().required('First name is required'),
+    lastName: Yup.string().required('Last name is required'),
     email: Yup.string().email('Email must be a valid email address').required('Email is required'),
-    contactnumber: Yup.string()
+    contactNumber: Yup.string()
       .trim()
       .matches(phoneRegex, 'Please use the following format: +27 72 000 0000')
       .required('Contact number is required'),
     nationality: Yup.string().required('Nationality is required'),
-    idnumber: Yup.string().when('nationality', {
+    idOrPassport: Yup.string().when('nationality', {
       is: 'South African',
       then: Yup.string()
         .test('validator-custom-name', (value, { createError, path }) => {
@@ -51,23 +71,35 @@ export default function PartnerInfo() {
       otherwise: Yup.string().required('ID or Passport number is required'),
     }),
     address: Yup.string().required('Address is required'),
-    dateofbirth: Yup.date()
-      .required('Date of birth is required')
-      .max(maxDate, 'Date of birth needs to be in the past')
-      .nullable(true),
+    dateOfBirth: Yup.mixed().when('hasnopartner', {
+      is: true,
+      then: Yup.string().nullable(true),
+      otherwise: Yup.date()
+        .required('Date of birth is required')
+        .max(maxDate, 'Date of birth needs to be in the past')
+        .nullable(true),
+    }),
   });
 
-  // After we implement auth remove dummy data
+  const { mutate: postSubmit } = usePutPatientPartnerDetails({
+    onSuccess: () => {
+      enqueueSnackbar('Partner details has been added!');
+      refetch();
+    },
+    onError: () => {
+      enqueueSnackbar('Error, partner details not added!', { variant: 'error' });
+    },
+  });
 
   const defaultValues = {
-    firstname: user?.partner?.firstname || 'Robert',
-    lastname: user?.partner?.lastname || 'Kennedy',
-    email: user?.partner?.email || 'tracyk321@gmail.com',
-    contactnumber: user?.partner?.contactnumber || '+27 79 384 0029',
-    nationality: user?.partner?.nationality || 'South African',
-    idnumber: user?.partner?.idnumber || 8511055123085,
-    address: user?.partner?.address || '47 Strawberry Lane, Constantia, Cape Town, 7806',
-    dateofbirth: user?.partner?.dateofbirth || '1981-09-22',
+    firstName: firstName || '',
+    lastName: lastName || '',
+    email: email || '',
+    contactNumber: contactNumber || '',
+    nationality: nationality || '',
+    idOrPassport: idOrPassport || '',
+    address: address || '',
+    dateOfBirth: firstName ? dateOfBirth : '',
   };
 
   const methods = useForm<FormValuesProps>({
@@ -81,12 +113,7 @@ export default function PartnerInfo() {
   } = methods;
 
   const onSubmit = async (data: FormValuesProps) => {
-    try {
-      await new Promise((resolve) => setTimeout(resolve, 500));
-      enqueueSnackbar('Update success!');
-    } catch (error) {
-      console.error(error);
-    }
+    postSubmit(data);
   };
 
   return (
@@ -96,16 +123,16 @@ export default function PartnerInfo() {
         <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
           <Grid container spacing={3} sx={{ pt: 3, mb: 3 }}>
             <Grid item xs={12} md={6}>
-              <RHFTextField name="firstname" label="First Name" />
+              <RHFTextField name="firstName" label="First Name" />
             </Grid>
             <Grid item xs={12} md={6}>
-              <RHFTextField name="lastname" label="Last Name" />
+              <RHFTextField name="lastName" label="Last Name" />
             </Grid>
             <Grid item xs={12} md={6}>
               <RHFTextField name="email" label="Email" />
             </Grid>
             <Grid item xs={12} md={6}>
-              <RHFTextField name="contactnumber" label="Contact Number" />
+              <RHFTextField name="contactNumber" label="Contact Number" />
             </Grid>
             <Grid item xs={12} md={6}>
               <RHFSelect name="nationality" label="Nationality" variant={'outlined'}>
@@ -115,13 +142,13 @@ export default function PartnerInfo() {
               </RHFSelect>
             </Grid>
             <Grid item xs={12} md={6}>
-              <RHFTextField name="idnumber" label="ID / Passport Number" />
+              <RHFTextField name="idOrPassport" label="ID / Passport Number" />
             </Grid>
             <Grid item xs={12} md={6}>
               <RHFTextField name="address" label="Address" />
             </Grid>
             <Grid item xs={12} md={6}>
-              <RHFDatePicker name="dateofbirth" label="Date of Birth" />
+              <RHFDatePicker name="dateOfBirth" label="Date of Birth" />
             </Grid>
           </Grid>
           <Box sx={{ textAlign: 'end' }}>

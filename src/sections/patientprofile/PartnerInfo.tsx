@@ -113,13 +113,7 @@ export default function PartnerInfo({
   } = methods;
 
   const onSubmit = async (data: FormValuesProps) => {
-    console.log(data);
-
     postSubmit(data);
-
-    console.log('After submit');
-
-    console.log(data);
   };
 
   return (

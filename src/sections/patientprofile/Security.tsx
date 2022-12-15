@@ -6,25 +6,26 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { Grid, Card, Typography, Stack, Box } from '@mui/material';
 import Iconify from 'src/components/iconify';
 import { LoadingButton } from '@mui/lab';
+import { usePostUpdatePassword } from 'src/hooks/api/auth/usePostUpdatePassword';
 
 type FormValuesProps = {
-  newPassword: string;
-  confirmNewPassword: string;
+  password: string;
+  confirmPassword: string;
 };
 
 export default function Security() {
   const { enqueueSnackbar } = useSnackbar();
 
   const schema = Yup.object().shape({
-    newPassword: Yup.string()
+    password: Yup.string()
       .required('Password is required')
       .min(8, 'Please use a password that is minimum 8 characters'),
-    confirmNewPassword: Yup.string().oneOf([Yup.ref('newPassword'), null], 'Passwords must match'),
+    confirmPassword: Yup.string().oneOf([Yup.ref('password'), null], 'Passwords must match'),
   });
 
   const defaultValues = {
-    newPassword: '',
-    confirmNewPassword: '',
+    password: '',
+    confirmPassword: '',
   };
 
   const methods = useForm({
@@ -38,14 +39,18 @@ export default function Security() {
     formState: { isSubmitting },
   } = methods;
 
-  const onSubmit = async (data: FormValuesProps) => {
-    try {
-      await new Promise((resolve) => setTimeout(resolve, 500));
+  const { mutate: postSubmit } = usePostUpdatePassword({
+    onSuccess: () => {
       reset();
-      enqueueSnackbar('Update success!');
-    } catch (error) {
-      console.error(error);
-    }
+      enqueueSnackbar('Password has been updated!');
+    },
+    onError: () => {
+      enqueueSnackbar('Error, password not updated!', { variant: 'error' });
+    },
+  });
+
+  const onSubmit = async (data: FormValuesProps) => {
+    postSubmit(data);
   };
 
   return (
@@ -56,7 +61,7 @@ export default function Security() {
             <Typography variant="h6">Security</Typography>
             <Stack spacing={3} sx={{ pt: 3, mb: 3 }}>
               <RHFTextField
-                name="newPassword"
+                name="password"
                 type="password"
                 label="New Password"
                 helperText={
@@ -73,11 +78,7 @@ export default function Security() {
                 }
               />
 
-              <RHFTextField
-                name="confirmNewPassword"
-                type="password"
-                label="Confirm New Password"
-              />
+              <RHFTextField name="confirmPassword" type="password" label="Confirm New Password" />
             </Stack>
             <Box sx={{ textAlign: 'end' }}>
               <LoadingButton

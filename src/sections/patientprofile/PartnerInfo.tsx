@@ -5,7 +5,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useSnackbar } from 'src/components/snackbar';
 import FormProvider, { RHFDatePicker, RHFSelect, RHFTextField } from 'src/components/hook-form';
 import { LoadingButton } from '@mui/lab';
-import { usePutPatientPartnerDetails } from 'src/hooks/api/patients/usePuPatientPartnerDetails';
+import { usePutPatientPartnerDetails } from 'src/hooks/api/patients/usePutPatientPartnerDetails';
 const southAfricanIdInfo = require('south-african-id-info');
 
 type FormValuesProps = {
@@ -113,7 +113,13 @@ export default function PartnerInfo({
   } = methods;
 
   const onSubmit = async (data: FormValuesProps) => {
+    console.log(data);
+
     postSubmit(data);
+
+    console.log('After submit');
+
+    console.log(data);
   };
 
   return (

@@ -14,9 +14,14 @@ export interface IPutPatientPartnerDetailsRequest {
 export const putPatientPartnerDetails = async (
   patientPartnerData: IPutPatientPartnerDetailsRequest
 ): Promise<any> => {
+  console.log('Patient partner data above fn');
+  console.log(patientPartnerData);
   const { data } = await axiosRequest('PUT', '/api/Patient/Profile/PartnerDetails', {
     data: patientPartnerData,
   });
+
+  console.log('putPatientPartnerDetails');
+  console.log(data);
 
   return data;
 };

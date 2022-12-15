@@ -1,7 +1,10 @@
 import { Box, Stack, Tab, Tabs } from '@mui/material';
+import { useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 import DashboardWelcome from 'src/components/dashboard-welcome';
 import Iconify from 'src/components/iconify';
+import LoadingScreen from 'src/components/loading-screen';
+import { useGetPatientProfile } from 'src/hooks/api/patients/useGetPatientProfile';
 import { GREYS } from 'src/theme/palette';
 import PartnerInfo from './PartnerInfo';
 import PersonalInfo from './PersonalInfo';
@@ -10,12 +13,32 @@ import Security from './Security';
 export default function PatientProfile() {
   const [currentTab, setCurrentTab] = useState('partner-1');
 
+  const queryClient = useQueryClient();
+
+  const { data: profile, isLoading } = useGetPatientProfile();
+
+  const refetch = () => {
+    queryClient.refetchQueries(['getPatientProfile']);
+  };
+
   const TABS = [
     {
       value: 'partner-1',
       label: 'Partner 1',
       icon: <Iconify icon="uil:user" />,
-      component: <PersonalInfo />,
+      component: (
+        <PersonalInfo
+          firstName={profile?.firstName}
+          lastName={profile?.lastName}
+          email={profile?.email}
+          contactNumber={profile?.contactNumber}
+          nationality={profile?.nationality}
+          idOrPassport={profile?.idOrPassport}
+          address={profile?.address}
+          dateOfBirth={profile?.dateOfBirth}
+          refetch={refetch}
+        />
+      ),
     },
     {
       value: 'partner-2',
@@ -30,6 +53,8 @@ export default function PatientProfile() {
       component: <Security />,
     },
   ];
+
+  if (isLoading) return <LoadingScreen />;
 
   return (
     <Stack>

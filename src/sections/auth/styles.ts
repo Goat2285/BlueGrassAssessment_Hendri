@@ -7,7 +7,5 @@ export const StylesGettingStarted = styled('div')(({ theme }) => ({
   [theme.breakpoints.up('sm')]: {    
     right: 40,
     top: 40,
-  },
-
-  
+  }, 
 }));

@@ -74,3 +74,11 @@ export const setSession = (accessToken: string | null) => {
     delete axios.defaults.headers.common.Authorization;
   }
 };
+
+export const getCookie = (cname: string) => {
+  console.log(document)
+  var matches = document.cookie.match(new RegExp(
+    '(?:^|; )' + cname.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + '=([^;]*)' // eslint-disable-line
+  ))
+  return matches ? decodeURIComponent(matches[1]) : undefined
+}

@@ -8,7 +8,8 @@ import { usePostUser } from 'src/hooks/api/users/usePostUser';
 
 type UserFormProps = {
   email: string;
-  fullname: string;
+  firstName: string;
+  lastName: string;
   role: string;
 };
 
@@ -20,7 +21,8 @@ type Props = {
 
 export default function UserAddForm({ closeDialog, refetch, roles }: Props) {
   const schema = Yup.object().shape({
-    fullname: Yup.string().required('Fullname is required'),
+    firstName: Yup.string().required('First name is required'),
+    lastName: Yup.string().required('Last name is required'),
     email: Yup.string().email('Email must be a valid email address').required('Email is required'),
     role: Yup.string().required('Role is required'),
   });
@@ -38,7 +40,8 @@ export default function UserAddForm({ closeDialog, refetch, roles }: Props) {
   });
 
   const defaultValues = {
-    fullname: '',
+    firstName: '',
+    lastName: '',
     email: '',
     role: '',
   };
@@ -59,9 +62,10 @@ export default function UserAddForm({ closeDialog, refetch, roles }: Props) {
     <Box sx={{ width: '100%' }}>
       <FormProvider methods={methods}>
         <Stack spacing={3}>
-          <RHFTextField name="fullname" label="Full Name" />
+          <RHFTextField name="firstName" label="First Name" />
+          <RHFTextField name="lastName" label="Last Name" />
           <RHFTextField name="email" label="Email" />
-          <RHFSelect name="role" label="Role">
+          <RHFSelect name="role" label="Select Role">
             <option />
             {roles?.map((role) => (
               <option key={role} value={role}>

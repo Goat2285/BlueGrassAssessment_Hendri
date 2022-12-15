@@ -2,7 +2,7 @@ import { Typography, Button, Box } from "@mui/material";
 import Updatepasswordform, { UpdatepasswordformProps } from './updatepasswordform';
 import { useNavigate } from 'react-router-dom';
 
-export default function ForgotPassWordStep1({ handleSubmit, onSubmit, methods, errors, isSubmitting, isSubmitSuccessful }: UpdatepasswordformProps){
+export default function ForgotPassWordStep1({ handleSubmit, onSubmit, methods, errors, isSubmitting }: UpdatepasswordformProps){
   const navigate = useNavigate();
 
   return (
@@ -16,8 +16,7 @@ export default function ForgotPassWordStep1({ handleSubmit, onSubmit, methods, e
         onSubmit={onSubmit} 
         methods={methods} 
         errors={errors} 
-        isSubmitting={isSubmitting} 
-        isSubmitSuccessful={isSubmitSuccessful} 
+        isSubmitting={isSubmitting}
       />
       <Button 
         variant="text" 

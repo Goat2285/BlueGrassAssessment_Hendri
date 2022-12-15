@@ -16,6 +16,7 @@ import { HelmetProvider } from 'react-helmet-async';
 import { SettingsProvider } from './components/settings';
 import ScrollToTop from './components/scroll-to-top';
 
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 // Check our docs
 // https://docs.minimals.cc/authentication/ts-version
 
@@ -41,6 +42,7 @@ root.render(
           <BrowserRouter>
             <ScrollToTop />
             <App />
+            <ReactQueryDevtools initialIsOpen={false} />
           </BrowserRouter>
         </SettingsProvider>
       </HelmetProvider>

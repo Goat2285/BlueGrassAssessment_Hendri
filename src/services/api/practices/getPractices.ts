@@ -10,6 +10,9 @@ export interface IPracticeResponse {
   telephone?: string;
   id: number;
   createDate: string;
+  adminFirstname: string;
+  adminLastname: string;
+  adminEmail: string;
 }
 
 export const getPractices = async (): Promise<IPracticeResponse[]> => {

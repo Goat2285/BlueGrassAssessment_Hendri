@@ -1,8 +1,9 @@
 import { Helmet } from 'react-helmet-async';
 // @mui
-import { Container, Typography } from '@mui/material';
+import { Container } from '@mui/material';
 // components
 import { useSettingsContext } from '../components/settings';
+import ClinicProfile from 'src/sections/clinicprofile';
 
 // ----------------------------------------------------------------------
 
@@ -16,9 +17,7 @@ export default function ProfilePage() {
       </Helmet>
 
       <Container maxWidth={themeStretch ? false : 'xl'}>
-        <Typography variant="h3" component="h1" paragraph>
-          Profile Page
-        </Typography>
+        <ClinicProfile />
       </Container>
     </>
   );

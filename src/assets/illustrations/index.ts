@@ -1,4 +1,6 @@
 export { default as DashboardIllustration } from './DashboardIllustration';
+export { default as BackgroundIllustration } from './BackgroundIllustration';
+export { default as UploadIllustration } from './UploadIllustration';
 export { default as StethoscopeIllustration } from './StethoscopeIllustration';
 export { default as ConsentsIllustration } from './ConsentsIllustration';
 export { default as TreatmentsIllustration } from './TreatmentsIllustration';

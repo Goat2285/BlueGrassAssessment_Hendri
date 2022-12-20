@@ -182,6 +182,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
         login,
         logout,
         register,
+        initialize,
       }}
     >
       {children}

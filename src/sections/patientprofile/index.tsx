@@ -6,6 +6,7 @@ import Iconify from 'src/components/iconify';
 import LoadingScreen from 'src/components/loading-screen';
 import { useGetPatientProfile } from 'src/hooks/api/patients/useGetPatientProfile';
 import { GREYS } from 'src/theme/palette';
+import ClinicInfo from './ClinicInfo';
 import PartnerInfo from './PartnerInfo';
 import PersonalInfo from './PersonalInfo';
 import Security from './Security';
@@ -57,6 +58,12 @@ export default function PatientProfile() {
           refetch={refetch}
         />
       ),
+    },
+    {
+      value: 'clinic',
+      label: 'Clinic',
+      icon: <Iconify icon="icon-park-outline:hospital-two" />,
+      component: <ClinicInfo clinic={'Cape Fertility Clinic'} />,
     },
     {
       value: 'security',

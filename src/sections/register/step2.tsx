@@ -109,6 +109,7 @@ export default function RegisterStep2({
   const { mutate: postSubmit } = usePostPartnerDetails({
     onSuccess: () => {
       enqueueSnackbar('Partner details has been added!');
+      refetch();
       setCurrentStep(2);
     },
     onError: () => {
@@ -125,7 +126,7 @@ export default function RegisterStep2({
     idOrPassport: idOrPassport || '',
     address: address || '',
     dateOfBirth: idOrPassport ? dateOfBirth : '',
-    hasnopartner: false,
+    hasnopartner: firstName ? false : true,
   };
 
   const methods = useForm<FormValuesProps>({
@@ -147,6 +148,9 @@ export default function RegisterStep2({
     const postData = Object.assign(data, {
       memberKey,
       token,
+      dateOfBirth: data.dateOfBirth
+        ? new Date(data.dateOfBirth).toISOString().substring(0, 10)
+        : '2022-12-23T14:01:23.635Z',
       hasPartner: !hasNoPartnerWatcher,
     });
 

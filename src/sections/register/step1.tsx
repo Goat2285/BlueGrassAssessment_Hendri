@@ -106,6 +106,7 @@ export default function RegisterStep1({
     const postData = Object.assign(data, {
       memberKey,
       token,
+      dateOfBirth: new Date(data.dateOfBirth).toISOString().substring(0, 10),
     });
     postSubmit(postData);
   };

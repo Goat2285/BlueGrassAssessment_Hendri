@@ -65,7 +65,7 @@ export default function UpdatePassword() {
   } = methods;
 
   const values = watch();
-  const { isError, isSuccess, data, error, refetch, isFetching } = useUpdatePasswordWithToken({
+  const { isError, isSuccess, error, refetch, isFetching } = useUpdatePasswordWithToken({
     ...values,
     userId: userDetails.userId,
     token: userDetails.token,

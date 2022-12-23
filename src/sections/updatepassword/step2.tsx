@@ -1,8 +1,8 @@
-import { Typography, Button, Box } from "@mui/material";
+import { Typography, Button, Box } from '@mui/material';
 import Image from '../../components/image';
 import { useNavigate } from 'react-router-dom';
 
-export default function ForgotPassWordStep2(){
+export default function ForgotPassWordStep2() {
   const navigate = useNavigate();
   return (
     <>
@@ -14,21 +14,24 @@ export default function ForgotPassWordStep2(){
         sx={{ width: 195 }}
         objectFit={'contain'}
       />
-      <Box sx={{ m: 2 }}/>
+      <Box sx={{ m: 2 }} />
       <Typography variant="h3">Password Updated</Typography>
-      <Box sx={{ m: 1 }}/>
-      <Typography variant="body1" color='text.secondary' sx={{ textAlign: 'center' }}>Your password has been successfully updated. Please proceed to the login screen and sign in using your new password.</Typography>
-      <Box sx={{ mb: 5 }}/>
-      <Button 
-        variant="contained" 
-        size="large" 
+      <Box sx={{ m: 1 }} />
+      <Typography variant="body1" color="text.secondary" sx={{ textAlign: 'center' }}>
+        Your password has been successfully updated. Please proceed to the login screen and sign in
+        using your new password.
+      </Typography>
+      <Box sx={{ mb: 5 }} />
+      <Button
+        variant="contained"
+        size="large"
         sx={{ width: '100%' }}
-        onClick={()=>{
+        onClick={() => {
           navigate('/login');
         }}
       >
-        Continue      
+        Continue
       </Button>
     </>
-  )
+  );
 }

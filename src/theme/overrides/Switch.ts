@@ -36,6 +36,7 @@ export default function Switch(theme: Theme) {
     '& .MuiSwitch-switchBase': {
       left: 2,
       padding: 12,
+      top: -3,
       ...(ownerState.size === 'small' && {
         padding: 7,
       }),

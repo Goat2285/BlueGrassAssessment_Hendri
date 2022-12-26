@@ -35,8 +35,8 @@ export default function Table(theme: Theme) {
           color: GREYS.grey1,
         },
         head: {
-          color: theme.palette.text.secondary,
-          backgroundColor: theme.palette.background.neutral,
+          color: theme.palette.grey[600],
+          backgroundColor: theme.palette.grey[100],
           '&:first-of-type': {
             borderTopLeftRadius: 8,
             borderBottomLeftRadius: 8,

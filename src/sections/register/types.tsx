@@ -23,6 +23,7 @@ export type Step1Props = {
   dateOfBirth?: string;
   memberKey: string;
   token: string;
+  refetch: () => void;
 };
 
 export type Step2Props = {

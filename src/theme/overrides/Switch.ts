@@ -19,7 +19,8 @@ export default function Switch(theme: Theme) {
       width: 14,
       height: 14,
       boxShadow: 'none',
-      color: `${theme.palette.common.white} !important`,
+      transform: 'scale(1.4)',
+      color: `${theme.palette.grey[100]} !important`,
       ...(ownerState.size === 'small' && {
         width: 10,
         height: 10,
@@ -29,10 +30,13 @@ export default function Switch(theme: Theme) {
       opacity: 1,
       borderRadius: 14,
       backgroundColor: alpha(theme.palette.grey[500], 0.48),
+      width: '36px',
+      height: '14px',
     },
     '& .MuiSwitch-switchBase': {
-      left: 3,
+      left: 2,
       padding: 12,
+      top: -3,
       ...(ownerState.size === 'small' && {
         padding: 7,
       }),
@@ -42,6 +46,9 @@ export default function Switch(theme: Theme) {
         ...(ownerState.size === 'small' && {
           transform: 'translateX(9px)',
         }),
+        '& .MuiSwitch-thumb': {
+          color: `${theme.palette.primary.main} !important`,
+        },
       },
       '&.Mui-disabled': {
         '& .MuiSwitch-thumb': { opacity: isLight ? 1 : 0.48 },

@@ -35,11 +35,7 @@ export default function Register() {
   };
 
   const userDetails = useMemo(() => getURLValues(), []);
-  const {
-    data: patientInfo,
-    isLoading,
-    isRefetching,
-  } = useGetPatientInfo({
+  const { data: patientInfo, isLoading } = useGetPatientInfo({
     memberKey: userDetails.userId,
     token: userDetails.token,
   });
@@ -48,7 +44,7 @@ export default function Register() {
     queryClient.refetchQueries(['getPatientInfo']);
   };
 
-  if (isLoading || isRefetching) return <LoadingScreen />;
+  if (isLoading) return <LoadingScreen />;
 
   return (
     <Stack
@@ -100,6 +96,7 @@ export default function Register() {
           dateOfBirth={patientInfo?.dateOfBirth}
           memberKey={userDetails.userId}
           token={userDetails.token}
+          refetch={refetch}
         />
       ) : null}
       {currentStep === 1 ? (

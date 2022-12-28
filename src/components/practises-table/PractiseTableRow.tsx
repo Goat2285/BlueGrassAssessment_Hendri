@@ -1,6 +1,6 @@
 import { RowProps } from './PractisesTable';
 // @mui
-import { Stack, TableRow, TableCell, Typography } from '@mui/material';
+import { Stack, TableRow, TableCell, Typography, alpha } from '@mui/material';
 // form
 import { useForm } from 'react-hook-form';
 // components
@@ -115,7 +115,21 @@ export default function PractiseTableRow({ row, refetch, checkPageAfterDelete }:
 
         <TableCell align="left">
           <FormProvider methods={methods} onChange={handleSubmit(onChange)}>
-            <RHFSwitch name="status" labelPlacement="end" label={status ? 'Active' : 'Disabled'} />
+            <RHFSwitch
+              name="status"
+              labelPlacement="end"
+              label={status ? 'Active' : 'Disabled'}
+              sx={{
+                '& .MuiSwitch-root': {
+                  '& .MuiSwitch-track': {
+                    backgroundColor: (theme) => alpha(theme.palette.grey[500], 0.8),
+                  },
+                  '& .Mui-checked + .MuiSwitch-track': {
+                    backgroundColor: (theme) => alpha(theme.palette.primary.main, 0.32),
+                  },
+                },
+              }}
+            />
           </FormProvider>
         </TableCell>
 

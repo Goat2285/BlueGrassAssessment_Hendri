@@ -35,6 +35,7 @@ export default function RegisterStep1({
   dateOfBirth,
   memberKey,
   token,
+  refetch,
 }: Step1Props) {
   const navigate = useNavigate();
   const phoneRegex = /^\+[1-9]{1}[0-9 | \s]{3,14}$/;
@@ -75,6 +76,7 @@ export default function RegisterStep1({
   const { mutate: postSubmit } = usePostPersonalDetails({
     onSuccess: () => {
       enqueueSnackbar('Personal details has been added!');
+      refetch();
       setCurrentStep(1);
     },
     onError: () => {
@@ -104,6 +106,7 @@ export default function RegisterStep1({
     const postData = Object.assign(data, {
       memberKey,
       token,
+      dateOfBirth: new Date(data.dateOfBirth).toISOString().substring(0, 10),
     });
     postSubmit(postData);
   };

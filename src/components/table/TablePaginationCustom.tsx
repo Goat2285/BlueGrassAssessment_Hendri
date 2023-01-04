@@ -8,6 +8,7 @@ import {
   FormControlLabel,
   TablePaginationProps,
 } from '@mui/material';
+import { GREYS } from 'src/theme/palette';
 //
 
 // ----------------------------------------------------------------------
@@ -27,7 +28,17 @@ export default function TablePaginationCustom({
 }: Props & TablePaginationProps) {
   return (
     <Box sx={{ position: 'relative', ...sx }}>
-      <TablePagination rowsPerPageOptions={rowsPerPageOptions} component="div" {...other} />
+      <TablePagination
+        rowsPerPageOptions={rowsPerPageOptions}
+        component="div"
+        {...other}
+        sx={{
+          '& .MuiTablePagination-selectIcon': {
+            stroke: GREYS.grey3,
+            strokeWidth: 2,
+          },
+        }}
+      />
 
       {onChangeDense && (
         <FormControlLabel

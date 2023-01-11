@@ -60,8 +60,8 @@ export default function Header({ onOpenNav }: Props) {
         >
           <NotificationsPopover />
           <CustomAvatar
-            alt={`${user?.user.firstname} ${user?.user.lastname}`}
-            name={`${user?.user.firstname} ${user?.user.lastname}`}
+            alt={`${user?.user?.firstname} ${user?.user?.lastname}`}
+            name={`${user?.user?.firstname} ${user?.user?.lastname}`}
             src={user?.user.avatar}
           />
           <AccountPopover />

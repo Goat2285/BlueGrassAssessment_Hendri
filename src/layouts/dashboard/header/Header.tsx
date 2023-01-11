@@ -1,6 +1,6 @@
 // @mui
-import { useTheme, alpha } from '@mui/material/styles';
-import { Stack, AppBar, Toolbar, IconButton, Typography } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
+import { Stack, AppBar, Toolbar, IconButton, Container } from '@mui/material';
 // utils
 import { bgBlur } from '../../../utils/cssStyles';
 // hooks
@@ -26,6 +26,7 @@ type Props = {
 
 export default function Header({ onOpenNav }: Props) {
   const theme = useTheme();
+  const { themeStretch } = useSettingsContext();
 
   const { user } = useAuthContext();
 
@@ -41,29 +42,31 @@ export default function Header({ onOpenNav }: Props) {
 
   const renderContent = (
     <>
-      {isDesktop && isNavHorizontal && <Logo sx={{ mr: 2.5 }} />}
+      <Container maxWidth={themeStretch ? false : 'xl'}>
+        {isDesktop && isNavHorizontal && <Logo sx={{ mr: 2.5 }} />}
 
-      {!isDesktop && (
-        <IconButton onClick={onOpenNav} sx={{ mr: 1, color: 'text.primary' }}>
-          <Iconify icon="eva:menu-2-fill" />
-        </IconButton>
-      )}
+        {!isDesktop && (
+          <IconButton onClick={onOpenNav} sx={{ mr: 1, color: 'text.primary' }}>
+            <Iconify icon="eva:menu-2-fill" />
+          </IconButton>
+        )}
 
-      <Stack
-        flexGrow={1}
-        direction="row"
-        alignItems="center"
-        justifyContent="flex-end"
-        spacing={{ xs: 0.5, sm: 1.5 }}
-      >
-        <NotificationsPopover />
-        <CustomAvatar
-          alt={`${user?.user.firstname} ${user?.user.lastname}`}
-          name={`${user?.user.firstname} ${user?.user.lastname}`}
-          src={user?.user.avatar}
-        />
-        <AccountPopover />
-      </Stack>
+        <Stack
+          flexGrow={1}
+          direction="row"
+          alignItems="center"
+          justifyContent="flex-end"
+          spacing={{ xs: 0.5, sm: 1.5 }}
+        >
+          <NotificationsPopover />
+          <CustomAvatar
+            alt={`${user?.user?.firstname} ${user?.user?.lastname}`}
+            name={`${user?.user?.firstname} ${user?.user?.lastname}`}
+            src={user?.user.avatar}
+          />
+          <AccountPopover />
+        </Stack>
+      </Container>
     </>
   );
 

@@ -133,7 +133,7 @@ export default function PractiseTableRow({ row, refetch, checkPageAfterDelete }:
           </FormProvider>
         </TableCell>
 
-        <TableCell align="right">
+        <TableCell align="left">
           <Typography component="div" noWrap>
             <IconButtonAnimate sx={{ color: 'primary.main' }} onClick={handleOpenEditDialog}>
               <Iconify icon="ri:edit-line" />

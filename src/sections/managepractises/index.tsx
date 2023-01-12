@@ -13,7 +13,7 @@ const TABLE_HEAD = [
   { id: 'email', label: 'Email', align: 'left' },
   { id: 'date', label: 'Date Created', align: 'left' },
   { id: 'status', label: 'Status', align: 'left' },
-  { id: 'actions', label: 'Actions', align: 'right' },
+  { id: 'actions', label: 'Actions', align: 'left' },
 ];
 
 export default function ManagePractises() {

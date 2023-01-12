@@ -80,7 +80,7 @@ export default function UserTableRow({
 
         <TableCell align="left">{format(new Date(createDate), 'MM/dd/yyyy')}</TableCell>
 
-        <TableCell align="right">
+        <TableCell align="left">
           <IconButtonAnimate sx={{ color: 'primary.main' }} onClick={handleOpenEditDialog}>
             <Iconify icon="ri:edit-line" />
           </IconButtonAnimate>

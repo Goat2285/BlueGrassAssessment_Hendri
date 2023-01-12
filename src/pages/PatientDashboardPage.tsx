@@ -15,7 +15,7 @@ export default function PatientDashboardPage() {
         <title>Dashboard</title>
       </Helmet>
 
-      <Container maxWidth={themeStretch ? false : 'xl'}>
+      <Container maxWidth={themeStretch ? false : 'lg'}>
         <Typography variant="h3" component="h1" paragraph>
           Dashboard Page
         </Typography>

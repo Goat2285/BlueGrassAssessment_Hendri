@@ -33,7 +33,7 @@ const TABLE_HEAD = [
   { id: 'name', label: 'Name', align: 'left' },
   { id: 'role', label: 'Role', align: 'left' },
   { id: 'date', label: 'Date Created', align: 'left' },
-  { id: 'actions', label: 'Actions', align: 'right' },
+  { id: 'actions', label: 'Actions', align: 'left' },
 ];
 
 export default function ManageUsers() {

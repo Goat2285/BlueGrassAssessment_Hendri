@@ -22,7 +22,7 @@ export default function AccountPopover() {
     {
       label: 'Profile',
       linkTo:
-        user?.user.roles[0] === 'SuperAdmin'
+        user?.user?.roles[0] === 'SuperAdmin'
           ? '/superadmin/dashboard/profile'
           : user?.user.roles[0] === 'Patient'
           ? '/patient/dashboard/profile'
@@ -81,7 +81,7 @@ export default function AccountPopover() {
       <MenuPopover
         open={openPopover}
         onClose={handleClosePopover}
-        sx={{ width: 200, p: 0, mt: 4.3 }}
+        sx={{ minWidth: 200, p: 0, mt: 4.3 }}
       >
         <Box sx={{ my: 1.5, px: 2.5 }}>
           <Typography variant="subtitle1" noWrap>

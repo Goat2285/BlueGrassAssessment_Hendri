@@ -58,7 +58,9 @@ export default function Header({ onOpenNav }: Props) {
           justifyContent="flex-end"
           spacing={{ xs: 0.5, sm: 1.5 }}
         >
-          <NotificationsPopover />
+          {user?.user?.roles[0] !== 'Patient' && user?.user?.roles[0] !== 'SuperAdmin' ? (
+            <NotificationsPopover />
+          ) : null}
           <CustomAvatar
             alt={`${user?.user?.firstname} ${user?.user?.lastname}`}
             name={`${user?.user?.firstname} ${user?.user?.lastname}`}

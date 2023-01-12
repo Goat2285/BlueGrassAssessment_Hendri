@@ -1,5 +1,5 @@
 // @mui
-import { Typography, Stack, Link } from '@mui/material';
+import { Stack } from '@mui/material';
 // components
 import Logo from '../../components/logo';
 import Image from '../../components/image';
@@ -9,12 +9,11 @@ import { StyledRoot, StyledSectionBg, StyledSection, StyledContent } from './sty
 // ----------------------------------------------------------------------
 
 type Props = {
-  title?: string;
   illustration?: string;
   children: React.ReactNode;
 };
 
-export default function LoginLayout({ children, illustration, title }: Props) {
+export default function LoginLayout({ children, illustration }: Props) {
   return (
     <StyledRoot>
       <Logo
@@ -27,11 +26,9 @@ export default function LoginLayout({ children, illustration, title }: Props) {
           ml: { xs: 2, md: 5 },
         }}
       />
-         <StyledSection sx={{ minWidth: 440, maxWidth: 444, borderRadius: '16px', boxShadow: 20, m: '16px' }}>
-        <Typography variant="h3" sx={{ textAlign: 'center', mb: 5 }}>
-          {title || 'Hi, Welcome back'}
-        </Typography>
-
+      <StyledSection
+        sx={{ minWidth: 440, maxWidth: 444, borderRadius: '16px', boxShadow: 20, m: '16px' }}
+      >
         <Image
           disabledEffect
           visibleByDefault

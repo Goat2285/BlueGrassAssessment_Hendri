@@ -15,7 +15,7 @@ export default function PatientMyProfilePage() {
         <title>My Profile</title>
       </Helmet>
 
-      <Container maxWidth={themeStretch ? false : 'xl'}>
+      <Container maxWidth={themeStretch ? false : 'lg'}>
         <Typography variant="h3" component="h1" paragraph>
           Patient Profile Page
         </Typography>

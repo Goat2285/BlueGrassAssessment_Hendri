@@ -16,7 +16,7 @@ export default function DashboardPage() {
         <title>Dashboard</title>
       </Helmet>
 
-      <Container maxWidth={themeStretch ? false : 'xl'}>
+      <Container maxWidth={themeStretch ? false : 'lg'}>
         <Landing />
       </Container>
     </>

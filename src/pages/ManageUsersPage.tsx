@@ -16,7 +16,7 @@ export default function ManageUsersPage() {
         <title>Manage Users</title>
       </Helmet>
 
-      <Container maxWidth={themeStretch ? false : 'xl'}>
+      <Container maxWidth={themeStretch ? false : 'lg'}>
         <ManageUsers />
       </Container>
     </>

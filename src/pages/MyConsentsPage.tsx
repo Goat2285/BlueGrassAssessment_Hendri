@@ -15,7 +15,7 @@ export default function MyConsentsPage() {
         <title>My Consents</title>
       </Helmet>
 
-      <Container maxWidth={themeStretch ? false : 'xl'}>
+      <Container maxWidth={themeStretch ? false : 'lg'}>
         <Typography variant="h3" component="h1" paragraph>
           My Consents Page
         </Typography>

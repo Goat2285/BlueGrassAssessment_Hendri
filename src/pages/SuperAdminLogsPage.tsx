@@ -15,7 +15,7 @@ export default function SuperAdminLogsPage() {
         <title>Logs</title>
       </Helmet>
 
-      <Container maxWidth={themeStretch ? false : 'xl'}>
+      <Container maxWidth={themeStretch ? false : 'lg'}>
         <Typography variant="h3" component="h1" paragraph>
           Superadmin Logs Page
         </Typography>

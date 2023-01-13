@@ -7,16 +7,18 @@ import FormProvider, { RHFDatePicker, RHFSelect, RHFTextField } from 'src/compon
 import { LoadingButton } from '@mui/lab';
 import { usePutPatientPersonalDetails } from 'src/hooks/api/patients/usePutPatientPersonalDetails';
 import { useAuthContext } from 'src/auth/useAuthContext';
+import { useNavigate } from 'react-router';
 const southAfricanIdInfo = require('south-african-id-info');
 
 type FormValuesProps = {
   firstName: string;
   lastName: string;
   contactNumber: string;
+  email: string;
   nationality: string;
   idOrPassport: string;
   address: string;
-  dateOfBirth: string;
+  //dateOfBirth: string;
 };
 
 type Props = {
@@ -48,6 +50,8 @@ export default function PersonalInfo({
   const { enqueueSnackbar } = useSnackbar();
 
   const { initialize } = useAuthContext();
+
+  const navigate = useNavigate();
 
   const schema = Yup.object().shape({
     firstName: Yup.string().required('First name is required'),
@@ -84,10 +88,17 @@ export default function PersonalInfo({
   });
 
   const { mutate: postSubmit } = usePutPatientPersonalDetails({
-    onSuccess: () => {
-      enqueueSnackbar('Personal details has been added!');
-      refetch();
-      initialize();
+    onSuccess: (data) => {
+      console.log(data);
+
+      if (data.isMailChanged) {
+        localStorage.setItem('verification', JSON.stringify(data.email));
+        navigate('/verification');
+      } else {
+        enqueueSnackbar('Personal details has been added!');
+        refetch();
+        initialize();
+      }
     },
     onError: () => {
       enqueueSnackbar('Error, personal details not added!', { variant: 'error' });
@@ -102,7 +113,7 @@ export default function PersonalInfo({
     nationality: nationality || '',
     idOrPassport: idOrPassport || '',
     address: address || '',
-    dateOfBirth: dateOfBirth || '',
+    //dateOfBirth: dateOfBirth || '',
   };
 
   const methods = useForm<FormValuesProps>({
@@ -132,7 +143,7 @@ export default function PersonalInfo({
               <RHFTextField name="lastName" label="Last Name" />
             </Grid>
             <Grid item xs={12} md={6}>
-              <RHFTextField name="email" label="Email" disabled />
+              <RHFTextField name="email" label="Email" />
             </Grid>
             <Grid item xs={12} md={6}>
               <RHFTextField name="contactNumber" label="Contact Number" />

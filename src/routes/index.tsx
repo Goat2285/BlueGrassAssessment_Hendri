@@ -92,9 +92,9 @@ export default function Router() {
         {
           path: '/',
           element: (
-            // <AuthGuard>
-            <SingleColumnLayout />
-            // </AuthGuard>
+            <AuthGuard>
+              <SingleColumnLayout />
+            </AuthGuard>
           ),
           children: [{ path: 'verification', element: <VerificationPage /> }],
         },

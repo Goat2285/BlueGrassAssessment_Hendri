@@ -1,7 +1,22 @@
 import { Typography, Stack, Link } from '@mui/material';
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router';
 import VerifyForm from './VerifyForm';
 
 export default function Verification() {
+  const [newEmail, setNewEmail] = useState('');
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const item = localStorage.getItem('verification');
+
+    if (item) {
+      setNewEmail(JSON.parse(item));
+    } else {
+      navigate(-1);
+    }
+  }, [navigate]);
+
   return (
     <Stack
       sx={{
@@ -21,7 +36,7 @@ export default function Verification() {
         variant="subtitle1"
         sx={{ color: 'grey.600', mb: 5, textAlign: 'center', fontWeight: 400 }}
       >
-        We've emailed a 6-digit confirmation code to <strong>acb@domain</strong>, please enter the
+        We've emailed a 6-digit confirmation code to <strong>{newEmail}</strong>, please enter the
         code in below box to verify your email.
       </Typography>
 

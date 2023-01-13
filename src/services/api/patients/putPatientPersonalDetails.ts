@@ -4,10 +4,11 @@ export interface IPutPatientPersonalDetailsRequest {
   firstName: string;
   lastName: string;
   contactNumber: string;
+  email: string;
   nationality: string;
   idOrPassport: string;
   address: string;
-  dateOfBirth: string;
+  //dateOfBirth: string;
 }
 
 export const putPatientPersonalDetails = async (

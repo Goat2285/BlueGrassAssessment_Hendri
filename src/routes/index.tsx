@@ -34,6 +34,7 @@ import {
   SuperAdminMyProfilePage,
   SuperAdminLogsPage,
   PatientMyProfilePage,
+  VerificationPage,
 } from './elements';
 
 // ----------------------------------------------------------------------
@@ -87,6 +88,15 @@ export default function Router() {
             { path: 'fertility-content', element: <FertilityContentPage /> },
             { path: 'my-consents', element: <MyConsentsPage /> },
           ],
+        },
+        {
+          path: '/',
+          element: (
+            // <AuthGuard>
+            <SingleColumnLayout />
+            // </AuthGuard>
+          ),
+          children: [{ path: 'verification', element: <VerificationPage /> }],
         },
         {
           path: 'auth',

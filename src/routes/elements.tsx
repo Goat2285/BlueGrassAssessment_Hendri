@@ -47,6 +47,9 @@ export const PatientMyProfilePage = Loadable(lazy(() => import('../pages/Patient
 export const FertilityContentPage = Loadable(lazy(() => import('../pages/FertilityContentPage')));
 export const MyConsentsPage = Loadable(lazy(() => import('../pages/MyConsentsPage')));
 
+// Verification
+export const VerificationPage = Loadable(lazy(() => import('../pages/VerificationPage')));
+
 // Other
 export const Page404 = Loadable(lazy(() => import('../pages/Page404')));
 export const WelcomePage = Loadable(lazy(() => import('../pages/WelcomePage')));

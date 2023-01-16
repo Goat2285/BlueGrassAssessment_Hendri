@@ -3,7 +3,7 @@ import FormProvider, { RHFSelect, RHFTextField } from 'src/components/hook-form'
 import { CustomFile } from 'src/components/upload';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useCallback, useReducer } from 'react';
+import { useCallback } from 'react';
 import { useSnackbar } from 'src/components/snackbar';
 import { Box, Card, Grid, Stack, Typography } from '@mui/material';
 import { RHFUploadAvatar } from 'src/components/hook-form/RHFUpload';
@@ -11,10 +11,12 @@ import { fData } from 'src/utils/formatNumber';
 import { LoadingButton } from '@mui/lab';
 import { usePutProfile } from 'src/hooks/api/account/usePutProfile';
 import { useAuthContext } from 'src/auth/useAuthContext';
+import { useNavigate } from 'react-router';
 
 type FormValuesProps = {
   firstname: string;
   lastname: string;
+  email: string;
   profilePictureUrl?: CustomFile | string | null;
 };
 
@@ -23,7 +25,7 @@ type Props = {
   lastname?: string;
   email?: string;
   role?: string;
-  profilePictureUrl?: CustomFile | string | null;
+  profilePictureUrl?: string | null;
   roles?: string[];
   refetch: () => void;
 };
@@ -41,11 +43,18 @@ export default function MyDetails({
 
   const { initialize } = useAuthContext();
 
+  const navigate = useNavigate();
+
   const { mutate: updateSubmit } = usePutProfile({
     onSuccess: (data) => {
-      refetch();
-      initialize();
-      enqueueSnackbar('Profile details has been updated!');
+      if (data.isMailChanged) {
+        localStorage.setItem('verification', JSON.stringify(data.email));
+        navigate('/verification');
+      } else {
+        refetch();
+        initialize();
+        enqueueSnackbar('Profile details has been updated!');
+      }
     },
     onError: () => {
       enqueueSnackbar('Error, profile details not updated!', { variant: 'error' });
@@ -96,6 +105,7 @@ export default function MyDetails({
     updateSubmit({
       firstname: data.firstname,
       lastname: data.lastname,
+      email: data.email,
       profilePicture: data.profilePictureUrl,
     });
   };

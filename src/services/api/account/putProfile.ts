@@ -4,6 +4,7 @@ import { axiosRequest } from 'src/services/axiosConfig';
 export interface IPutProfileRequest {
   firstname: string;
   lastname: string;
+  email: string;
   profilePicture?: CustomFile | string | null;
 }
 

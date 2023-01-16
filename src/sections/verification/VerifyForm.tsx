@@ -58,7 +58,7 @@ export default function VerifyForm({ email }: Props) {
   const { mutate: postVerifyEmail } = usePostVerifyEmail({
     onSuccess: async () => {
       enqueueSnackbar('Verify success!');
-      await queryClient.refetchQueries(['getPatientProfile']);
+      await queryClient.refetchQueries(['getPatientProfile', 'updateProfile']);
       initialize();
       navigate(-1);
       localStorage.removeItem('verification');

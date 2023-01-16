@@ -83,11 +83,11 @@ export default function PartnerInfo({
 
   const { mutate: postSubmit } = usePutPatientPartnerDetails({
     onSuccess: () => {
-      enqueueSnackbar('Partner details has been added!');
+      enqueueSnackbar('Partner details has been updated!');
       refetch();
     },
     onError: () => {
-      enqueueSnackbar('Error, partner details not added!', { variant: 'error' });
+      enqueueSnackbar('Error, partner details not updated!', { variant: 'error' });
     },
   });
 

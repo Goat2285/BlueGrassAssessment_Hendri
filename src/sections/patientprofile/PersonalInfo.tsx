@@ -93,13 +93,13 @@ export default function PersonalInfo({
         localStorage.setItem('verification', JSON.stringify(data.email));
         navigate('/verification');
       } else {
-        enqueueSnackbar('Personal details has been added!');
+        enqueueSnackbar('Personal details has been updated!');
         refetch();
         initialize();
       }
     },
     onError: () => {
-      enqueueSnackbar('Error, personal details not added!', { variant: 'error' });
+      enqueueSnackbar('Error, personal details not updated!', { variant: 'error' });
     },
   });
 

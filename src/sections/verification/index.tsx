@@ -1,11 +1,24 @@
 import { Typography, Stack, Link } from '@mui/material';
+import { useSnackbar } from 'notistack';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router';
+import { usePostResendVerificationCode } from 'src/hooks/api/verification/usePostResendVerificationCode';
 import VerifyForm from './VerifyForm';
 
 export default function Verification() {
   const [newEmail, setNewEmail] = useState('');
   const navigate = useNavigate();
+
+  const { enqueueSnackbar } = useSnackbar();
+
+  const { mutate: postResendVerificationCode } = usePostResendVerificationCode({
+    onSuccess: () => {
+      enqueueSnackbar('Your new verification code has been sent, please check your email');
+    },
+    onError: () => {
+      enqueueSnackbar('Error, verification code not sent');
+    },
+  });
 
   useEffect(() => {
     const item = localStorage.getItem('verification');
@@ -16,6 +29,12 @@ export default function Verification() {
       navigate(-1);
     }
   }, [navigate]);
+
+  const handleResendVerificationCode = () => {
+    postResendVerificationCode({
+      email: newEmail,
+    });
+  };
 
   return (
     <Stack
@@ -44,7 +63,15 @@ export default function Verification() {
 
       <Typography variant="body2" sx={{ mt: 3 }}>
         Don’t have a code? &nbsp;
-        <Link variant="subtitle2">Resend code</Link>
+        <Link
+          variant="subtitle2"
+          onClick={handleResendVerificationCode}
+          sx={{
+            cursor: 'pointer',
+          }}
+        >
+          Resend code
+        </Link>
       </Typography>
     </Stack>
   );

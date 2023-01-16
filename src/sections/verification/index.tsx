@@ -40,7 +40,7 @@ export default function Verification() {
         code in below box to verify your email.
       </Typography>
 
-      <VerifyForm />
+      <VerifyForm email={newEmail} />
 
       <Typography variant="body2" sx={{ mt: 3 }}>
         Don’t have a code? &nbsp;

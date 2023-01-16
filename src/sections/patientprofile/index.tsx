@@ -1,6 +1,7 @@
 import { Box, Stack, Tab, Tabs } from '@mui/material';
 import { useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
+import { useAuthContext } from 'src/auth/useAuthContext';
 import DashboardWelcome from 'src/components/dashboard-welcome';
 import Iconify from 'src/components/iconify';
 import LoadingScreen from 'src/components/loading-screen';
@@ -14,12 +15,15 @@ import Security from './Security';
 export default function PatientProfile() {
   const [currentTab, setCurrentTab] = useState('partner-1');
 
+  const { initialize } = useAuthContext();
+
   const queryClient = useQueryClient();
 
   const { data: profile, isLoading } = useGetPatientProfile();
 
   const refetch = () => {
     queryClient.refetchQueries(['getPatientProfile']);
+    initialize();
   };
 
   const TABS = [

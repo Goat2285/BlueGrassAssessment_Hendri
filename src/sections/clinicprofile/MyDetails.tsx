@@ -42,7 +42,7 @@ export default function MyDetails({
   const { initialize } = useAuthContext();
 
   const { mutate: updateSubmit } = usePutProfile({
-    onSuccess: () => {
+    onSuccess: (data) => {
       refetch();
       initialize();
       enqueueSnackbar('Profile details has been updated!');
@@ -55,8 +55,7 @@ export default function MyDetails({
   const schema = Yup.object().shape({
     firstname: Yup.string().required('First name is required'),
     lastname: Yup.string().required('Last name is required'),
-    // email: Yup.string().email('Email must be a valid email address').required('Email is required'),
-    // role: Yup.string().required('Role is required'),
+    email: Yup.string().email('Email must be a valid email address').required('Email is required'),
   });
 
   const defaultValues = {
@@ -138,7 +137,7 @@ export default function MyDetails({
             <Stack spacing={3} sx={{ pt: 4, mb: '20px' }}>
               <RHFTextField name="firstname" label="First name" />
               <RHFTextField name="lastname" label="Last name" />
-              <RHFTextField name="email" label="Email" disabled />
+              <RHFTextField name="email" label="Email" />
               <RHFSelect name="role" label="Role" disabled>
                 <option />
                 {roles?.map((role) => (

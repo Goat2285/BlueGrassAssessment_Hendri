@@ -89,8 +89,6 @@ export default function PersonalInfo({
 
   const { mutate: postSubmit } = usePutPatientPersonalDetails({
     onSuccess: (data) => {
-      console.log(data);
-
       if (data.isMailChanged) {
         localStorage.setItem('verification', JSON.stringify(data.email));
         navigate('/verification');

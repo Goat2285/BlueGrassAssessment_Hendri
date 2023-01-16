@@ -6,11 +6,12 @@ import { yupResolver } from '@hookform/resolvers/yup';
 // @mui
 import { Stack, FormHelperText } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
-// routes
-import { PATH_DASHBOARD } from '../../routes/paths';
 // components
 import { useSnackbar } from '../../components/snackbar';
 import FormProvider, { RHFCodes } from '../../components/hook-form';
+import { usePostVerifyEmail } from 'src/hooks/api/verification/usePostVerifyEmail';
+import { useQueryClient } from '@tanstack/react-query';
+import { useAuthContext } from 'src/auth/useAuthContext';
 
 // ----------------------------------------------------------------------
 
@@ -23,8 +24,16 @@ type FormValuesProps = {
   code6: string;
 };
 
-export default function VerifyForm() {
+type Props = {
+  email: string;
+};
+
+export default function VerifyForm({ email }: Props) {
   const navigate = useNavigate();
+
+  const { initialize } = useAuthContext();
+
+  const queryClient = useQueryClient();
 
   const { enqueueSnackbar } = useSnackbar();
 
@@ -46,6 +55,19 @@ export default function VerifyForm() {
     code6: '',
   };
 
+  const { mutate: postVerifyEmail } = usePostVerifyEmail({
+    onSuccess: async () => {
+      enqueueSnackbar('Verify success!');
+      await queryClient.refetchQueries(['getPatientProfile']);
+      initialize();
+      navigate(-1);
+      localStorage.removeItem('verification');
+    },
+    onError: () => {
+      enqueueSnackbar('Error, verification failed');
+    },
+  });
+
   const methods = useForm({
     mode: 'onChange',
     resolver: yupResolver(VerifyCodeSchema),
@@ -58,16 +80,10 @@ export default function VerifyForm() {
   } = methods;
 
   const onSubmit = async (data: FormValuesProps) => {
-    try {
-      await new Promise((resolve) => setTimeout(resolve, 500));
-      console.log('DATA', Object.values(data).join(''));
-
-      enqueueSnackbar('Verify success!');
-
-      // navigate(PATH_DASHBOARD.root);
-    } catch (error) {
-      console.error(error);
-    }
+    postVerifyEmail({
+      email: email,
+      verificationCode: Object.values(data).join(''),
+    });
   };
 
   return (

@@ -64,7 +64,7 @@ export default function Header({ onOpenNav }: Props) {
           <CustomAvatar
             alt={`${user?.user?.firstname} ${user?.user?.lastname}`}
             name={`${user?.user?.firstname} ${user?.user?.lastname}`}
-            src={user?.user.avatar}
+            src={user?.user?.profilePictureUrl}
           />
           <AccountPopover />
         </Stack>

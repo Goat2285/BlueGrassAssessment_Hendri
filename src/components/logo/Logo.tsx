@@ -7,7 +7,7 @@ import { Box, Link, BoxProps } from '@mui/material';
 
 export interface LogoProps extends BoxProps {
   logoStyle?: 1 | 2 | 3,
-  cursorPointer?: Boolean,  
+  cursorPointer?: Boolean,
   disabledLink?: boolean;
 }
 
@@ -17,7 +17,7 @@ const Logo = forwardRef<HTMLDivElement, LogoProps>(
     const logo = (
       <Box
         component="img"
-        src={`/assets/images/logo-style${logoStyle}.svg`}
+        src={'/assets/images/illustrations/illustration_empty_content.svg'}
         sx={{ width: 124, height: 50, cursor: cursorPointer ? 'pointer' : 'default', ...sx }}
       />
     );

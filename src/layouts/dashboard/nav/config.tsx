@@ -95,7 +95,7 @@ const navConfig = [
         roles: ['SuperAdmin'],
       },
       {
-        title: 'Fertility Content',
+        title: 'Content',
         path: PATH_DASHBOARD.patient.fertilityContent,
         icon: ICONS.fertility,
         roles: ['Patient'],

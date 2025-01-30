@@ -28,19 +28,19 @@ export default function Welcome() {
         disabledEffect
         visibleByDefault
         alt="Man's head silhouette"
-        src={'/assets/images/logo-style3.svg'}
+        src={'/assets/images/illustrations/illustration_empty_content.svg'}
         sx={{ width: '100%', maxWidth: 480 }}
         objectFit={'contain'}
       />
       <Box m={4} />
-      <Button 
-        variant="contained" 
-        size="large" 
+      <Button
+        variant="contained"
+        size="large"
         onClick={()=>{
           navigate('/auth/register');
         }}
       >
-        Get Started      
+        Get Started
       </Button>
     </Stack>
   );

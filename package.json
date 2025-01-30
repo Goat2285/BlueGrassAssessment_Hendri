@@ -12,7 +12,11 @@
     "eject": "react-scripts eject",
     "clear-all": "rm -rf build node_modules",
     "re-start": "rm -rf build node_modules && yarn install && yarn start",
-    "re-build": "rm -rf build node_modules && yarn install && yarn build"
+    "re-build": "rm -rf build node_modules && yarn install && yarn build",
+    "test:e2e": "npx playwright test --config=playwright/playwright.config.ts --ui",
+    "test:e2e:headless": "npx playwright test --config=playwright/playwright.config.ts",
+    "test:e2e:report": "yarn playwright show-report",
+    "test:e2e:debug": "yarn playwright  test --config=playwright/playwright.config.ts --debug"
   },
   "eslintConfig": {
     "extends": [
@@ -84,6 +88,7 @@
   "devDependencies": {
     "@babel/core": "^7.19.3",
     "@babel/eslint-parser": "^7.19.1",
+    "@playwright/test": "^1.50.0",
     "@svgr/webpack": "^6.4.0",
     "@types/autosuggest-highlight": "^3.2.0",
     "@types/js-cookie": "^3.0.2",
@@ -113,5 +118,6 @@
   },
   "overrides": {
     "@svgr/webpack": "^6.4.0"
-  }
+  },
+  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
 }

@@ -40,7 +40,7 @@ export default function CompleteRegistration({ onClose }: Props) {
         disabledEffect
         visibleByDefault
         alt="My fertility journey - Happy family with a child"
-        src={'/assets/images/logo-style3.svg'}
+        src={'/assets/images/illustrations/illustration_empty_content.svg'}
         sx={{ width: 128 }}
         objectFit={'contain'}
       />

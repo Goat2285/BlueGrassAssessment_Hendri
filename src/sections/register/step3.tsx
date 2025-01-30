@@ -8,7 +8,7 @@ import ConfirmDialog from 'src/components/confirm-dialog';
 import CompleteRegistration from './CompleteRegistration';
 
 const INCLUDED_IN_PROCE = [
-  'Access the My Fertility Journey Education Library',
+  'Access the My Journey Education Library',
   'Read and download treatment Fact Sheets',
   'Watch and learn videos about you treatment and procedures',
   'Navigate and electronically sign the clinics consent forms',

@@ -44,7 +44,7 @@ export default function RegisterStep1({
   const Step1Schema = Yup.object().shape({
     firstName: Yup.string().required('First name is required'),
     lastName: Yup.string().required('Last name is required'),
-    email: Yup.string().email('Email must be a valid email address').required('Email is required'),
+    // email: Yup.string().email('Email must be a valid email address').required('Email is required'),
     contactNumber: Yup.string()
       .trim()
       .matches(phoneRegex, 'Please use the following format: +27 72 000 0000')
@@ -127,12 +127,12 @@ export default function RegisterStep1({
           />
         </Stack>
         <Stack spacing={3} direction={'row'} flexWrap={'wrap'} justifyContent="center">
-          <RHFTextField
-            name="email"
-            label="Email"
-            sx={{ maxWidth: 448, margin: '12px !important' }}
-            disabled
-          />
+          {/*<RHFTextField*/}
+          {/*  name="email"*/}
+          {/*  label="Email"*/}
+          {/*  sx={{ maxWidth: 448, margin: '12px !important' }}*/}
+          {/*  disabled*/}
+          {/*/>*/}
           <RHFTextField
             name="contactNumber"
             label="Contact Number"

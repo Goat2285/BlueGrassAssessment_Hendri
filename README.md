@@ -1,7 +1,7 @@
 # **Blue Grass Automation QA Assessment**
 
 ## **Project Overview**
-This project is an automated end-to-end testing framework for the **Blue Grass Automation** web application using **Playwright**. It includes test cases covering **positive, negative, and edge cases** for the application's core functionalities.
+This project is an automated end-to-end testing framework for the **Blue Grass Automation Assessment** web application using **Playwright**. It includes test cases covering **positive, negative, and edge cases** for the application.
 
 ## **Project Structure**
 ```
@@ -15,7 +15,7 @@ This project is an automated end-to-end testing framework for the **Blue Grass A
 ```
 
 ## **Setup Instructions**
-### **Prerequisites**
+### **Pre-requisites**
 Ensure the following are installed:
 - **Node.js** (LTS version recommended)
 - **npm** or **yarn**
@@ -29,16 +29,6 @@ cd bg_qa_engineering_technical_assessment
 
 # Install dependencies
 npm install
-```
-
-### **Environment Variables**
-Create a `.env` file in the root directory and define the required environment variables:
-```
-REACT_APP_HOST_API_KEY=http://localhost:3000
-```
-Verify environment variables are set correctly:
-```bash
-node checkEnv.js
 ```
 
 ## **Running Tests**
@@ -133,7 +123,7 @@ jobs:
   - Increase **reusability of selectors**
 
 ## **Conclusion**
-This **QA Automation framework** ensures **reliable test execution**, **scalability**, and **robust reporting** for the **Blue Grass Automation** application. 🎯
+This **QA Automation framework** ensures **reliable test execution**, **scalability**, and **robust reporting** for the **Blue Grass Automation Assessment** application.
 
 ---
 **Maintained by:** QA Engineering Team 🚀

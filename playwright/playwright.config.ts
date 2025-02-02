@@ -10,19 +10,20 @@ export default defineConfig({
   reporter: [['list'], ['html', { open: 'never' }]],
   webServer: {
     command: 'npm run start',
-    url: 'http://127.0.0.1:3000',
+    url: 'http://localhost:3000',
   },
+  workers: 1,
   projects: [
     {
       name: 'Desktop Chromium',
       use: {
         browserName: 'chromium',
-        headless: false, // Running the tests in non-headless mode
+        headless: true, // Running the tests in non-headless mode
         // Launch options specifically for Chromium
         launchOptions: {
           slowMo: 1000, // Slows down Playwright operations by 100ms
         },
-        baseURL: 'http://127.0.0.1:3000',
+        baseURL: 'http://localhost:3000',
         viewport: { width: 1280, height: 720 },
         actionTimeout: 5000,
         video: 'retain-on-failure',
